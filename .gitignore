@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+data/eeg/raw/
+data/eeg/sets/
+data/eeg/*.zip
+data/eeg/*.txt.bak
+*.egg-info/
+.pytest_cache/

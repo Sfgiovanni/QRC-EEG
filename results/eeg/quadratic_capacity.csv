@@ -1,0 +1,7 @@
+construction,hp,quadratic_capacity_mean,quadratic_capacity_std,n_qubits_or_units,n_features,n_seeds
+AB_noaux,"{""tau"": 5, ""delayed_mass"": 0.3}",1.914266020308624,0.1532947627451479,4,66,5
+single_kernel,"{""K"": 15, ""r"": 0.7, ""past_mass"": 0.3}",2.613918864702343,0.1073088445247947,4,66,5
+dual_kernel,"{""K"": 15, ""r_fast"": 0.5, ""r_slow"": 0.9, ""fast_mass"": 0.2, ""slow_mass"": 0.2}",2.49385990652168,0.0832890458660978,4,66,5
+triangular,"{""K"": 15, ""past_mass"": 0.3}",2.6072015423379877,0.0859082588981607,4,66,5
+uniform,"{""K"": 15, ""past_mass"": 0.3}",2.582234362395784,0.0788950210687277,4,66,5
+ESN,"{""n_reservoir"": 200, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.7}",0.0133900277228262,0.0047014662118772,200,200,5

@@ -1,0 +1,21 @@
+# Built for this study; no aps.mplstyle existed in either source repository
+# or was found at the "Paper - Figures and Tables/style/" path referenced in
+# the original spec. Reasonable APS/REVTeX-like defaults + Wong colorblind
+# palette (Wong, 2011, Nature Methods).
+font.family: serif
+font.size: 9
+axes.labelsize: 9
+axes.titlesize: 9
+xtick.labelsize: 8
+ytick.labelsize: 8
+legend.fontsize: 8
+figure.figsize: 3.4, 2.6
+figure.dpi: 100
+savefig.dpi: 600
+savefig.bbox: tight
+axes.spines.top: False
+axes.spines.right: False
+axes.linewidth: 0.8
+lines.linewidth: 1.2
+lines.markersize: 4
+axes.prop_cycle: cycler('color', ['0072B2', 'E69F00', '009E73', 'D55E00', 'CC79A7', 'F0E442', '56B4E9', '000000'])

@@ -1,0 +1,70 @@
+# Frozen configuration for the QRC-EEG study. Do not edit after HP search
+# begins; any change after that point is a deviation to be logged in
+# results/eeg/PROVENANCE.md, not silently applied.
+
+data:
+  sets: [Z, F, S]
+  n_segments_per_set: 100
+  n_samples_per_segment: 4097
+  sampling_rate_hz: 173.61
+
+split:
+  train_frac: 0.60
+  val_frac: 0.20
+  test_frac: 0.20
+  seed: 20260712
+
+channel:
+  n_qubits: 4
+  evolution_time: 1.0
+  hp_search_seeds: [101, 102]
+  confirmatory_seeds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# HP-search-stage-only compute-budget reduction (never applied to the
+# confirmatory held-out evaluation): use a subsample of the frozen
+# train/validation split's segments so the grid search finishes in a
+# reasonable time. Logged here and in results/eeg/PROVENANCE.md.
+hp_search_subsample:
+  train_segments_per_set: 20
+  val_segments_per_set: 10
+
+readout:
+  alpha_grid: [1.0e-8, 1.0e-7, 1.0e-6, 1.0e-5, 1.0e-4, 1.0e-3, 1.0e-2,
+               0.1, 1.0, 10.0, 100.0]
+  washout: 50
+  horizons: [1, 2, 4, 8]
+
+hp_grids:
+  AB_noaux:
+    tau: [5, 15]
+    delayed_mass: [0.3, 0.5]
+  single_kernel:
+    K: [15]
+    r: [0.7, 0.9]
+    past_mass: [0.3, 0.5]
+  dual_kernel:
+    K: [15]
+    r_fast: [0.5]
+    r_slow: [0.9]
+    fast_mass: [0.2]
+    slow_mass: [0.2, 0.3]
+  triangular:
+    K: [15]
+    past_mass: [0.3, 0.5]
+  uniform:
+    K: [15]
+    past_mass: [0.3, 0.5]
+  ESN:
+    n_reservoir: [200]
+    spectral_radius: [0.5, 0.9, 1.2]
+    input_scale: [1.0]
+    leak_rate: [0.3, 0.7]
+
+quadratic_capacity:
+  seeds: [1, 2, 3, 4, 5]
+  sequence_length: 3000
+  tau_values: [1, 2, 4, 8, 16]
+
+statistics:
+  bootstrap_resamples: 10000
+  family: eeg_primary

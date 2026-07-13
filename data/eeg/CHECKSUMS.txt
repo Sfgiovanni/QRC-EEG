@@ -1,0 +1,4 @@
+# Frozen on first successful fetch; do not edit by hand.
+source_url=https://raw.githubusercontent.com/RYH2077/EEG-Epilepsy-Datasets/185859ab48bc701c9a10f6bb2b5f76d8e28e4003/Bonn%20EEG%20dataset.zip
+archive_sha256=f4c2dc52fd5320d4404fcbc6ecb9db69a4a7e408df4e3d5456530343dbcb75ad
+sets=Z,F,S
