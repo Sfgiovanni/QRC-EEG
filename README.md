@@ -23,21 +23,12 @@ history-mixing mechanism differs between arms.
 
 ## Main results
 
-On held-out Bonn EEG segments (sets Z/F/S, 4 forecast horizons, 10 seeds):
-
-- The single-exponential kernel reaches **R^2 = 0.92-0.97 at 1-step-ahead
-  forecasting** across all three EEG conditions, degrading at longer
-  horizons as expected.
-- The kernel **significantly outperforms the AB-noaux discrete-delay QRC
-  construction** (Holm-corrected, 8/12 set x horizon cells, mean win
-  fraction 0.854).
-- At matched readout dimension, the kernel is **competitive with a classical
-  ESN control** (a naive comparison favors ESN, but that used 3x the readout
-  features of every quantum arm; the gap collapses once dimension is
-  equalized).
-- The kernel has the **highest quadratic memory capacity** among the tested
-  QRC constructions on a frozen synthetic protocol (2.61, vs. 1.91 for
-  AB-noaux).
+On held-out Bonn EEG segments (sets Z/F/S, 4 forecast horizons, 10 seeds),
+the corrected analysis is reported as a horizon-dependent interaction:
+ESN-66 tends to lead at short horizons and the kernel at longer horizons.
+Exact regenerated counts, effect sizes, confidence intervals and Holm values
+are written to `RESULTS.md` and the result CSVs by the pipeline; this README
+does not duplicate numeric claims that can become stale.
 
 Full results, caveats, and honest null/negative findings are in
 [`RESULTS.md`](RESULTS.md). Methodology and every modeling choice are
@@ -74,8 +65,16 @@ python -m pip install -e ".[dev]"
 
 ```bash
 pytest                        # mechanism sanity checks + guardrails
-bash scripts/run_eeg.sh       # full pipeline: fetch -> HP search -> holdout -> stats -> figures
+bash scripts/run_eeg.sh       # complete deterministic pipeline and final fail-high gate
 ```
+
+`bash scripts/run_eeg.sh` is the canonical single command. It performs
+fetch+SHA256 verification, segment-grouped sanity/leak tests, HP searches,
+held-out runs (including ESN-66), capacity, paired statistics, tables,
+figures, regenerated narrative/diff, the full pytest suite, provenance
+checksums and `verify_fase1.py`. Ridge `alpha` and model HP selection use
+whole disjoint train/validation segments; temporal rows are never randomly
+mixed across those partitions.
 
 Or step by step:
 
@@ -83,11 +82,14 @@ Or step by step:
 python scripts/fetch_eeg.py             # download + verify Bonn EEG data
 python scripts/run_sanity_checks.py     # mechanism checks (must pass)
 python scripts/run_hp_search.py         # train -> validation HP selection
+python scripts/run_esn66_hp_search.py   # matched ESN HP selection
 python scripts/run_holdout_eval.py      # held-out evaluation, 10 seeds
+python scripts/run_esn66_holdout.py     # matched ESN held-out evaluation
 python scripts/run_quadratic_capacity.py
 python scripts/run_statistics.py        # Holm-corrected paired contrasts
+python scripts/run_esn66_contrasts.py
 python scripts/run_tables_figures.py    # REVTeX tables + APS figures
-python scripts/make_provenance.py       # checksums for every output file
+python scripts/verify_fase1.py           # final gate + checksums
 ```
 
 ## Dataset

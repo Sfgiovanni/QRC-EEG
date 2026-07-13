@@ -45,21 +45,44 @@ def main() -> None:
     raw = {name: load_set(ROOT / "data" / "eeg" / "sets" / name) for name in sets}
     scaled = {name: scale_set_from_training(raw[name], splits[name]["train"])[0] for name in sets}
 
-    rows = []
+    rows, alpha_rows = [], []
     for set_name in sets:
-        trainval_ids = splits[set_name]["train"] + splits[set_name]["val"]
+        train_ids = splits[set_name]["train"]
+        val_ids = splits[set_name]["val"]
         test_ids = splits[set_name]["test"]
-        trainval_arr = np.stack([scaled[set_name][i] for i in trainval_ids])
+        train_arr = np.stack([scaled[set_name][i] for i in train_ids])
+        val_arr = np.stack([scaled[set_name][i] for i in val_ids])
         test_arr = np.stack([scaled[set_name][i] for i in test_ids])
 
         for seed in cfg["channel"]["confirmatory_seeds"]:
             t0 = time.perf_counter()
-            feats_trainval = construction_features("ESN", hp, seed=seed, segments=trainval_arr)
+            feats_train = construction_features("ESN", hp, seed=seed, segments=train_arr)
+            feats_val = construction_features("ESN", hp, seed=seed, segments=val_arr)
             feats_test = construction_features("ESN", hp, seed=seed, segments=test_arr)
-            fits = fit_readouts_per_horizon(feats_trainval, trainval_arr, horizons, alpha_grid, washout=washout)
+            fits = fit_readouts_per_horizon(
+                feats_train,
+                train_arr,
+                horizons,
+                alpha_grid,
+                washout=washout,
+                validation_features=feats_val,
+                validation_segments=val_arr,
+                train_segment_ids=train_ids,
+                validation_segment_ids=val_ids,
+            )
             results = evaluate_segments_full(feats_test, test_arr, fits, washout=washout)
             elapsed = time.perf_counter() - t0
             for h, metrics in results.items():
+                alpha_rows.append(
+                    {
+                        "construction": "ESN_66",
+                        "set": set_name,
+                        "horizon": h,
+                        "seed": seed,
+                        "alpha": fits[h].alpha,
+                        "selection_scheme": "blocked_segments_train_val",
+                    }
+                )
                 for i, seg_id in enumerate(test_ids):
                     rows.append(
                         {
@@ -93,6 +116,14 @@ def main() -> None:
     expected = len(sets) * len(horizons) * len(cfg["channel"]["confirmatory_seeds"])
     if n_cells != expected:
         raise RuntimeError(f"incomplete ESN-66 grid: {n_cells} of {expected} (set,horizon,seed) cells")
+    alpha_path = RESULTS_DIR / "selected_alphas_esn66.csv"
+    with open(alpha_path, "w", newline="") as f:
+        w = csv.DictWriter(
+            f, fieldnames=["construction", "set", "horizon", "seed", "alpha", "selection_scheme"]
+        )
+        w.writeheader()
+        w.writerows(alpha_rows)
+    print("wrote", alpha_path, f"({len(alpha_rows)} rows)")
 
 
 if __name__ == "__main__":

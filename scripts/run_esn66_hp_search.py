@@ -55,20 +55,35 @@ def main() -> None:
     n_train_sub = sub["train_segments_per_set"]
     n_val_sub = sub["val_segments_per_set"]
 
-    train_arr, val_arr = {}, {}
+    train_arr, val_arr, train_ids_by_set, val_ids_by_set = {}, {}, {}, {}
     for name in sets:
         train_ids = splits[name]["train"][:n_train_sub]
         val_ids = splits[name]["val"][:n_val_sub]
+        train_ids_by_set[name] = train_ids
+        val_ids_by_set[name] = val_ids
         train_arr[name] = np.stack([scaled[name][i] for i in train_ids])
         val_arr[name] = np.stack([scaled[name][i] for i in val_ids])
 
     pooled_train = np.concatenate([train_arr[n] for n in sets], axis=0)
     pooled_val = np.concatenate([val_arr[n] for n in sets], axis=0)
+    pooled_train_ids = [sid for name in sets for sid in train_ids_by_set[name]]
+    pooled_val_ids = [sid for name in sets for sid in val_ids_by_set[name]]
 
     def mean_val_nrmse(hp: dict, seed: int) -> float:
         feats_train = construction_features("ESN", hp, seed=seed, segments=pooled_train)
         feats_val = construction_features("ESN", hp, seed=seed, segments=pooled_val)
-        fits = fit_readouts_per_horizon(feats_train, pooled_train, horizons, alpha_grid, washout=washout)
+        fits = fit_readouts_per_horizon(
+            feats_train,
+            pooled_train,
+            horizons,
+            alpha_grid,
+            washout=washout,
+            validation_features=feats_val,
+            validation_segments=pooled_val,
+            train_segment_ids=pooled_train_ids,
+            validation_segment_ids=pooled_val_ids,
+            refit_on_train_validation=False,
+        )
         results = evaluate_segments(feats_val, pooled_val, fits, washout=washout)
         return float(np.nanmean([np.nanmean(v) for v in results.values()]))
 

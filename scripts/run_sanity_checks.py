@@ -19,6 +19,7 @@ def main() -> None:
             "tests/test_mechanism_checks.py",
             "tests/test_constructions_differ.py",
             "tests/test_batched_matches_reference.py",
+            "tests/test_segment_grouped_selection.py",
             "-v",
         ],
         cwd=ROOT,

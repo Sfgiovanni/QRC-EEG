@@ -120,35 +120,68 @@ def _pool_rows(features: np.ndarray, target: np.ndarray, washout: int, horizon: 
     return feats[valid], targs[valid]
 
 
-def fit_readouts_per_horizon(
-    features: np.ndarray, segments: np.ndarray, horizons: list[int], alpha_grid: list[float], washout: int = WASHOUT
-) -> dict[int, HorizonFit]:
-    """Fit one pooled ridge readout per horizon, selecting alpha by in-sample-free grid search.
+def assert_disjoint_segment_ids(train_segment_ids: list[str], validation_segment_ids: list[str]) -> None:
+    """Fail high if a whole-segment train/validation partition overlaps."""
 
-    `segments` here is the z-scored raw signal (B, T) that the targets are
-    derived from; `features` is aligned reservoir output for the same B, T.
-    Alpha selection uses the same rows passed in (caller is responsible for
-    passing only train-side data when fitting, or train+val split rows when
-    selecting alpha against a held validation slice).
+    train_ids = list(train_segment_ids)
+    validation_ids = list(validation_segment_ids)
+    if len(train_ids) != len(set(train_ids)):
+        raise ValueError("duplicate segment_id inside ridge-training partition")
+    if len(validation_ids) != len(set(validation_ids)):
+        raise ValueError("duplicate segment_id inside ridge-validation partition")
+    overlap = sorted(set(train_ids) & set(validation_ids))
+    if overlap:
+        raise ValueError(f"segment leakage across ridge train/validation partitions: {overlap}")
+
+
+def fit_readouts_per_horizon(
+    train_features: np.ndarray,
+    train_segments: np.ndarray,
+    horizons: list[int],
+    alpha_grid: list[float],
+    washout: int = WASHOUT,
+    *,
+    validation_features: np.ndarray,
+    validation_segments: np.ndarray,
+    train_segment_ids: list[str],
+    validation_segment_ids: list[str],
+    refit_on_train_validation: bool = True,
+) -> dict[int, HorizonFit]:
+    """Select ridge alpha on disjoint whole validation segments.
+
+    Temporal rows are pooled only *within* the already separated partitions;
+    no row-level random split is permitted. Washout is applied independently
+    to every segment by :func:`_pool_rows`. Final held-out evaluation refits on
+    train+validation with the selected alpha; HP search can request a
+    train-only fit so its score is evaluated on the untouched validation
+    segments.
     """
+
+    assert_disjoint_segment_ids(train_segment_ids, validation_segment_ids)
+    if len(train_segment_ids) != len(train_segments) or len(train_segment_ids) != len(train_features):
+        raise ValueError("ridge-training segment ids/arrays have inconsistent lengths")
+    if len(validation_segment_ids) != len(validation_segments) or len(validation_segment_ids) != len(validation_features):
+        raise ValueError("ridge-validation segment ids/arrays have inconsistent lengths")
 
     fits = {}
     for h in horizons:
-        target = np.stack([forecast_target(seg, h) for seg in segments])
-        x, y = _pool_rows(features, target, washout, h)
+        train_target = np.stack([forecast_target(seg, h) for seg in train_segments])
+        validation_target = np.stack([forecast_target(seg, h) for seg in validation_segments])
+        x_train, y_train = _pool_rows(train_features, train_target, washout, h)
+        x_validation, y_validation = _pool_rows(validation_features, validation_target, washout, h)
         best_alpha, best_err = alpha_grid[0], np.inf
-        # simple 80/20 row split for alpha selection (rows already pooled/shuffled across segments)
-        rng = np.random.default_rng(0)
-        idx = rng.permutation(len(x))
-        cut = max(1, int(0.8 * len(idx)))
-        tr_idx, val_idx = idx[:cut], idx[cut:]
         for alpha in alpha_grid:
-            w = fit_readout(x[tr_idx], y[tr_idx], alpha=alpha)
-            pred = predict_readout(x[val_idx], w)
-            err = float(np.sqrt(np.mean((pred - y[val_idx]) ** 2)))
+            weights = fit_readout(x_train, y_train, alpha=alpha)
+            pred = predict_readout(x_validation, weights)
+            err = float(np.sqrt(np.mean((pred - y_validation) ** 2)))
             if err < best_err:
                 best_alpha, best_err = alpha, err
-        final_w = fit_readout(x, y, alpha=best_alpha)
+        if refit_on_train_validation:
+            final_x = np.vstack([x_train, x_validation])
+            final_y = np.concatenate([y_train, y_validation])
+        else:
+            final_x, final_y = x_train, y_train
+        final_w = fit_readout(final_x, final_y, alpha=best_alpha)
         fits[h] = HorizonFit(horizon=h, alpha=best_alpha, weights=final_w)
     return fits
 

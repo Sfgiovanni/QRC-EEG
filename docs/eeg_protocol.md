@@ -102,6 +102,17 @@ rather than silently applied: it makes the comparison *more* conservative
 (nobody gets set-specific tuning), not less, since every construction is
 still tuned as generously as every other.
 
+Ridge selection is blocked at the segment level. For every construction and
+seed, all temporal rows from the frozen training segments are used to fit a
+candidate `alpha`, and all temporal rows from separate frozen validation
+segments are used to select it. Segment IDs are checked for uniqueness and
+zero train/validation overlap before fitting; an overlap aborts the run.
+Washout is applied independently at the start of every segment before rows
+are pooled within a partition. HP search scores train-fitted models on the
+same segment-disjoint validation partition; final held-out evaluation then
+refits the chosen ridge on train+validation and evaluates test segments once.
+The former random 80/20 split of autocorrelated temporal rows is prohibited.
+
 ## Causal preprocessing and inference unit
 
 The corrected pipeline fits one scalar mean and standard deviation per EEG

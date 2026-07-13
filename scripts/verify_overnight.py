@@ -33,7 +33,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from qrc_eeg.eeg_data import load_set  # noqa: E402
 from qrc_eeg.pipeline import construction_features, fit_readouts_per_horizon, evaluate_segments_full  # noqa: E402
 from qrc_eeg.splits import assert_disjoint, load_splits  # noqa: E402
-from qrc_eeg.tasks import zscore  # noqa: E402
+from qrc_eeg.preprocessing import scale_set_from_training  # noqa: E402
 import json  # noqa: E402
 
 CONFIG_PATH = ROOT / "config" / "eeg_frozen.yaml"
@@ -70,20 +70,33 @@ def check_reproducibility(cfg: dict) -> dict:
     alpha_grid = cfg["readout"]["alpha_grid"]
     splits = load_splits(SPLITS_DIR, sets)
     raw = {name: load_set(ROOT / "data" / "eeg" / "sets" / name) for name in sets}
-    zscored = {name: {sid: zscore(np.array(v))[0] for sid, v in segs.items()} for name, segs in raw.items()}
+    scaled = {name: scale_set_from_training(raw[name], splits[name]["train"])[0] for name in sets}
 
     stored = pd.read_csv(RESULTS_DIR / "raw" / "eeg_holdout_by_segment_seed.csv")
     stored = stored[(stored.construction == "single_kernel") & (stored.seed == 1) & (stored.horizon == 1)]
 
     r2_recomputed = {}
     for set_name in sets:
-        trainval_ids = splits[set_name]["train"] + splits[set_name]["val"]
+        train_ids = splits[set_name]["train"]
+        val_ids = splits[set_name]["val"]
         test_ids = splits[set_name]["test"]
-        trainval_arr = np.stack([zscored[set_name][i] for i in trainval_ids])
-        test_arr = np.stack([zscored[set_name][i] for i in test_ids])
-        feats_trainval = construction_features("single_kernel", hp, seed=1, segments=trainval_arr)
+        train_arr = np.stack([scaled[set_name][i] for i in train_ids])
+        val_arr = np.stack([scaled[set_name][i] for i in val_ids])
+        test_arr = np.stack([scaled[set_name][i] for i in test_ids])
+        feats_train = construction_features("single_kernel", hp, seed=1, segments=train_arr)
+        feats_val = construction_features("single_kernel", hp, seed=1, segments=val_arr)
         feats_test = construction_features("single_kernel", hp, seed=1, segments=test_arr)
-        fits = fit_readouts_per_horizon(feats_trainval, trainval_arr, [1], alpha_grid, washout=washout)
+        fits = fit_readouts_per_horizon(
+            feats_train,
+            train_arr,
+            [1],
+            alpha_grid,
+            washout=washout,
+            validation_features=feats_val,
+            validation_segments=val_arr,
+            train_segment_ids=train_ids,
+            validation_segment_ids=val_ids,
+        )
         results = evaluate_segments_full(feats_test, test_arr, fits, washout=washout)
 
         recomputed_nrmse = {sid: results[1]["nrmse"][i] for i, sid in enumerate(test_ids)}

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Commit the current QRC-EEG working tree and push master to the fixed GitHub
+# Commit the current QRC-EEG phase-1 working tree and push master to the fixed GitHub
 # repository. The GitHub token is read without echo and passed to Git through
 # a restricted FIFO; it is never stored in a file, remote URL, or Git config.
 set -euo pipefail
@@ -44,9 +44,9 @@ if git diff --cached --quiet; then
 else
   printf '\nResumo do commit:\n'
   git --no-pager diff --cached --shortstat
-  printf '\nMensagem do commit [Fix causal EEG evaluation leakage and rerun]: '
+  printf '\nMensagem do commit [Fix segment-blocked ridge selection and rerun EEG]: '
   IFS= read -r commit_message
-  commit_message=${commit_message:-"Fix causal EEG evaluation leakage and rerun"}
+  commit_message=${commit_message:-"Fix segment-blocked ridge selection and rerun EEG"}
   git commit -m "$commit_message"
 fi
 

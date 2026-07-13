@@ -1,7 +1,7 @@
 construction,hp,mean_val_nrmse,seconds
-ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.3}",0.6651943013794772,20.955474839996896
-ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.7}",0.5952496696456582,20.880914570996538
-ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.3}",0.6716490768061385,20.88265295700694
-ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.7}",0.6041427971441022,20.793552417002502
-ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.3}",0.6812873784553316,20.886660749005387
-ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.7}",0.6230949096597174,20.872623796007247
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.3}",0.6648834704772753,21.86387722499785
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.7}",0.5951568062347683,21.78384245300549
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.3}",0.6714502855306372,21.828408780973405
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.7}",0.6041368242698418,21.78619438302121
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.3}",0.6812873784553316,21.891510026005562
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.7}",0.6230916014885779,21.821071522979764

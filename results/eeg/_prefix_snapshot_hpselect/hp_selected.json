@@ -1,0 +1,50 @@
+{
+  "AB_noaux": {
+    "hp": {
+      "tau": 5,
+      "delayed_mass": 0.3
+    },
+    "val_nrmse": 0.6408580013834448
+  },
+  "single_kernel": {
+    "hp": {
+      "K": 15,
+      "r": 0.7,
+      "past_mass": 0.3
+    },
+    "val_nrmse": 0.6063369409624533
+  },
+  "dual_kernel": {
+    "hp": {
+      "K": 15,
+      "r_fast": 0.5,
+      "r_slow": 0.9,
+      "fast_mass": 0.2,
+      "slow_mass": 0.2
+    },
+    "val_nrmse": 0.6076144078238697
+  },
+  "triangular": {
+    "hp": {
+      "K": 15,
+      "past_mass": 0.3
+    },
+    "val_nrmse": 0.6079613612650726
+  },
+  "uniform": {
+    "hp": {
+      "K": 15,
+      "past_mass": 0.3
+    },
+    "val_nrmse": 0.6103234515869665
+  },
+  "ESN": {
+    "hp": {
+      "n_reservoir": 200,
+      "spectral_radius": 0.5,
+      "input_scale": 1.0,
+      "leak_rate": 0.7
+    },
+    "val_nrmse": 0.5821378230584909
+  }
+}

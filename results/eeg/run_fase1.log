@@ -1,0 +1,401 @@
+[2026-07-13T16:40:23-03:00] fetch_eeg
+using cached archive: /home/franco/QRC EEG/data/eeg/raw/bonn_eeg_dataset.zip
+observed sha256: f4c2dc52fd5320d4404fcbc6ecb9db69a4a7e408df4e3d5456530343dbcb75ad
+set Z: 100 segments verified in /home/franco/QRC EEG/data/eeg/sets/Z
+set F: 100 segments verified in /home/franco/QRC EEG/data/eeg/sets/F
+set S: 100 segments verified in /home/franco/QRC EEG/data/eeg/sets/S
+wrote /home/franco/QRC EEG/data/eeg/CHECKSUMS.txt
+[2026-07-13T16:40:23-03:00] sanity_checks
+============================= test session starts ==============================
+platform linux -- Python 3.13.9, pytest-9.1.1, pluggy-1.6.0 -- /home/franco/QRC EEG/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/franco/QRC EEG
+configfile: pyproject.toml
+collecting ... collected 11 items
+
+tests/test_mechanism_checks.py::test_trace_hermiticity_positivity_over_trajectory PASSED [  9%]
+tests/test_mechanism_checks.py::test_fading_memory_echo_state_property PASSED [ 18%]
+tests/test_mechanism_checks.py::test_shuffled_target_leakage_r2_near_zero PASSED [ 27%]
+tests/test_mechanism_checks.py::test_nonzero_quadratic_capacity PASSED   [ 36%]
+tests/test_mechanism_checks.py::test_complex64_matches_complex128 PASSED [ 45%]
+tests/test_mechanism_checks.py::test_constructions_produce_distinct_trajectories PASSED [ 54%]
+tests/test_constructions_differ.py::test_constructions_differ_on_real_shaped_input PASSED [ 63%]
+tests/test_batched_matches_reference.py::test_batched_matches_sequential_reference PASSED [ 72%]
+tests/test_segment_grouped_selection.py::test_frozen_train_validation_test_splits_are_segment_disjoint PASSED [ 81%]
+tests/test_segment_grouped_selection.py::test_ridge_selection_rejects_segment_overlap PASSED [ 90%]
+tests/test_segment_grouped_selection.py::test_group_guard_rejects_duplicates_inside_partition PASSED [100%]
+
+============================== 11 passed in 3.70s ==============================
+sanity checks: ok
+[2026-07-13T16:40:27-03:00] hp_search
+AB_noaux {'tau': 5, 'delayed_mass': 0.3} -> val NRMSE 0.6407 (68.7s)
+AB_noaux {'tau': 5, 'delayed_mass': 0.5} -> val NRMSE 0.6707 (68.8s)
+AB_noaux {'tau': 15, 'delayed_mass': 0.3} -> val NRMSE 0.6565 (71.9s)
+AB_noaux {'tau': 15, 'delayed_mass': 0.5} -> val NRMSE 0.6892 (72.5s)
+single_kernel {'K': 15, 'r': 0.7, 'past_mass': 0.3} -> val NRMSE 0.6059 (83.0s)
+single_kernel {'K': 15, 'r': 0.7, 'past_mass': 0.5} -> val NRMSE 0.6113 (82.7s)
+single_kernel {'K': 15, 'r': 0.9, 'past_mass': 0.3} -> val NRMSE 0.6064 (83.0s)
+single_kernel {'K': 15, 'r': 0.9, 'past_mass': 0.5} -> val NRMSE 0.6222 (82.6s)
+dual_kernel {'K': 15, 'r_fast': 0.5, 'r_slow': 0.9, 'fast_mass': 0.2, 'slow_mass': 0.2} -> val NRMSE 0.6069 (82.4s)
+dual_kernel {'K': 15, 'r_fast': 0.5, 'r_slow': 0.9, 'fast_mass': 0.2, 'slow_mass': 0.3} -> val NRMSE 0.6097 (82.3s)
+triangular {'K': 15, 'past_mass': 0.3} -> val NRMSE 0.6075 (82.5s)
+triangular {'K': 15, 'past_mass': 0.5} -> val NRMSE 0.6244 (81.9s)
+uniform {'K': 15, 'past_mass': 0.3} -> val NRMSE 0.6099 (82.1s)
+uniform {'K': 15, 'past_mass': 0.5} -> val NRMSE 0.6383 (83.7s)
+ESN {'n_reservoir': 200, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.6344 (79.9s)
+ESN {'n_reservoir': 200, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.5821 (78.9s)
+ESN {'n_reservoir': 200, 'spectral_radius': 0.9, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.6311 (78.8s)
+ESN {'n_reservoir': 200, 'spectral_radius': 0.9, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.5870 (79.4s)
+ESN {'n_reservoir': 200, 'spectral_radius': 1.2, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.6529 (79.1s)
+ESN {'n_reservoir': 200, 'spectral_radius': 1.2, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.5994 (78.8s)
+wrote /home/franco/QRC EEG/results/eeg/hp_search_log.csv
+wrote /home/franco/QRC EEG/results/eeg/hp_selected.json
+[2026-07-13T17:06:51-03:00] esn66_hp_search
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.6649 (21.9s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.5952 (21.8s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.9, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.6715 (21.8s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.9, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.6041 (21.8s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 1.2, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.6813 (21.9s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 1.2, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.6231 (21.8s)
+wrote /home/franco/QRC EEG/results/eeg/hp_search_log_esn66.csv
+wrote /home/franco/QRC EEG/results/eeg/hp_selected_esn66.json
+[2026-07-13T17:09:03-03:00] holdout_eval
+Z: causal training-only scaler mean=-2.96436 std=48.0139 n=245820
+F: causal training-only scaler mean=-2.91726 std=63.6454 n=245820
+S: causal training-only scaler mean=-6.93099 std=305.697 n=245820
+AB_noaux set=Z seed=1: 37.3s mean_nrmse=0.6708
+AB_noaux set=Z seed=2: 37.0s mean_nrmse=0.6722
+AB_noaux set=Z seed=3: 36.9s mean_nrmse=0.6743
+AB_noaux set=Z seed=4: 36.9s mean_nrmse=0.6700
+AB_noaux set=Z seed=5: 36.9s mean_nrmse=0.6690
+AB_noaux set=Z seed=6: 36.9s mean_nrmse=0.6725
+AB_noaux set=Z seed=7: 36.9s mean_nrmse=0.6742
+AB_noaux set=Z seed=8: 37.0s mean_nrmse=0.6699
+AB_noaux set=Z seed=9: 36.8s mean_nrmse=0.6694
+AB_noaux set=Z seed=10: 36.9s mean_nrmse=0.6722
+AB_noaux set=F seed=1: 36.8s mean_nrmse=0.5414
+AB_noaux set=F seed=2: 36.8s mean_nrmse=0.5494
+AB_noaux set=F seed=3: 36.7s mean_nrmse=0.5475
+AB_noaux set=F seed=4: 36.8s mean_nrmse=0.5397
+AB_noaux set=F seed=5: 36.7s mean_nrmse=0.5416
+AB_noaux set=F seed=6: 36.7s mean_nrmse=0.5465
+AB_noaux set=F seed=7: 36.7s mean_nrmse=0.5467
+AB_noaux set=F seed=8: 36.7s mean_nrmse=0.5410
+AB_noaux set=F seed=9: 36.8s mean_nrmse=0.5409
+AB_noaux set=F seed=10: 36.7s mean_nrmse=0.5515
+AB_noaux set=S seed=1: 36.7s mean_nrmse=0.6020
+AB_noaux set=S seed=2: 36.7s mean_nrmse=0.6119
+AB_noaux set=S seed=3: 36.8s mean_nrmse=0.6148
+AB_noaux set=S seed=4: 36.7s mean_nrmse=0.5993
+AB_noaux set=S seed=5: 36.6s mean_nrmse=0.6084
+AB_noaux set=S seed=6: 36.7s mean_nrmse=0.6026
+AB_noaux set=S seed=7: 36.6s mean_nrmse=0.6089
+AB_noaux set=S seed=8: 36.8s mean_nrmse=0.6065
+AB_noaux set=S seed=9: 36.8s mean_nrmse=0.6047
+AB_noaux set=S seed=10: 36.8s mean_nrmse=0.6059
+single_kernel set=Z seed=1: 44.1s mean_nrmse=0.6446
+single_kernel set=Z seed=2: 44.8s mean_nrmse=0.6448
+single_kernel set=Z seed=3: 44.6s mean_nrmse=0.6463
+single_kernel set=Z seed=4: 44.7s mean_nrmse=0.6473
+single_kernel set=Z seed=5: 44.6s mean_nrmse=0.6430
+single_kernel set=Z seed=6: 44.4s mean_nrmse=0.6474
+single_kernel set=Z seed=7: 44.4s mean_nrmse=0.6478
+single_kernel set=Z seed=8: 44.4s mean_nrmse=0.6432
+single_kernel set=Z seed=9: 44.2s mean_nrmse=0.6465
+single_kernel set=Z seed=10: 44.2s mean_nrmse=0.6446
+single_kernel set=F seed=1: 44.7s mean_nrmse=0.5270
+single_kernel set=F seed=2: 44.7s mean_nrmse=0.5395
+single_kernel set=F seed=3: 44.7s mean_nrmse=0.5348
+single_kernel set=F seed=4: 44.7s mean_nrmse=0.5300
+single_kernel set=F seed=5: 45.1s mean_nrmse=0.5267
+single_kernel set=F seed=6: 44.7s mean_nrmse=0.5384
+single_kernel set=F seed=7: 44.4s mean_nrmse=0.5358
+single_kernel set=F seed=8: 44.6s mean_nrmse=0.5280
+single_kernel set=F seed=9: 44.4s mean_nrmse=0.5317
+single_kernel set=F seed=10: 44.6s mean_nrmse=0.5409
+single_kernel set=S seed=1: 44.1s mean_nrmse=0.5515
+single_kernel set=S seed=2: 43.9s mean_nrmse=0.5625
+single_kernel set=S seed=3: 43.8s mean_nrmse=0.5619
+single_kernel set=S seed=4: 43.8s mean_nrmse=0.5527
+single_kernel set=S seed=5: 44.4s mean_nrmse=0.5599
+single_kernel set=S seed=6: 44.0s mean_nrmse=0.5543
+single_kernel set=S seed=7: 44.1s mean_nrmse=0.5632
+single_kernel set=S seed=8: 43.9s mean_nrmse=0.5578
+single_kernel set=S seed=9: 43.9s mean_nrmse=0.5605
+single_kernel set=S seed=10: 43.9s mean_nrmse=0.5546
+dual_kernel set=Z seed=1: 44.3s mean_nrmse=0.6456
+dual_kernel set=Z seed=2: 44.3s mean_nrmse=0.6466
+dual_kernel set=Z seed=3: 44.3s mean_nrmse=0.6474
+dual_kernel set=Z seed=4: 44.3s mean_nrmse=0.6480
+dual_kernel set=Z seed=5: 44.4s mean_nrmse=0.6443
+dual_kernel set=Z seed=6: 44.3s mean_nrmse=0.6465
+dual_kernel set=Z seed=7: 44.3s mean_nrmse=0.6475
+dual_kernel set=Z seed=8: 44.4s mean_nrmse=0.6438
+dual_kernel set=Z seed=9: 44.4s mean_nrmse=0.6465
+dual_kernel set=Z seed=10: 44.7s mean_nrmse=0.6467
+dual_kernel set=F seed=1: 44.3s mean_nrmse=0.5291
+dual_kernel set=F seed=2: 44.2s mean_nrmse=0.5381
+dual_kernel set=F seed=3: 44.3s mean_nrmse=0.5352
+dual_kernel set=F seed=4: 44.2s mean_nrmse=0.5301
+dual_kernel set=F seed=5: 44.0s mean_nrmse=0.5289
+dual_kernel set=F seed=6: 44.0s mean_nrmse=0.5345
+dual_kernel set=F seed=7: 44.1s mean_nrmse=0.5350
+dual_kernel set=F seed=8: 44.1s mean_nrmse=0.5280
+dual_kernel set=F seed=9: 44.0s mean_nrmse=0.5319
+dual_kernel set=F seed=10: 44.0s mean_nrmse=0.5407
+dual_kernel set=S seed=1: 44.1s mean_nrmse=0.5508
+dual_kernel set=S seed=2: 44.5s mean_nrmse=0.5664
+dual_kernel set=S seed=3: 44.5s mean_nrmse=0.5658
+dual_kernel set=S seed=4: 44.5s mean_nrmse=0.5532
+dual_kernel set=S seed=5: 44.5s mean_nrmse=0.5611
+dual_kernel set=S seed=6: 44.5s mean_nrmse=0.5496
+dual_kernel set=S seed=7: 44.3s mean_nrmse=0.5616
+dual_kernel set=S seed=8: 44.3s mean_nrmse=0.5577
+dual_kernel set=S seed=9: 44.1s mean_nrmse=0.5608
+dual_kernel set=S seed=10: 44.2s mean_nrmse=0.5561
+triangular set=Z seed=1: 44.0s mean_nrmse=0.6438
+triangular set=Z seed=2: 44.2s mean_nrmse=0.6460
+triangular set=Z seed=3: 44.1s mean_nrmse=0.6473
+triangular set=Z seed=4: 44.1s mean_nrmse=0.6444
+triangular set=Z seed=5: 44.1s mean_nrmse=0.6433
+triangular set=Z seed=6: 44.3s mean_nrmse=0.6461
+triangular set=Z seed=7: 44.1s mean_nrmse=0.6483
+triangular set=Z seed=8: 44.2s mean_nrmse=0.6447
+triangular set=Z seed=9: 44.6s mean_nrmse=0.6448
+triangular set=Z seed=10: 44.6s mean_nrmse=0.6458
+triangular set=F seed=1: 44.7s mean_nrmse=0.5276
+triangular set=F seed=2: 44.7s mean_nrmse=0.5358
+triangular set=F seed=3: 44.8s mean_nrmse=0.5353
+triangular set=F seed=4: 44.2s mean_nrmse=0.5287
+triangular set=F seed=5: 44.2s mean_nrmse=0.5294
+triangular set=F seed=6: 44.4s mean_nrmse=0.5333
+triangular set=F seed=7: 44.4s mean_nrmse=0.5329
+triangular set=F seed=8: 44.5s mean_nrmse=0.5269
+triangular set=F seed=9: 44.4s mean_nrmse=0.5307
+triangular set=F seed=10: 44.4s mean_nrmse=0.5406
+triangular set=S seed=1: 44.3s mean_nrmse=0.5549
+triangular set=S seed=2: 44.3s mean_nrmse=0.5650
+triangular set=S seed=3: 44.3s mean_nrmse=0.5641
+triangular set=S seed=4: 44.3s mean_nrmse=0.5540
+triangular set=S seed=5: 44.3s mean_nrmse=0.5646
+triangular set=S seed=6: 44.4s mean_nrmse=0.5560
+triangular set=S seed=7: 44.4s mean_nrmse=0.5621
+triangular set=S seed=8: 44.4s mean_nrmse=0.5585
+triangular set=S seed=9: 44.5s mean_nrmse=0.5633
+triangular set=S seed=10: 44.6s mean_nrmse=0.5550
+uniform set=Z seed=1: 44.5s mean_nrmse=0.6488
+uniform set=Z seed=2: 44.5s mean_nrmse=0.6529
+uniform set=Z seed=3: 44.6s mean_nrmse=0.6541
+uniform set=Z seed=4: 44.5s mean_nrmse=0.6501
+uniform set=Z seed=5: 44.6s mean_nrmse=0.6496
+uniform set=Z seed=6: 44.5s mean_nrmse=0.6512
+uniform set=Z seed=7: 44.5s mean_nrmse=0.6540
+uniform set=Z seed=8: 44.6s mean_nrmse=0.6523
+uniform set=Z seed=9: 44.5s mean_nrmse=0.6500
+uniform set=Z seed=10: 44.5s mean_nrmse=0.6526
+uniform set=F seed=1: 44.6s mean_nrmse=0.5341
+uniform set=F seed=2: 44.5s mean_nrmse=0.5380
+uniform set=F seed=3: 44.6s mean_nrmse=0.5399
+uniform set=F seed=4: 44.5s mean_nrmse=0.5367
+uniform set=F seed=5: 44.5s mean_nrmse=0.5375
+uniform set=F seed=6: 44.5s mean_nrmse=0.5353
+uniform set=F seed=7: 44.4s mean_nrmse=0.5390
+uniform set=F seed=8: 44.5s mean_nrmse=0.5333
+uniform set=F seed=9: 44.5s mean_nrmse=0.5352
+uniform set=F seed=10: 44.4s mean_nrmse=0.5456
+uniform set=S seed=1: 44.4s mean_nrmse=0.5637
+uniform set=S seed=2: 44.5s mean_nrmse=0.5686
+uniform set=S seed=3: 44.5s mean_nrmse=0.5684
+uniform set=S seed=4: 44.5s mean_nrmse=0.5587
+uniform set=S seed=5: 44.4s mean_nrmse=0.5700
+uniform set=S seed=6: 44.5s mean_nrmse=0.5600
+uniform set=S seed=7: 44.5s mean_nrmse=0.5671
+uniform set=S seed=8: 44.5s mean_nrmse=0.5638
+uniform set=S seed=9: 44.6s mean_nrmse=0.5665
+uniform set=S seed=10: 44.9s mean_nrmse=0.5614
+ESN set=Z seed=1: 40.5s mean_nrmse=0.6538
+ESN set=Z seed=2: 40.5s mean_nrmse=0.6516
+ESN set=Z seed=3: 40.5s mean_nrmse=0.6523
+ESN set=Z seed=4: 40.5s mean_nrmse=0.6520
+ESN set=Z seed=5: 40.5s mean_nrmse=0.6525
+ESN set=Z seed=6: 40.4s mean_nrmse=0.6529
+ESN set=Z seed=7: 40.5s mean_nrmse=0.6515
+ESN set=Z seed=8: 40.4s mean_nrmse=0.6528
+ESN set=Z seed=9: 40.5s mean_nrmse=0.6520
+ESN set=Z seed=10: 40.6s mean_nrmse=0.6518
+ESN set=F seed=1: 40.5s mean_nrmse=0.5091
+ESN set=F seed=2: 40.4s mean_nrmse=0.5182
+ESN set=F seed=3: 40.4s mean_nrmse=0.5096
+ESN set=F seed=4: 40.4s mean_nrmse=0.5149
+ESN set=F seed=5: 40.4s mean_nrmse=0.5207
+ESN set=F seed=6: 40.4s mean_nrmse=0.5146
+ESN set=F seed=7: 40.4s mean_nrmse=0.5169
+ESN set=F seed=8: 40.4s mean_nrmse=0.5068
+ESN set=F seed=9: 40.4s mean_nrmse=0.5197
+ESN set=F seed=10: 40.4s mean_nrmse=0.5164
+ESN set=S seed=1: 40.4s mean_nrmse=0.5448
+ESN set=S seed=2: 40.6s mean_nrmse=0.5411
+ESN set=S seed=3: 40.5s mean_nrmse=0.5413
+ESN set=S seed=4: 40.4s mean_nrmse=0.5480
+ESN set=S seed=5: 40.4s mean_nrmse=0.5452
+ESN set=S seed=6: 40.4s mean_nrmse=0.5454
+ESN set=S seed=7: 40.4s mean_nrmse=0.5441
+ESN set=S seed=8: 40.4s mean_nrmse=0.5450
+ESN set=S seed=9: 40.4s mean_nrmse=0.5438
+ESN set=S seed=10: 40.4s mean_nrmse=0.5445
+wrote /home/franco/QRC EEG/results/eeg/raw/eeg_holdout_by_segment_seed.csv (14400 rows)
+wrote /home/franco/QRC EEG/results/eeg/selected_alphas.csv (720 rows)
+[2026-07-13T19:16:27-03:00] esn66_holdout
+ESN_66 set=Z seed=1: 10.7s mean_nrmse=0.6597
+ESN_66 set=Z seed=2: 10.6s mean_nrmse=0.6655
+ESN_66 set=Z seed=3: 10.7s mean_nrmse=0.6625
+ESN_66 set=Z seed=4: 10.7s mean_nrmse=0.6637
+ESN_66 set=Z seed=5: 10.7s mean_nrmse=0.6605
+ESN_66 set=Z seed=6: 10.7s mean_nrmse=0.6626
+ESN_66 set=Z seed=7: 10.7s mean_nrmse=0.6564
+ESN_66 set=Z seed=8: 10.6s mean_nrmse=0.6563
+ESN_66 set=Z seed=9: 10.6s mean_nrmse=0.6606
+ESN_66 set=Z seed=10: 10.6s mean_nrmse=0.6634
+ESN_66 set=F seed=1: 10.6s mean_nrmse=0.5135
+ESN_66 set=F seed=2: 10.6s mean_nrmse=0.5206
+ESN_66 set=F seed=3: 10.6s mean_nrmse=0.5173
+ESN_66 set=F seed=4: 10.6s mean_nrmse=0.5230
+ESN_66 set=F seed=5: 10.6s mean_nrmse=0.5177
+ESN_66 set=F seed=6: 10.6s mean_nrmse=0.5237
+ESN_66 set=F seed=7: 10.6s mean_nrmse=0.5101
+ESN_66 set=F seed=8: 10.6s mean_nrmse=0.5094
+ESN_66 set=F seed=9: 10.6s mean_nrmse=0.5169
+ESN_66 set=F seed=10: 10.6s mean_nrmse=0.5274
+ESN_66 set=S seed=1: 10.6s mean_nrmse=0.5629
+ESN_66 set=S seed=2: 10.6s mean_nrmse=0.5734
+ESN_66 set=S seed=3: 10.6s mean_nrmse=0.5748
+ESN_66 set=S seed=4: 10.7s mean_nrmse=0.5693
+ESN_66 set=S seed=5: 10.6s mean_nrmse=0.5695
+ESN_66 set=S seed=6: 10.6s mean_nrmse=0.5658
+ESN_66 set=S seed=7: 10.7s mean_nrmse=0.5602
+ESN_66 set=S seed=8: 10.6s mean_nrmse=0.5556
+ESN_66 set=S seed=9: 10.6s mean_nrmse=0.5600
+ESN_66 set=S seed=10: 10.6s mean_nrmse=0.5685
+wrote /home/franco/QRC EEG/results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv (2400 rows)
+wrote /home/franco/QRC EEG/results/eeg/selected_alphas_esn66.csv (120 rows)
+[2026-07-13T19:21:47-03:00] quadratic_capacity
+AB_noaux: quadratic = 1.9296 +/- 0.1230, linear = 2.6086 +/- 0.0654
+single_kernel: quadratic = 2.6151 +/- 0.1018, linear = 3.4492 +/- 0.1552
+dual_kernel: quadratic = 2.5051 +/- 0.0799, linear = 3.2464 +/- 0.0548
+triangular: quadratic = 2.6154 +/- 0.0841, linear = 3.4204 +/- 0.1911
+uniform: quadratic = 2.5878 +/- 0.0818, linear = 3.3617 +/- 0.2053
+ESN: quadratic = 0.0087 +/- 0.0038, linear = 3.2333 +/- 0.0442
+wrote /home/franco/QRC EEG/results/eeg/quadratic_capacity.csv
+wrote /home/franco/QRC EEG/results/eeg/linear_capacity.csv
+[2026-07-13T19:22:11-03:00] statistics
+wrote /home/franco/QRC EEG/results/eeg/tab_eeg_contrasts.csv (36 rows)
+                      comparison set  ...    p_holm  win_fraction_state
+0   dual_kernel vs single_kernel   F  ...  0.000360                0.10
+1      single_kernel vs AB_noaux   F  ...  0.000069                1.00
+2           single_kernel vs ESN   F  ...  0.000069                0.00
+3   dual_kernel vs single_kernel   F  ...  0.016275                0.10
+4      single_kernel vs AB_noaux   F  ...  0.000267                0.90
+5           single_kernel vs ESN   F  ...  0.000069                0.00
+6   dual_kernel vs single_kernel   F  ...  1.000000                0.70
+7      single_kernel vs AB_noaux   F  ...  0.700949                0.80
+8           single_kernel vs ESN   F  ...  0.092339                0.30
+9   dual_kernel vs single_kernel   F  ...  0.414055                0.75
+10     single_kernel vs AB_noaux   F  ...  1.000000                0.60
+11          single_kernel vs ESN   F  ...  0.084419                0.75
+12  dual_kernel vs single_kernel   S  ...  0.434807                0.25
+13     single_kernel vs AB_noaux   S  ...  0.000069                1.00
+14          single_kernel vs ESN   S  ...  0.000069                0.00
+15  dual_kernel vs single_kernel   S  ...  0.244995                0.20
+16     single_kernel vs AB_noaux   S  ...  0.000069                1.00
+17          single_kernel vs ESN   S  ...  0.000694                0.10
+18  dual_kernel vs single_kernel   S  ...  1.000000                0.35
+19     single_kernel vs AB_noaux   S  ...  0.021349                0.90
+20          single_kernel vs ESN   S  ...  0.257721                0.20
+21  dual_kernel vs single_kernel   S  ...  1.000000                0.55
+22     single_kernel vs AB_noaux   S  ...  1.000000                0.35
+23          single_kernel vs ESN   S  ...  1.000000                0.60
+24  dual_kernel vs single_kernel   Z  ...  0.011581                0.20
+25     single_kernel vs AB_noaux   Z  ...  0.000069                1.00
+26          single_kernel vs ESN   Z  ...  0.016275                0.05
+27  dual_kernel vs single_kernel   Z  ...  0.181709                0.30
+28     single_kernel vs AB_noaux   Z  ...  0.000069                1.00
+29          single_kernel vs ESN   Z  ...  0.414055                0.25
+30  dual_kernel vs single_kernel   Z  ...  1.000000                0.45
+31     single_kernel vs AB_noaux   Z  ...  0.008059                0.85
+32          single_kernel vs ESN   Z  ...  1.000000                0.45
+33  dual_kernel vs single_kernel   Z  ...  0.700949                0.70
+34     single_kernel vs AB_noaux   Z  ...  0.742950                0.70
+35          single_kernel vs ESN   Z  ...  0.115013                0.85
+
+[36 rows x 6 columns]
+[2026-07-13T19:22:19-03:00] esn66_contrasts
+wrote /home/franco/QRC EEG/results/eeg/tab_esn_matched.csv (12 rows)
+   set  horizon  ...  esn66_nrmse_mean_matched  esn200_nrmse_mean_unmatched
+0    F        1  ...                  0.184615                     0.178616
+1    F        2  ...                  0.331493                     0.326079
+2    F        4  ...                  0.623091                     0.620891
+3    F        8  ...                  0.932677                     0.933216
+4    S        1  ...                  0.162630                     0.148260
+5    S        2  ...                  0.367103                     0.338826
+6    S        4  ...                  0.768792                     0.733875
+7    S        8  ...                  0.965445                     0.956386
+8    Z        1  ...                  0.265738                     0.261312
+9    Z        2  ...                  0.506129                     0.497143
+10   Z        4  ...                  0.874293                     0.860633
+11   Z        8  ...                  0.998263                     0.990187
+
+[12 rows x 9 columns]
+wrote /home/franco/QRC EEG/paper/tab_esn_matched.tex
+[2026-07-13T19:22:22-03:00] long_horizon_contrasts
+wrote /home/franco/QRC EEG/results/eeg/tab_long_horizon_contrasts.csv (12 rows)
+                   comparison set  ...    p_holm  win_fraction_state
+0   single_kernel vs AB_noaux   F  ...  0.446058                0.80
+1     single_kernel vs ESN_66   F  ...  0.455109                0.45
+2   single_kernel vs AB_noaux   F  ...  0.461025                0.60
+3     single_kernel vs ESN_66   F  ...  0.003136                0.85
+4   single_kernel vs AB_noaux   S  ...  0.009150                0.90
+5     single_kernel vs ESN_66   S  ...  0.455109                0.65
+6   single_kernel vs AB_noaux   S  ...  0.461025                0.35
+7     single_kernel vs ESN_66   S  ...  0.455109                0.70
+8   single_kernel vs AB_noaux   Z  ...  0.003546                0.85
+9     single_kernel vs ESN_66   Z  ...  0.044647                0.75
+10  single_kernel vs AB_noaux   Z  ...  0.455109                0.70
+11    single_kernel vs ESN_66   Z  ...  0.008507                0.85
+
+[12 rows x 8 columns]
+wrote /home/franco/QRC EEG/paper/tab_long_horizon_contrasts.tex
+[2026-07-13T19:22:26-03:00] tables_figures
+/home/franco/.config/matplotlib is not a writable directory
+Matplotlib created a temporary cache directory at /tmp/matplotlib-_b6oey4p because there was an issue with the default path ({configdir}); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+wrote fig_eeg_demand_gradient (pdf, png) -- categorical x-axis, not the degenerate continuous score
+capacity/demand regression: {'slope': -4.861106941019985, 'ci_lo': -92.2521045338901, 'ci_hi': 82.52989065185014, 'n': 36} {'slope': -0.00599450283027176, 'ci_lo': nan, 'ci_hi': nan, 'n': 3}
+wrote fig_eeg_capacity_vs_gain (pdf, png)
+[2026-07-13T19:22:28-03:00] long_horizon_figure
+/home/franco/.config/matplotlib is not a writable directory
+Matplotlib created a temporary cache directory at /tmp/matplotlib-htvp0430 because there was an issue with the default path ({configdir}); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+wrote fig_long_horizon (pdf, png)
+[2026-07-13T19:22:30-03:00] update_results
+wrote RESULTS.md from regenerated CSVs
+[2026-07-13T19:22:31-03:00] fase1_diff_report
+wrote /home/franco/QRC EEG/results/eeg/fase1_diff_report.md
+- **Kernel x ESN horizon interaction — ENFRAQUECEU.** Expected direction in 6/8 F/Z cells; Holm-significant expected-direction cells: short=3, long=3.
+- **Kernel > AB — SOBREVIVEU.** Kernel-favoring cells=11/12; Holm-significant kernel-favoring cells=8/12.
+[2026-07-13T19:22:31-03:00] pytest
+.............                                                            [100%]
+13 passed in 3.48s
+[2026-07-13T19:22:35-03:00] pipeline_stages_complete
+[2026-07-13T19:22:35-03:00] verify_fase1
+....                                                                     [100%]
+4 passed in 0.63s
+wrote /home/franco/QRC EEG/provenance/eeg_checksums.txt (50 files)
+wrote results/eeg/PROVENANCE.md
+
+FASE1 GATE: PASS
+ridge/HP selection: disjoint whole segments; overlap guard passed
+shuffled target: held-out R2 near-zero test passed
+RESULTS.md: regenerated numbers match CSVs; stale claims absent
+run_eeg.sh: all deterministic stages completed before this gate
+snapshot + numeric diff + 840 matched alpha choices: present
+14355257aa0b4dfac968f110142e05e5a781d2e7e7200c0c178eb174387e99dc  results/eeg/fase1_diff_report.md
+304a0c675273294f09d45e6b7e43fc6c698d82a706b515356dcc357e794a5a52  results/eeg/selected_alphas.csv
+230b52b265bbba2424df62e762d5fbe7b7524efac2e6721dc2fa2d7c6d1449c5  results/eeg/selected_alphas_esn66.csv
