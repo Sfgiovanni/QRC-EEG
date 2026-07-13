@@ -1,6 +1,6 @@
 # Vendored from QRC-Glicose (github.com/Sfgiovanni/QRC-Glicose), MIT License, same author.
 # Adapted here for the QRC-EEG study; see docs/eeg_protocol.md for provenance.
-"""Patient-level paired statistical summaries."""
+"""Test-segment-level paired statistical summaries."""
 
 from __future__ import annotations
 
@@ -24,14 +24,14 @@ def holm(p_values: np.ndarray) -> np.ndarray:
     return out
 
 
-def paired_patient_summary(
+def paired_segment_summary(
     state_kernel: pd.Series,
     comparator: pd.Series,
     state_name: str,
     comparator_name: str,
     seed: int = 1234,
 ) -> dict[str, float | int | str]:
-    """Summarize paired patient differences.
+    """Summarize paired held-out segment differences.
 
     Positive differences mean ``RMSE_comparator - RMSE_state_kernel``.
     """
@@ -47,7 +47,7 @@ def paired_patient_summary(
     dz = float(np.mean(diff) / np.std(diff, ddof=1)) if len(diff) > 1 and np.std(diff, ddof=1) > 0 else float("nan")
     return {
         "comparison": f"{state_name} vs {comparator_name}",
-        "n_patients": len(common),
+        "n_segments": len(common),
         "mean_diff_rmse_comparator_minus_state": float(np.mean(diff)) if len(diff) else float("nan"),
         "median_diff": float(np.median(diff)) if len(diff) else float("nan"),
         "ci95_lo": float(np.percentile(boots, 2.5)),

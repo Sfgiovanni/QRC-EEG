@@ -23,7 +23,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from qrc_eeg.statistics import holm, paired_patient_summary  # noqa: E402
+from qrc_eeg.statistics import holm, paired_segment_summary  # noqa: E402
 
 CONFIG_PATH = ROOT / "config" / "eeg_frozen.yaml"
 RESULTS_DIR = ROOT / "results" / "eeg"
@@ -46,7 +46,7 @@ def main() -> None:
             b = slab[slab["construction"] == "ESN_66"].set_index("segment_id")["nrmse"]
             if a.empty or b.empty:
                 continue
-            summary = paired_patient_summary(a, b, "single_kernel", "ESN_66", seed=cfg["split"]["seed"])
+            summary = paired_segment_summary(a, b, "single_kernel", "ESN_66", seed=cfg["split"]["seed"])
             summary["set"] = set_name
             summary["horizon"] = horizon
             rows.append(summary)

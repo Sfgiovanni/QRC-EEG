@@ -21,8 +21,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from qrc_eeg.eeg_data import load_set  # noqa: E402
 from qrc_eeg.pipeline import construction_features, fit_readouts_per_horizon, evaluate_segments_full  # noqa: E402
+from qrc_eeg.preprocessing import scale_set_from_training  # noqa: E402
 from qrc_eeg.splits import load_splits  # noqa: E402
-from qrc_eeg.tasks import zscore  # noqa: E402
 
 CONFIG_PATH = ROOT / "config" / "eeg_frozen.yaml"
 SPLITS_DIR = ROOT / "data" / "eeg" / "splits"
@@ -38,9 +38,16 @@ def main() -> None:
     washout = cfg["readout"]["washout"]
     selected = json.loads((RESULTS_DIR / "hp_selected.json").read_text())
 
-    raw = {name: load_set(ROOT / "data" / "eeg" / "sets" / name) for name in sets}
-    zscored = {name: {sid: zscore(np.array(v))[0] for sid, v in segs.items()} for name, segs in raw.items()}
     splits = load_splits(SPLITS_DIR, sets)
+    raw = {name: load_set(ROOT / "data" / "eeg" / "sets" / name) for name in sets}
+    scaled = {}
+    for name in sets:
+        scaled[name], scaler = scale_set_from_training(raw[name], splits[name]["train"])
+        print(
+            f"{name}: causal training-only scaler mean={scaler.mean:.6g} std={scaler.std:.6g} "
+            f"n={scaler.n_training_samples}",
+            flush=True,
+        )
 
     rows = []
     for construction, choice in selected.items():
@@ -48,8 +55,8 @@ def main() -> None:
         for set_name in sets:
             trainval_ids = splits[set_name]["train"] + splits[set_name]["val"]
             test_ids = splits[set_name]["test"]
-            trainval_arr = np.stack([zscored[set_name][i] for i in trainval_ids])
-            test_arr = np.stack([zscored[set_name][i] for i in test_ids])
+            trainval_arr = np.stack([scaled[set_name][i] for i in trainval_ids])
+            test_arr = np.stack([scaled[set_name][i] for i in test_ids])
 
             for seed in cfg["channel"]["confirmatory_seeds"]:
                 t0 = time.perf_counter()

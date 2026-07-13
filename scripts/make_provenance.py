@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT / "src"))
 OUTPUT_GLOBS = [
     "results/eeg/*.csv",
     "results/eeg/raw/*.csv",
+    "results/eeg/bugfix_diff_report.md",
     "figures/eeg/*.pdf",
     "figures/eeg/*.png",
     "paper/*.tex",

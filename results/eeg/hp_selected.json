@@ -4,7 +4,7 @@
       "tau": 5,
       "delayed_mass": 0.3
     },
-    "val_nrmse": 0.6048578029309868
+    "val_nrmse": 0.6408580013834448
   },
   "single_kernel": {
     "hp": {
@@ -12,7 +12,7 @@
       "r": 0.7,
       "past_mass": 0.3
     },
-    "val_nrmse": 0.571800776036522
+    "val_nrmse": 0.6063369409624533
   },
   "dual_kernel": {
     "hp": {
@@ -22,21 +22,21 @@
       "fast_mass": 0.2,
       "slow_mass": 0.2
     },
-    "val_nrmse": 0.5728475628775107
+    "val_nrmse": 0.6076144078238697
   },
   "triangular": {
     "hp": {
       "K": 15,
       "past_mass": 0.3
     },
-    "val_nrmse": 0.5726141614405984
+    "val_nrmse": 0.6079613612650726
   },
   "uniform": {
     "hp": {
       "K": 15,
       "past_mass": 0.3
     },
-    "val_nrmse": 0.5764679451225366
+    "val_nrmse": 0.6103234515869665
   },
   "ESN": {
     "hp": {
@@ -45,6 +45,6 @@
       "input_scale": 1.0,
       "leak_rate": 0.7
     },
-    "val_nrmse": 0.5613057664283273
+    "val_nrmse": 0.5821378230584909
   }
 }

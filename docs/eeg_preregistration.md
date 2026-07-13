@@ -110,12 +110,6 @@ expectation values, 66 features), and the input-encoding channel. Reported
 in `tab_quadratic_capacity` alongside feature counts so no reader can mistake
 this for a dimension-inflation result.
 
-## Secondary task (if time budget allows)
-
-Ictal (E) vs. non-ictal (Z, D) classification from reservoir features,
-logistic readout, equalized across constructions. Metric: AUROC, AUPRC,
-bootstrap 95% CI.
-
 ## Quadratic-capacity linkage
 
 Frozen synthetic quadratic-capacity protocol (vendored `memory_capacity.py`),

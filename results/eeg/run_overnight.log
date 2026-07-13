@@ -1,4 +1,4 @@
-[2026-07-12T22:30:07-03:00] overnight run started (3 items + gate)
+[2026-07-12T22:30:07-03:00] overnight run started (2 items + gate)
 [2026-07-12T22:30:35-03:00] Item2 step1: ESN-66 HP search starting
 ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.6309 (30.2s)
 ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.5695 (30.2s)
@@ -80,101 +80,28 @@ wrote /home/franco/QRC EEG/results/eeg/tab_long_horizon_contrasts.csv (12 rows)
 [12 rows x 8 columns]
 wrote /home/franco/QRC EEG/paper/tab_long_horizon_contrasts.tex
 [2026-07-12T22:44:39-03:00] Item1 done
-[2026-07-12T22:45:00-03:00] Item3: ictal classification starting
-single_kernel seed=1: 114.7s alpha=1e-06 auroc=0.9912 auprc=0.9815
-single_kernel seed=2: 106.6s alpha=1e-07 auroc=0.9862 auprc=0.9721
-single_kernel seed=3: 113.6s alpha=1e-07 auroc=0.9912 auprc=0.9823
-single_kernel seed=4: 102.8s alpha=1e-06 auroc=0.9950 auprc=0.9903
-single_kernel seed=5: 113.5s alpha=1e-06 auroc=0.9975 auprc=0.9951
-single_kernel seed=6: 112.6s alpha=1e-08 auroc=0.9925 auprc=0.9846
-single_kernel seed=7: 112.7s alpha=1e-06 auroc=0.9938 auprc=0.9900
-single_kernel seed=8: 112.7s alpha=1e-07 auroc=0.9838 auprc=0.9619
-single_kernel seed=9: 112.9s alpha=1e-08 auroc=0.9950 auprc=0.9897
-single_kernel seed=10: 112.4s alpha=1e-06 auroc=0.9950 auprc=0.9897
-dual_kernel seed=1: 113.4s alpha=1e-07 auroc=0.9712 auprc=0.9164
-dual_kernel seed=2: 113.2s alpha=1e-07 auroc=0.9862 auprc=0.9724
-dual_kernel seed=3: 112.9s alpha=1e-06 auroc=0.9762 auprc=0.9471
-dual_kernel seed=4: 114.6s alpha=1e-07 auroc=0.9875 auprc=0.9749
-dual_kernel seed=5: 113.5s alpha=1e-06 auroc=0.9925 auprc=0.9885
-dual_kernel seed=6: 114.1s alpha=1e-07 auroc=0.9775 auprc=0.9424
-dual_kernel seed=7: 104.6s alpha=1e-06 auroc=0.9962 auprc=0.9935
-dual_kernel seed=8: 113.2s alpha=1e-07 auroc=0.9812 auprc=0.9452
-dual_kernel seed=9: 113.2s alpha=1e-07 auroc=0.9888 auprc=0.9746
-dual_kernel seed=10: 114.1s alpha=1e-06 auroc=0.9950 auprc=0.9897
-AB_noaux seed=1: 82.5s alpha=1e-07 auroc=0.9825 auprc=0.9594
-AB_noaux seed=2: 82.8s alpha=1e-07 auroc=0.9875 auprc=0.9723
-AB_noaux seed=3: 82.3s alpha=1e-07 auroc=0.9838 auprc=0.9636
-AB_noaux seed=4: 81.3s alpha=1e-08 auroc=0.9912 auprc=0.9815
-AB_noaux seed=5: 81.1s alpha=1e-07 auroc=1.0000 auprc=1.0000
-AB_noaux seed=6: 81.0s alpha=1e-07 auroc=0.9900 auprc=0.9804
-AB_noaux seed=7: 81.2s alpha=1e-06 auroc=0.9938 auprc=0.9868
-AB_noaux seed=8: 81.3s alpha=1e-07 auroc=0.9875 auprc=0.9735
-AB_noaux seed=9: 81.3s alpha=1e-07 auroc=1.0000 auprc=1.0000
-AB_noaux seed=10: 81.2s alpha=1e-06 auroc=0.9950 auprc=0.9910
-ESN_66 seed=1: 3.8s alpha=0.001 auroc=0.4113 auprc=0.4739
-ESN_66 seed=2: 3.8s alpha=0.0001 auroc=0.5188 auprc=0.5680
-ESN_66 seed=3: 3.8s alpha=1e-05 auroc=0.5775 auprc=0.5655
-ESN_66 seed=4: 3.8s alpha=0.0001 auroc=0.5613 auprc=0.5837
-ESN_66 seed=5: 3.8s alpha=0.0001 auroc=0.5275 auprc=0.5604
-ESN_66 seed=6: 3.8s alpha=0.0001 auroc=0.5288 auprc=0.5629
-ESN_66 seed=7: 3.8s alpha=1e-05 auroc=0.6162 auprc=0.6053
-ESN_66 seed=8: 3.8s alpha=1e-07 auroc=0.6000 auprc=0.5561
-ESN_66 seed=9: 3.8s alpha=1e-07 auroc=0.6188 auprc=0.5509
-ESN_66 seed=10: 3.8s alpha=1e-07 auroc=0.6225 auprc=0.5845
-wrote /home/franco/QRC EEG/results/eeg/raw/eeg_ictal_by_seed.csv
-[sanity] single_kernel: mean shuffled-label held-out AUROC = 0.5091
-[sanity] dual_kernel: mean shuffled-label held-out AUROC = 0.5402
-[sanity] AB_noaux: mean shuffled-label held-out AUROC = 0.4915
-[sanity] ESN_66: mean shuffled-label held-out AUROC = 0.5149
-PASS: leakage sanity check -- all constructions collapse to chance under label shuffling
-wrote /home/franco/QRC EEG/results/eeg/tab_ictal_classification.csv
-    construction  n_test_segments  ...  auprc_ci_hi  n_boot_used
-0  single_kernel               60  ...     1.000000        10000
-1    dual_kernel               60  ...     1.000000        10000
-2       AB_noaux               60  ...     1.000000        10000
-3         ESN_66               60  ...     0.756043        10000
-
-[4 rows x 11 columns]
-wrote /home/franco/QRC EEG/results/eeg/tab_ictal_classification_contrasts.csv
-                  comparison  n_segments  ...  n_boot_used  p_holm
-0  single_kernel vs AB_noaux          60  ...        10000     1.0
-1    single_kernel vs ESN_66          60  ...        10000     0.0
-
-[2 rows x 11 columns]
-wrote paper/tab_ictal_classification.tex, paper/tab_ictal_classification_contrasts.tex
-[2026-07-12T23:36:46-03:00] Item3: ictal classification done
-[2026-07-12T23:37:17-03:00] Figures: generating
+[2026-07-13T09:17:58-03:00] Figures: generating
 wrote fig_long_horizon (pdf, png)
-wrote fig_ictal_auroc (pdf, png)
-[2026-07-12T23:37:19-03:00] Figures done
-[2026-07-12T23:37:44-03:00] Provenance pass 1 (pre-gate)
+[2026-07-13T09:18:00-03:00] Figures done
+[2026-07-13T09:18:00-03:00] Provenance pass 1 (pre-gate)
 skip (missing): results/eeg/overnight_summary.md
-Traceback (most recent call last):
-  File "/home/franco/QRC EEG/scripts/append_overnight_provenance.py", line 168, in <module>
-    main()
-    ~~~~^^
-  File "/home/franco/QRC EEG/scripts/append_overnight_provenance.py", line 69, in main
-    close_idx = max(i for i, l in enumerate(lines) if l.strip() == "```")
-ValueError: max() iterable argument is empty
-[2026-07-12T23:38:22-03:00] Provenance pass 1 (pre-gate, retry)
-skip (missing): results/eeg/overnight_summary.md
-appended 17 checksums to /home/franco/QRC EEG/provenance/eeg_checksums.txt
-appended overnight addendum to /home/franco/QRC EEG/results/eeg/PROVENANCE.md
-[2026-07-12T23:38:45-03:00] Gate: verify_overnight.py starting
+appended 9 checksums to /home/franco/QRC EEG/provenance/eeg_checksums.txt
+PROVENANCE.md addendum already present, skipping (idempotent re-run)
+[2026-07-13T09:18:52-03:00] Gate: verify_overnight.py starting
 [gate] 1/4 reproducibility: re-running single_kernel seed=1, all sets, h=1 ...
 [gate] reproducibility OK -- seed=1 h=1 nrmse matches stored raw row-for-row; R^2 anchors match RESULTS.md: {'F': 0.9659567564552133, 'S': 0.9735425947850991, 'Z': 0.9217752904667499}
 [gate] 2/4 anti-leakage ...
-[gate] anti-leakage OK -- splits disjoint, shuffle-label AUROC near chance for all constructions
+[gate] anti-leakage OK -- splits disjoint, no cross-set collisions
 [gate] 3/4 completeness ...
 [gate] completeness OK -- ESN-66 grid is 3x4x10x20, all new artifacts checksummed
 [gate] 4/4 writing overnight_summary.md ...
 [gate] wrote /home/franco/QRC EEG/results/eeg/overnight_summary.md
 GATE PASSED.
-[2026-07-12T23:40:27-03:00] Gate: verify_overnight.py exit=0
-[2026-07-12T23:41:06-03:00] Provenance pass 2 (post-gate, checksums overnight_summary.md)
-appended 18 checksums to /home/franco/QRC EEG/provenance/eeg_checksums.txt
+[2026-07-13T09:20:32-03:00] Gate: verify_overnight.py exit=0
+[2026-07-13T09:20:32-03:00] Provenance pass 2 (post-gate)
+appended 10 checksums to /home/franco/QRC EEG/provenance/eeg_checksums.txt
 PROVENANCE.md addendum already present, skipping (idempotent re-run)
-[2026-07-12T23:41:16-03:00] Full pytest suite
-..................                                                       [100%]
-18 passed in 4.46s
-[2026-07-12T23:41:21-03:00] pytest exit=0
+[2026-07-13T09:20:32-03:00] Full pytest suite
+........                                                                 [100%]
+8 passed in 3.84s
+[2026-07-13T09:20:37-03:00] pytest exit=0

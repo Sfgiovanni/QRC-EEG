@@ -23,8 +23,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from qrc_eeg.eeg_data import load_set  # noqa: E402
 from qrc_eeg.pipeline import construction_features, fit_readouts_per_horizon, evaluate_segments_full  # noqa: E402
+from qrc_eeg.preprocessing import scale_set_from_training  # noqa: E402
 from qrc_eeg.splits import load_splits  # noqa: E402
-from qrc_eeg.tasks import zscore  # noqa: E402
 
 CONFIG_PATH = ROOT / "config" / "eeg_frozen.yaml"
 SPLITS_DIR = ROOT / "data" / "eeg" / "splits"
@@ -41,16 +41,16 @@ def main() -> None:
     selected = json.loads((RESULTS_DIR / "hp_selected_esn66.json").read_text())
     hp = selected["ESN_66"]["hp"]
 
-    raw = {name: load_set(ROOT / "data" / "eeg" / "sets" / name) for name in sets}
-    zscored = {name: {sid: zscore(np.array(v))[0] for sid, v in segs.items()} for name, segs in raw.items()}
     splits = load_splits(SPLITS_DIR, sets)
+    raw = {name: load_set(ROOT / "data" / "eeg" / "sets" / name) for name in sets}
+    scaled = {name: scale_set_from_training(raw[name], splits[name]["train"])[0] for name in sets}
 
     rows = []
     for set_name in sets:
         trainval_ids = splits[set_name]["train"] + splits[set_name]["val"]
         test_ids = splits[set_name]["test"]
-        trainval_arr = np.stack([zscored[set_name][i] for i in trainval_ids])
-        test_arr = np.stack([zscored[set_name][i] for i in test_ids])
+        trainval_arr = np.stack([scaled[set_name][i] for i in trainval_ids])
+        test_arr = np.stack([scaled[set_name][i] for i in test_ids])
 
         for seed in cfg["channel"]["confirmatory_seeds"]:
             t0 = time.perf_counter()

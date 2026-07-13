@@ -41,6 +41,25 @@ def n_dof_for(construction: str, hp: dict) -> int:
     return hp["n_reservoir"] if construction == "ESN" else N_QUBITS
 
 
+def select_capacity_alpha(
+    feats: np.ndarray,
+    target: np.ndarray,
+    train_idx: np.ndarray,
+    val_idx: np.ndarray,
+    alpha_grid: list[float],
+) -> float:
+    """Select ridge alpha on validation rows; reserved test rows are absent."""
+
+    best_alpha, best_score = alpha_grid[0], -np.inf
+    for alpha in alpha_grid:
+        weights = fit_readout(feats[train_idx], target[train_idx], alpha=alpha)
+        pred = predict_readout(feats[val_idx], weights)
+        score = capacity_score(target[val_idx], pred)
+        if score > best_score:
+            best_alpha, best_score = alpha, score
+    return float(best_alpha)
+
+
 def capacity_for_kind(feats: np.ndarray, u: np.ndarray, tau_values: list[int], kind: str, washout: int, alpha_grid: list[float]) -> float:
     total_capacity = 0.0
     for tau in tau_values:
@@ -50,15 +69,19 @@ def capacity_for_kind(feats: np.ndarray, u: np.ndarray, tau_values: list[int], k
         idx = idx[idx >= washout]
         if len(idx) < 20:
             continue
-        split = int(len(idx) * 0.7)
-        train_idx, test_idx = idx[:split], idx[split:]
-        best_score = -np.inf
-        for alpha in alpha_grid:
-            w = fit_readout(feats[train_idx], target[train_idx], alpha=alpha)
-            pred = predict_readout(feats[test_idx], w)
-            score = capacity_score(target[test_idx], pred)
-            best_score = max(best_score, score)
-        total_capacity += best_score
+        train_end = int(len(idx) * 0.6)
+        val_end = int(len(idx) * 0.8)
+        train_idx, val_idx, test_idx = idx[:train_end], idx[train_end:val_end], idx[val_end:]
+        if min(len(train_idx), len(val_idx), len(test_idx)) == 0:
+            raise RuntimeError(f"capacity split empty for tau={tau}")
+        best_alpha = select_capacity_alpha(feats, target, train_idx, val_idx, alpha_grid)
+        weights = fit_readout(
+            feats[np.concatenate([train_idx, val_idx])],
+            target[np.concatenate([train_idx, val_idx])],
+            alpha=best_alpha,
+        )
+        pred = predict_readout(feats[test_idx], weights)
+        total_capacity += capacity_score(target[test_idx], pred)
     return total_capacity
 
 

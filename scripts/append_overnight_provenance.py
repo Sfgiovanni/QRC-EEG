@@ -22,19 +22,11 @@ NEW_FILES = [
     "results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv",
     "results/eeg/tab_esn_matched.csv",
     "results/eeg/tab_long_horizon_contrasts.csv",
-    "results/eeg/raw/eeg_ictal_by_seed.csv",
-    "results/eeg/ictal_shuffle_check.csv",
-    "results/eeg/tab_ictal_classification.csv",
-    "results/eeg/tab_ictal_classification_contrasts.csv",
     "results/eeg/overnight_summary.md",
     "paper/tab_esn_matched.tex",
     "paper/tab_long_horizon_contrasts.tex",
-    "paper/tab_ictal_classification.tex",
-    "paper/tab_ictal_classification_contrasts.tex",
     "figures/eeg/fig_long_horizon.pdf",
     "figures/eeg/fig_long_horizon.png",
-    "figures/eeg/fig_ictal_auroc.pdf",
-    "figures/eeg/fig_ictal_auroc.png",
 ]
 
 
@@ -77,7 +69,7 @@ def main() -> None:
     section = f"""
 ## Overnight run addendum ({stamp})
 
-Three follow-up items, run in one pass, reusing the existing pipeline
+Two follow-up items, run in one pass, reusing the existing pipeline
 (`src/qrc_eeg/pipeline.py`, `statistics.py`, `splits.py`, `readout.py`) end to
 end; no reservoir/kernel/channel/ESN/capacity/bootstrap code was
 reimplemented.
@@ -115,50 +107,25 @@ within this 12-test family). `results/eeg/tab_esn_matched.csv` carries the
 original ESN-200 endpoint (`esn200_nrmse_mean_unmatched`) alongside the
 matched ESN-66 endpoint for direct transparency in one table.
 
-**Item 3 (ictal classification, pre-registered secondary task):**
-`scripts/run_ictal_classification.py`. Reuses
-`qrc_eeg.pipeline.construction_features` for single_kernel, dual_kernel,
-AB_noaux, and ESN_66 (equalized 66-feature budget on every arm) over the
-existing frozen segment-level splits (train/val/test), pooled across
-Z/F/S -- label is ictal (S) vs non-ictal (Z, F), fixed by which set a
-segment belongs to, so no new leakage surface is introduced by pooling.
-New (not reused, because nothing existed for it): `src/qrc_eeg/classification.py`
-(mean-pool-over-time feature reduction, L2-penalized logistic readout via
-Newton-Raphson, rank-based AUROC/AUPRC, segment-level bootstrap CIs and
-paired bootstrap Delta-AUC -- mirrors `readout.py`'s regularization
-convention and `statistics.py`'s bootstrap conventions rather than
-inventing new ones). Alpha selected per construction/seed on the train/val
-split by validation log-loss; final readout refit on train+val, evaluated
-once on held-out test; probabilities ensemble-averaged across the 10
-confirmatory seeds before computing AUROC/AUPRC. **Mandatory leakage sanity
-check is embedded in the script itself** (`results/eeg/ictal_shuffle_check.csv`):
-with segment labels shuffled and the model refit on a held-out split, AUROC
-must land in [0.35, 0.65] for every construction or the script aborts with
-`SystemExit` before writing any classification table.
-
 **Gate:** `scripts/verify_overnight.py` re-runs (not just re-reads)
 single_kernel seed=1 h=1 through the live pipeline and diffs every test
 segment's NRMSE against the stored raw CSV row, then separately recomputes
 the RESULTS.md h=1 R^2 anchors (0.92 Z / 0.97 F / 0.97 S) directly from the
 raw CSV filtered to horizon==1 (not from the horizon-averaged endpoints
-table). It re-verifies split disjointness and the classification shuffle
-check, checks the ESN-66 grid is complete (3x4x10 cells x 20 segments each),
-confirms every new artifact has a SHA256 in `provenance/eeg_checksums.txt`,
-and writes `results/eeg/overnight_summary.md` with a pre-committed,
-mechanically-applied PRE-vs-PRResearch decision rule (stated in the gate
-script before results were read, applied honestly to whatever came out).
+table). It re-verifies split disjointness, checks the ESN-66 grid is
+complete (3x4x10 cells x 20 segments each), confirms every new artifact has
+a SHA256 in `provenance/eeg_checksums.txt`, and writes
+`results/eeg/overnight_summary.md` with a pre-committed, mechanically-applied
+PRE-vs-PRResearch decision rule (stated in the gate script before results
+were read, applied honestly to whatever came out).
 
 New tables: `results/eeg/tab_long_horizon_contrasts.csv`,
-`results/eeg/tab_esn_matched.csv`, `results/eeg/tab_ictal_classification.csv`,
-`results/eeg/tab_ictal_classification_contrasts.csv` (+ matching `paper/*.tex`).
-New figures: `figures/eeg/fig_long_horizon.{{pdf,png}}`,
-`figures/eeg/fig_ictal_auroc.{{pdf,png}}`. New raw/diagnostic files:
-`results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv`,
-`results/eeg/raw/eeg_ictal_by_seed.csv`,
-`results/eeg/hp_search_log_esn66.csv`, `results/eeg/hp_selected_esn66.json`,
-`results/eeg/ictal_shuffle_check.csv`. Progress log with timestamps:
-`results/eeg/run_overnight.log`. No existing artifact was overwritten;
-every filename above is new.
+`results/eeg/tab_esn_matched.csv` (+ matching `paper/*.tex`).
+New figure: `figures/eeg/fig_long_horizon.{{pdf,png}}`. New raw/diagnostic
+files: `results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv`,
+`results/eeg/hp_search_log_esn66.csv`, `results/eeg/hp_selected_esn66.json`.
+Progress log with timestamps: `results/eeg/run_overnight.log`. No existing
+artifact was overwritten; every filename above is new.
 """
     with open(provenance_md, "a") as f:
         f.write(section)

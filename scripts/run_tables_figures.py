@@ -115,6 +115,29 @@ def ols_with_ci(x: np.ndarray, y: np.ndarray) -> dict:
     return {"slope": slope, "ci_lo": slope - 1.96 * se_slope, "ci_hi": slope + 1.96 * se_slope, "n": n}
 
 
+def capacity_association_three_gaps(rows: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
+    """Describe the association at its actual independent unit: comparison (n=3).
+
+    Each comparison contributes one capacity gap repeated across sets and
+    horizons. We average its EEG deltas and deliberately omit an inferential
+    confidence interval, which the 36 repeated rows cannot justify.
+    """
+
+    points = (
+        rows.groupby("comparison", as_index=False)
+        .agg(capacity_gap=("capacity_gap", "first"), delta_nrmse=("delta_nrmse", "mean"))
+        .sort_values("comparison")
+    )
+    if len(points) != 3 or points["capacity_gap"].nunique() != 3:
+        raise RuntimeError(
+            "capacity association requires exactly three independent comparison-level capacity gaps"
+        )
+    x = points["capacity_gap"].to_numpy(dtype=float)
+    y = points["delta_nrmse"].to_numpy(dtype=float)
+    slope = float(np.polyfit(x, y, 1)[0])
+    return points, {"slope": slope, "ci_lo": float("nan"), "ci_hi": float("nan"), "n": 3}
+
+
 def main() -> None:
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
     PAPER_DIR.mkdir(parents=True, exist_ok=True)
@@ -189,7 +212,7 @@ def main() -> None:
     reg_df = build_capacity_gain_regression()
     reg_df.to_csv(RESULTS_DIR / "capacity_gain_regression_rows.csv", index=False)
     reg_demand = ols_with_ci(reg_df["nonlinear_demand"].to_numpy(), reg_df["delta_nrmse"].to_numpy())
-    reg_capacity = ols_with_ci(reg_df["capacity_gap"].to_numpy(), reg_df["delta_nrmse"].to_numpy())
+    capacity_points, reg_capacity = capacity_association_three_gaps(reg_df)
     pd.DataFrame(
         [
             {"predictor": "nonlinear_demand", **reg_demand},
@@ -200,12 +223,12 @@ def main() -> None:
 
     if not reg_df.empty:
         fig, ax = plt.subplots()
-        ax.scatter(reg_df["capacity_gap"], reg_df["delta_nrmse"], s=14)
+        ax.scatter(capacity_points["capacity_gap"], capacity_points["delta_nrmse"], s=24)
         if not np.isnan(reg_capacity["slope"]):
-            xs = np.linspace(reg_df["capacity_gap"].min(), reg_df["capacity_gap"].max(), 50)
+            xs = np.linspace(capacity_points["capacity_gap"].min(), capacity_points["capacity_gap"].max(), 50)
             x_design = np.column_stack([np.ones(len(xs)), xs])
-            x_full = np.column_stack([np.ones(len(reg_df)), reg_df["capacity_gap"]])
-            beta, *_ = np.linalg.lstsq(x_full, reg_df["delta_nrmse"], rcond=None)
+            x_full = np.column_stack([np.ones(len(capacity_points)), capacity_points["capacity_gap"]])
+            beta, *_ = np.linalg.lstsq(x_full, capacity_points["delta_nrmse"], rcond=None)
             ax.plot(xs, x_design @ beta, color="black", linewidth=1.0)
         ax.set_xlabel("Quadratic-capacity gap (kernel $-$ comparator)")
         ax.set_ylabel(r"$\Delta$NRMSE (comparator $-$ kernel)")

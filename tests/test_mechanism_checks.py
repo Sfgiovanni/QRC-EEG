@@ -23,6 +23,7 @@ from qrc_eeg import (
 from qrc_eeg.memory_capacity import memory_target
 from qrc_eeg.metrics import capacity_score
 from qrc_eeg.readout import fit_readout, predict_readout
+from qrc_eeg.tasks import r2_score
 
 N_QUBITS = 4
 CHANNEL_SEED = 20260712
@@ -95,11 +96,15 @@ def test_shuffled_target_leakage_r2_near_zero():
     rng = np.random.default_rng(4)
     shuffled_target = rng.permutation(u)
 
-    train_feats, train_y = feats[washout:-1], shuffled_target[washout + 1 :]
+    x = feats[washout:-1]
+    y = shuffled_target[washout + 1 :]
+    cut = int(0.7 * len(x))
+    train_feats, train_y = x[:cut], y[:cut]
+    test_feats, test_y = x[cut:], y[cut:]
     weights = fit_readout(train_feats, train_y, alpha=1e-3)
-    pred = predict_readout(train_feats, weights)
-    r2 = capacity_score(train_y, pred)
-    assert r2 < 0.05, f"shuffled-target leakage detected: R^2={r2}"
+    pred = predict_readout(test_feats, weights)
+    r2 = r2_score(test_y, pred)
+    assert r2 < 0.05, f"shuffled-target leakage detected on held-out rows: R^2={r2}"
 
 
 def test_nonzero_quadratic_capacity():

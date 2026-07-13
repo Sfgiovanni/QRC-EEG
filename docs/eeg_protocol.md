@@ -102,6 +102,26 @@ rather than silently applied: it makes the comparison *more* conservative
 (nobody gets set-specific tuning), not less, since every construction is
 still tuned as generously as every other.
 
+## Causal preprocessing and inference unit
+
+The corrected pipeline fits one scalar mean and standard deviation per EEG
+set using **only the 60 frozen training segments**. Those fixed statistics are
+then applied unchanged to the training, validation, and held-out test
+segments. No statistic is estimated from a test segment, from its future
+samples, or from the validation partition. The final readout may still be
+refit on train+validation after hyperparameter selection, but the scaler
+remains the training-only scaler. This replaces the former per-segment
+full-series z-score, which used future samples of each held-out segment and
+was therefore transductive.
+
+The paired statistical unit is a held-out **segment**, not a patient. The
+[Bonn distribution page](https://www.upf.edu/web/ntsa/downloads/-/asset_publisher/xvT6E4pczrBw/content/2001-indications-of-nonlinear-deterministic-and-finite-dimensional-structures-in-time-series-of-brain-electrical-activity-dependence-on-recording-regi)
+states that signals were randomized with respect to recording contact and
+patient/volunteer and that the mapping is unavailable. Consequently there is
+no subject-level split and no claim of between-patient generalization. Z is
+surface EEG, whereas F and S are intracranial EEG; inference is limited to
+the held-out segments of this benchmark.
+
 ## Compute-budget notes
 
 Sequential per-segment evolution costs ~0.28 ms/step (measured); a full

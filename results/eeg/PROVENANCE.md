@@ -16,109 +16,33 @@ Every number in the EEG tables/figures traces to a script + source file below.
 ## File checksums (SHA256)
 
 ```
-e9c03837763e987dd7b1b64edd3f6941fbf9ae3cbcc97741e714b327498b7aa0  results/eeg/capacity_demand_regression_summary.csv
-a8e279234307fd7b175e8e2cd701bb8956fd84c66a22542999940136a3bd3383  results/eeg/capacity_gain_regression_rows.csv
-66dc92bd35e9fa1af97f6df1c0f9003a8f411a57b26a313114fd388d2f69172f  results/eeg/hp_search_log.csv
-2b369fccd852116cf5a16884b1fe69200fb4d39bd4ca4bdb4dd580f6cb4a418b  results/eeg/linear_capacity.csv
+6701f7a3901caf7188887b0e83267b46378922970fd1210988bffe78506bfc4f  results/eeg/capacity_demand_regression_summary.csv
+ed746863c1b002a582d7ea4b6888208ddcf9de8868e0792a228ab13e02aae154  results/eeg/capacity_gain_regression_rows.csv
+32e765f71c74ecd144477f520a972abd9a7fb4f3efceb830598032f37d65a2fd  results/eeg/hp_search_log.csv
+a89caf52341c5601955fb1f0c31bec3b4a76b17a678649dcac912e71a6e915fd  results/eeg/hp_search_log_esn66.csv
+974e4866cb40e3f70974de8f774f1d6f786b73cf82b8d82a8880e30eaf70cb93  results/eeg/linear_capacity.csv
 7cc706eb10e06269722310b506d9a172e07b6980dabd7cd2810b4bdb8e6556ff  results/eeg/nonlinear_demand.csv
-4f59e245ca75b59ece9832946779943f1fc98eccf9f0862f41a89f16b51a3f73  results/eeg/quadratic_capacity.csv
-ff6ef3695040a70b93df19aba681e31e83deafd278ccb58fb28042b52b0c28d0  results/eeg/tab_eeg_contrasts.csv
-4cb8085e9fe12146ad319d9b07e46b196080d6eda8f6b8c7109a8857ba40edae  results/eeg/tab_eeg_endpoints.csv
-d0a466beae8ff589afad49102449402fc3c8ee83d1d3777268e87cb4ae77d3c9  results/eeg/raw/eeg_holdout_by_segment_seed.csv
-cc724f4a4d0b92135c693c66f1677c2d70a5f65bf9efbb4f7314564c01c6fc64  figures/eeg/fig_eeg_capacity_vs_gain.pdf
-36601af5f134690c0de97c353f9f48e3e53dbc3cbe0811c5d22d35a834e53858  figures/eeg/fig_eeg_demand_gradient.pdf
-c0b5d75681be736b9e1db4718f8cfbab7b53097dbeba866089c0fc49f4997ef3  figures/eeg/fig_eeg_capacity_vs_gain.png
-e317148995a15c939b4f71177578e46df463f7488b06ae33cca0fe10457fac3e  figures/eeg/fig_eeg_demand_gradient.png
-0201f91419f4584b4e1ead00cb8414732b17bdcc734bec37dc4a3e285982858a  paper/tab_eeg_contrasts.tex
-ce28ec6f483f3dcd48d824bee0a8232cab3a9648c6b2eccd31cb115a46e8d176  paper/tab_eeg_endpoints.tex
-ef0b8662c155ba170c7d186c979052c6efd8301e83ed8eadd25a5b9822042be9  paper/tab_quadratic_capacity.tex
+f748932df62fd493b4dcebfd04e914d902676add15678134f440d3eae851a2c2  results/eeg/quadratic_capacity.csv
+7f5d280ec7249ab268faad8b7778cdf44c88eb7eac48d1022ec8c9d140c5517e  results/eeg/tab_eeg_contrasts.csv
+cbd42786156f656e3b2547fee7f9735d601256921c72b09a9d8e637a1ab40652  results/eeg/tab_eeg_endpoints.csv
+950af895b414dba21a7d68e48f12fd0f6ece3491bf6ce79ca940503a2c6bb4c1  results/eeg/tab_esn_matched.csv
+f3a936d8699bb46606e400511b3f41989803470a1803d7f1a6559dbb13e26562  results/eeg/tab_long_horizon_contrasts.csv
+fa2758886f462845596f132c653f89363f762a78d89e038a06c4c36c874bea82  results/eeg/raw/eeg_holdout_by_segment_seed.csv
+9e945bff155e1f907c6792290c8da489843a885af1a6f2a098c16db623ae0a2e  results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv
+75b51f83ad2101480cc92c4b9c3597e10c64d59487ccb97f2f30e3b88f756aeb  results/eeg/bugfix_diff_report.md
+6fd39eda6c696e6b18936ce882b18743f49e0bbf720c0a1f2777e2fdff3a4733  figures/eeg/fig_eeg_capacity_vs_gain.pdf
+c74d86ad5b9e44f6b15e747dd0a226c121912138abd4cb772d085f132c27f09e  figures/eeg/fig_eeg_demand_gradient.pdf
+a7dd1716c5b98968c23dc68e4d49c9802ac489f56b086235feb11db7145e5a42  figures/eeg/fig_long_horizon.pdf
+5f10e890bd8b3b4dfc45c4f1226e8e71974fd04bbcbebb54aad300cc40763329  figures/eeg/fig_eeg_capacity_vs_gain.png
+1bbb458fc3a2aa6cf0e35655f5c8c883c9940468c81fc4c1881073769c399087  figures/eeg/fig_eeg_demand_gradient.png
+2bac0a004b08fc9cbe254f328782c565dc268d9441a18fdf3797bf7a7c5788d4  figures/eeg/fig_long_horizon.png
+442f9d6d38b2c6722079d1961e3b24009aed524fa94e8fca0da2e6c6bce252ef  paper/tab_eeg_contrasts.tex
+6cd83b1f54acd3e16708fec779a88f2bc8184c0db24731d8d01f2321af1d92b2  paper/tab_eeg_endpoints.tex
+716de0b584e32f9509405d0fa2c42e83221666266d6b5bbcdefc777d985d197b  paper/tab_esn_matched.tex
+be68b44c1f047d2fbbade103b7b8711c531c2ecb05132039f11fb033a3a9d2a2  paper/tab_long_horizon_contrasts.tex
+1fb373cf13e2b40cee5985cae487217038c32eedfdb6cc31ccd1a9371bd6ac65  paper/tab_quadratic_capacity.tex
 cd1b1bcb6f3e1eabb983657bed47aa8d459ebe3bea67cb543c69070d26a39a29  data/eeg/CHECKSUMS.txt
 e67870dd06d2aeaedf0680191c06fabda23b572e24fc99c038fbfa29c3dd0b2b  data/eeg/splits/F_split.json
 b55ba299126b8218ed2bf0bded0f3612f257a1105fa778aa48bd053eee158f36  data/eeg/splits/S_split.json
 0ce9db2e1f8b2fb8d03ba78b98d9b380ba40047c5b33df5e3efbc2ae88bc8be4  data/eeg/splits/Z_split.json
 ```
-
-## Overnight run addendum (2026-07-12T23:38:22-03:00)
-
-Three follow-up items, run in one pass, reusing the existing pipeline
-(`src/qrc_eeg/pipeline.py`, `statistics.py`, `splits.py`, `readout.py`) end to
-end; no reservoir/kernel/channel/ESN/capacity/bootstrap code was
-reimplemented.
-
-**Post-freeze deviation (logged per `config/eeg_frozen.yaml`'s own rule):**
-`scripts/run_esn66_hp_search.py` runs a real HP search for the ESN
-matched-dimension control (`n_reservoir=66`, exactly the readout feature
-count of every quantum arm) over the *same* `spectral_radius` x `leak_rate`
-grid values already frozen for ESN-200 (`config/eeg_frozen.yaml`'s
-`hp_grids.ESN`), with the same `hp_search_seeds` and `hp_search_subsample`.
-`n_reservoir` itself is the new experiment's independent variable, not a
-tuned knob, and is fixed to 66 rather than searched. Selected HP:
-`results/eeg/hp_selected_esn66.json`. This was *not* a reuse of the
-ESN-200-tuned hyperparameters at a smaller size (which would have
-handicapped the classical control); giving the classical arm its own fair
-HP search is what makes the matched-budget comparison in Item 2 valid.
-
-**Item 1 (long horizon, h=4/8):** `scripts/run_long_horizon_contrasts.py`.
-single_kernel vs AB_noaux reuses the existing
-`results/eeg/raw/eeg_holdout_by_segment_seed.csv` (h=4/8 were already run in
-the original held-out grid, just not previously summarized as their own
-family). single_kernel vs ESN is reported against **ESN-66** (matched,
-`results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv`), not ESN-200 --
-ESN-200 is included only as a labeled-unmatched reference column. Holm
-correction is *recomputed fresh* within this 12-test family (`eeg_long`);
-it does not reuse `eeg_primary`'s p_holm column, which was corrected across
-a different (36-test) family.
-
-**Item 2 (ESN dimension-matched control, complete):**
-`scripts/run_esn66_hp_search.py` -> `scripts/run_esn66_holdout.py`
-(3 sets x 4 horizons x 10 confirmatory seeds, same split/readout/alpha grid
-as every other construction) -> `scripts/run_esn66_contrasts.py`
-(paired contrasts vs single_kernel, family `eeg_esn_matched`, fresh Holm
-within this 12-test family). `results/eeg/tab_esn_matched.csv` carries the
-original ESN-200 endpoint (`esn200_nrmse_mean_unmatched`) alongside the
-matched ESN-66 endpoint for direct transparency in one table.
-
-**Item 3 (ictal classification, pre-registered secondary task):**
-`scripts/run_ictal_classification.py`. Reuses
-`qrc_eeg.pipeline.construction_features` for single_kernel, dual_kernel,
-AB_noaux, and ESN_66 (equalized 66-feature budget on every arm) over the
-existing frozen segment-level splits (train/val/test), pooled across
-Z/F/S -- label is ictal (S) vs non-ictal (Z, F), fixed by which set a
-segment belongs to, so no new leakage surface is introduced by pooling.
-New (not reused, because nothing existed for it): `src/qrc_eeg/classification.py`
-(mean-pool-over-time feature reduction, L2-penalized logistic readout via
-Newton-Raphson, rank-based AUROC/AUPRC, segment-level bootstrap CIs and
-paired bootstrap Delta-AUC -- mirrors `readout.py`'s regularization
-convention and `statistics.py`'s bootstrap conventions rather than
-inventing new ones). Alpha selected per construction/seed on the train/val
-split by validation log-loss; final readout refit on train+val, evaluated
-once on held-out test; probabilities ensemble-averaged across the 10
-confirmatory seeds before computing AUROC/AUPRC. **Mandatory leakage sanity
-check is embedded in the script itself** (`results/eeg/ictal_shuffle_check.csv`):
-with segment labels shuffled and the model refit on a held-out split, AUROC
-must land in [0.35, 0.65] for every construction or the script aborts with
-`SystemExit` before writing any classification table.
-
-**Gate:** `scripts/verify_overnight.py` re-runs (not just re-reads)
-single_kernel seed=1 h=1 through the live pipeline and diffs every test
-segment's NRMSE against the stored raw CSV row, then separately recomputes
-the RESULTS.md h=1 R^2 anchors (0.92 Z / 0.97 F / 0.97 S) directly from the
-raw CSV filtered to horizon==1 (not from the horizon-averaged endpoints
-table). It re-verifies split disjointness and the classification shuffle
-check, checks the ESN-66 grid is complete (3x4x10 cells x 20 segments each),
-confirms every new artifact has a SHA256 in `provenance/eeg_checksums.txt`,
-and writes `results/eeg/overnight_summary.md` with a pre-committed,
-mechanically-applied PRE-vs-PRResearch decision rule (stated in the gate
-script before results were read, applied honestly to whatever came out).
-
-New tables: `results/eeg/tab_long_horizon_contrasts.csv`,
-`results/eeg/tab_esn_matched.csv`, `results/eeg/tab_ictal_classification.csv`,
-`results/eeg/tab_ictal_classification_contrasts.csv` (+ matching `paper/*.tex`).
-New figures: `figures/eeg/fig_long_horizon.{pdf,png}`,
-`figures/eeg/fig_ictal_auroc.{pdf,png}`. New raw/diagnostic files:
-`results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv`,
-`results/eeg/raw/eeg_ictal_by_seed.csv`,
-`results/eeg/hp_search_log_esn66.csv`, `results/eeg/hp_selected_esn66.json`,
-`results/eeg/ictal_shuffle_check.csv`. Progress log with timestamps:
-`results/eeg/run_overnight.log`. No existing artifact was overwritten;
-every filename above is new.

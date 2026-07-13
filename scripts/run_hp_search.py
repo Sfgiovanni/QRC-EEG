@@ -21,8 +21,8 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from qrc_eeg.eeg_data import load_set  # noqa: E402
 from qrc_eeg.pipeline import construction_features, fit_readouts_per_horizon, evaluate_segments  # noqa: E402
+from qrc_eeg.preprocessing import scale_set_from_training  # noqa: E402
 from qrc_eeg.splits import build_and_save_splits, load_splits  # noqa: E402
-from qrc_eeg.tasks import zscore  # noqa: E402
 
 CONFIG_PATH = ROOT / "config" / "eeg_frozen.yaml"
 SPLITS_DIR = ROOT / "data" / "eeg" / "splits"
@@ -37,8 +37,6 @@ def main() -> None:
     washout = cfg["readout"]["washout"]
 
     raw = {name: load_set(ROOT / "data" / "eeg" / "sets" / name) for name in sets}
-    zscored = {name: {sid: zscore(np.array(v))[0] for sid, v in segs.items()} for name, segs in raw.items()}
-
     ids_by_set = {name: list(segs.keys()) for name, segs in raw.items()}
     build_and_save_splits(
         ids_by_set,
@@ -48,6 +46,7 @@ def main() -> None:
         out_dir=SPLITS_DIR,
     )
     splits = load_splits(SPLITS_DIR, sets)
+    scaled = {name: scale_set_from_training(raw[name], splits[name]["train"])[0] for name in sets}
 
     sub = cfg["hp_search_subsample"]
     n_train_sub = sub["train_segments_per_set"]
@@ -57,8 +56,8 @@ def main() -> None:
     for name in sets:
         train_ids = splits[name]["train"][:n_train_sub]
         val_ids = splits[name]["val"][:n_val_sub]
-        train_arr[name] = np.stack([zscored[name][i] for i in train_ids])
-        val_arr[name] = np.stack([zscored[name][i] for i in val_ids])
+        train_arr[name] = np.stack([scaled[name][i] for i in train_ids])
+        val_arr[name] = np.stack([scaled[name][i] for i in val_ids])
 
     pooled_train = np.concatenate([train_arr[n] for n in sets], axis=0)
     pooled_val = np.concatenate([val_arr[n] for n in sets], axis=0)

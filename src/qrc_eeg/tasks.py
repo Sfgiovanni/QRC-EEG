@@ -135,9 +135,3 @@ def nonlinear_demand_score(
         "fold_r2_linear": fold_lin_r2,
         "fold_r2_quadratic": fold_quad_r2,
     }
-
-
-def seizure_label(set_name: str) -> int:
-    """1 for ictal (S), 0 for non-ictal (Z, F)."""
-
-    return 1 if set_name == "S" else 0

@@ -6,6 +6,6 @@
       "input_scale": 1.0,
       "leak_rate": 0.7
     },
-    "val_nrmse": 0.5694790456165832
+    "val_nrmse": 0.5952496696456582
   }
 }
