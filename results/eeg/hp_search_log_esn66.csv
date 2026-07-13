@@ -1,0 +1,7 @@
+construction,hp,mean_val_nrmse,seconds
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.3}",0.6308596337541825,30.229922081998666
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.7}",0.5694790456165832,30.210201477995724
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.3}",0.6328244832998339,30.385828180005774
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.7}",0.5762106921795476,29.737873571997625
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.3}",0.6393583307500608,29.57490159200097
+ESN_66,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.7}",0.5863291477403262,30.06796957399638

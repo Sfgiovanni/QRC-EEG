@@ -1,0 +1,5 @@
+construction,mean_shuffled_auroc,n_perms
+single_kernel,0.5091399278971052,20
+dual_kernel,0.5402060229995118,20
+AB_noaux,0.49145660483297177,20
+ESN_66,0.5148999842529615,20

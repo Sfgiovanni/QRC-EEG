@@ -1,0 +1,13 @@
+\begin{table}
+\caption{Ictal (S) vs non-ictal (Z, F) classification, equalized 66-feature logistic readout.}
+\label{tab:ictal_classification}
+\begin{ruledtabular}
+\begin{tabular}{llllllllll}
+construction & n_test_segments & n_pos_ictal & n_neg_nonictal & auroc & auroc_ci_lo & auroc_ci_hi & auprc & auprc_ci_lo & auprc_ci_hi \\
+single_kernel & 60 & 20 & 40 & 0.9975 & 0.9884 & 1.0 & 0.9951 & 0.9767 & 1.0 \\
+dual_kernel & 60 & 20 & 40 & 0.9975 & 0.9884 & 1.0 & 0.9951 & 0.9767 & 1.0 \\
+AB_noaux & 60 & 20 & 40 & 0.9988 & 0.9929 & 1.0 & 0.9976 & 0.9857 & 1.0 \\
+ESN_66 & 60 & 20 & 40 & 0.585 & 0.4031 & 0.7614 & 0.5732 & 0.3586 & 0.756 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}

@@ -1,44 +1,81 @@
-# EEG Study Provenance
+#!/usr/bin/env python3
+"""Append SHA256 of every new overnight-run artifact to
+provenance/eeg_checksums.txt (never overwrites the existing block) and
+append a dated section to results/eeg/PROVENANCE.md documenting the new
+scripts, the ESN-66 post-freeze HP-search deviation, and where every new
+number comes from. Idempotent: re-running recomputes hashes for files that
+changed and does not duplicate an unchanged entry.
+"""
 
-Every number in the EEG tables/figures traces to a script + source file below.
+from __future__ import annotations
 
-## Pipeline (run in order by scripts/run_eeg.sh)
+import hashlib
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
 
-1. `scripts/fetch_eeg.py` -> `data/eeg/sets/{Z,F,S}/*.txt`, `data/eeg/CHECKSUMS.txt`
-2. `scripts/run_sanity_checks.py` -> pytest mechanism suite (must pass to proceed)
-3. `scripts/run_hp_search.py` -> `results/eeg/hp_search_log.csv`, `results/eeg/hp_selected.json`
-4. `scripts/run_holdout_eval.py` -> `results/eeg/raw/eeg_holdout_by_segment_seed.csv`
-5. `scripts/run_quadratic_capacity.py` -> `results/eeg/quadratic_capacity.csv`
-6. `scripts/run_statistics.py` -> `results/eeg/tab_eeg_contrasts.csv`
-7. `scripts/run_tables_figures.py` -> `results/eeg/tab_eeg_endpoints.csv`, `paper/*.tex`, `figures/eeg/*.{pdf,png}`, regression summaries
-8. `scripts/make_provenance.py` (this script) -> checksums below
+ROOT = Path(__file__).resolve().parents[1]
 
-## File checksums (SHA256)
+NEW_FILES = [
+    "results/eeg/hp_search_log_esn66.csv",
+    "results/eeg/hp_selected_esn66.json",
+    "results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv",
+    "results/eeg/tab_esn_matched.csv",
+    "results/eeg/tab_long_horizon_contrasts.csv",
+    "results/eeg/raw/eeg_ictal_by_seed.csv",
+    "results/eeg/ictal_shuffle_check.csv",
+    "results/eeg/tab_ictal_classification.csv",
+    "results/eeg/tab_ictal_classification_contrasts.csv",
+    "results/eeg/overnight_summary.md",
+    "paper/tab_esn_matched.tex",
+    "paper/tab_long_horizon_contrasts.tex",
+    "paper/tab_ictal_classification.tex",
+    "paper/tab_ictal_classification_contrasts.tex",
+    "figures/eeg/fig_long_horizon.pdf",
+    "figures/eeg/fig_long_horizon.png",
+    "figures/eeg/fig_ictal_auroc.pdf",
+    "figures/eeg/fig_ictal_auroc.png",
+]
 
-```
-e9c03837763e987dd7b1b64edd3f6941fbf9ae3cbcc97741e714b327498b7aa0  results/eeg/capacity_demand_regression_summary.csv
-a8e279234307fd7b175e8e2cd701bb8956fd84c66a22542999940136a3bd3383  results/eeg/capacity_gain_regression_rows.csv
-66dc92bd35e9fa1af97f6df1c0f9003a8f411a57b26a313114fd388d2f69172f  results/eeg/hp_search_log.csv
-2b369fccd852116cf5a16884b1fe69200fb4d39bd4ca4bdb4dd580f6cb4a418b  results/eeg/linear_capacity.csv
-7cc706eb10e06269722310b506d9a172e07b6980dabd7cd2810b4bdb8e6556ff  results/eeg/nonlinear_demand.csv
-4f59e245ca75b59ece9832946779943f1fc98eccf9f0862f41a89f16b51a3f73  results/eeg/quadratic_capacity.csv
-ff6ef3695040a70b93df19aba681e31e83deafd278ccb58fb28042b52b0c28d0  results/eeg/tab_eeg_contrasts.csv
-4cb8085e9fe12146ad319d9b07e46b196080d6eda8f6b8c7109a8857ba40edae  results/eeg/tab_eeg_endpoints.csv
-d0a466beae8ff589afad49102449402fc3c8ee83d1d3777268e87cb4ae77d3c9  results/eeg/raw/eeg_holdout_by_segment_seed.csv
-cc724f4a4d0b92135c693c66f1677c2d70a5f65bf9efbb4f7314564c01c6fc64  figures/eeg/fig_eeg_capacity_vs_gain.pdf
-36601af5f134690c0de97c353f9f48e3e53dbc3cbe0811c5d22d35a834e53858  figures/eeg/fig_eeg_demand_gradient.pdf
-c0b5d75681be736b9e1db4718f8cfbab7b53097dbeba866089c0fc49f4997ef3  figures/eeg/fig_eeg_capacity_vs_gain.png
-e317148995a15c939b4f71177578e46df463f7488b06ae33cca0fe10457fac3e  figures/eeg/fig_eeg_demand_gradient.png
-0201f91419f4584b4e1ead00cb8414732b17bdcc734bec37dc4a3e285982858a  paper/tab_eeg_contrasts.tex
-ce28ec6f483f3dcd48d824bee0a8232cab3a9648c6b2eccd31cb115a46e8d176  paper/tab_eeg_endpoints.tex
-ef0b8662c155ba170c7d186c979052c6efd8301e83ed8eadd25a5b9822042be9  paper/tab_quadratic_capacity.tex
-cd1b1bcb6f3e1eabb983657bed47aa8d459ebe3bea67cb543c69070d26a39a29  data/eeg/CHECKSUMS.txt
-e67870dd06d2aeaedf0680191c06fabda23b572e24fc99c038fbfa29c3dd0b2b  data/eeg/splits/F_split.json
-b55ba299126b8218ed2bf0bded0f3612f257a1105fa778aa48bd053eee158f36  data/eeg/splits/S_split.json
-0ce9db2e1f8b2fb8d03ba78b98d9b380ba40047c5b33df5e3efbc2ae88bc8be4  data/eeg/splits/Z_split.json
-```
 
-## Overnight run addendum (2026-07-12T23:38:22-03:00)
+def sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    h.update(path.read_bytes())
+    return h.hexdigest()
+
+
+def main() -> None:
+    checksums_path = ROOT / "provenance" / "eeg_checksums.txt"
+    text = checksums_path.read_text()
+    existing_names = set()
+    for line in text.splitlines():
+        parts = line.split()
+        if len(parts) == 2:
+            existing_names.add(parts[1])
+
+    new_lines = []
+    for rel in NEW_FILES:
+        p = ROOT / rel
+        if not p.exists():
+            print(f"skip (missing): {rel}")
+            continue
+        digest = sha256(p)
+        # remove any stale entry for this path before appending the fresh one
+        text = "\n".join(line for line in text.splitlines() if not line.endswith(f"  {rel}")) + "\n"
+        new_lines.append(f"{digest}  {rel}")
+
+    # provenance/eeg_checksums.txt is plain "hash  path" lines, no markdown fence -- just append.
+    text = text.rstrip("\n") + "\n" + "\n".join(new_lines) + "\n"
+    checksums_path.write_text(text)
+    print(f"appended {len(new_lines)} checksums to {checksums_path}")
+
+    provenance_md = ROOT / "results" / "eeg" / "PROVENANCE.md"
+    if "## Overnight run addendum" in provenance_md.read_text():
+        print(f"PROVENANCE.md addendum already present, skipping (idempotent re-run)")
+        return
+    stamp = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+    section = f"""
+## Overnight run addendum ({stamp})
 
 Three follow-up items, run in one pass, reusing the existing pipeline
 (`src/qrc_eeg/pipeline.py`, `statistics.py`, `splits.py`, `readout.py`) end to
@@ -114,11 +151,19 @@ script before results were read, applied honestly to whatever came out).
 New tables: `results/eeg/tab_long_horizon_contrasts.csv`,
 `results/eeg/tab_esn_matched.csv`, `results/eeg/tab_ictal_classification.csv`,
 `results/eeg/tab_ictal_classification_contrasts.csv` (+ matching `paper/*.tex`).
-New figures: `figures/eeg/fig_long_horizon.{pdf,png}`,
-`figures/eeg/fig_ictal_auroc.{pdf,png}`. New raw/diagnostic files:
+New figures: `figures/eeg/fig_long_horizon.{{pdf,png}}`,
+`figures/eeg/fig_ictal_auroc.{{pdf,png}}`. New raw/diagnostic files:
 `results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv`,
 `results/eeg/raw/eeg_ictal_by_seed.csv`,
 `results/eeg/hp_search_log_esn66.csv`, `results/eeg/hp_selected_esn66.json`,
 `results/eeg/ictal_shuffle_check.csv`. Progress log with timestamps:
 `results/eeg/run_overnight.log`. No existing artifact was overwritten;
 every filename above is new.
+"""
+    with open(provenance_md, "a") as f:
+        f.write(section)
+    print(f"appended overnight addendum to {provenance_md}")
+
+
+if __name__ == "__main__":
+    main()

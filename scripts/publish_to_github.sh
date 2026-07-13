@@ -3,6 +3,11 @@
 # The token is entered hidden, piped only to github_api.py and to a
 # restricted FIFO for git's askpass -- it is never written to disk, the
 # remote URL, git config, or the command line.
+#
+# Also stages and commits any pending working-tree changes (respecting
+# .gitignore) before pushing -- always a new commit, never an amend.
+# If there is nothing to commit, that step is skipped and the script just
+# pushes whatever is already at HEAD.
 set -eu
 
 die() {
@@ -80,6 +85,23 @@ if git remote get-url origin >/dev/null 2>&1; then
     [ "$current" = "$remote_url" ] || die "origin already points to $current; refusing to replace it"
 else
     git remote add origin "$remote_url"
+fi
+
+if [ -z "$(git status --porcelain)" ]; then
+    printf 'Nothing to commit -- working tree is clean.\n'
+else
+    printf '\nChanges to be committed:\n'
+    git -c color.status=always status --short | sed 's/^/  /'
+    printf 'Commit message (Enter for default): '
+    IFS= read -r commit_msg
+    commit_msg=${commit_msg:-"Update QRC-EEG repository"}
+    git add -A -- . ':!*.env' ':!*credentials*' ':!*secret*'
+    if git diff --cached --quiet; then
+        printf 'Nothing to commit after applying .gitignore.\n'
+    else
+        git commit -m "$commit_msg"
+        printf 'Created commit %s: %s\n' "$(git rev-parse --short HEAD)" "$commit_msg"
+    fi
 fi
 
 # GIT_ASKPASS reads the token once from a restricted FIFO. The token is never

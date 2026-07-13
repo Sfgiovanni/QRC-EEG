@@ -1,0 +1,11 @@
+{
+  "ESN_66": {
+    "hp": {
+      "n_reservoir": 66,
+      "spectral_radius": 0.5,
+      "input_scale": 1.0,
+      "leak_rate": 0.7
+    },
+    "val_nrmse": 0.5694790456165832
+  }
+}
