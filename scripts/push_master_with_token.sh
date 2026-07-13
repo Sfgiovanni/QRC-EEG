@@ -43,7 +43,7 @@ if git diff --cached --quiet; then
   printf '\nNenhuma alteração nova para commit; será enviado o HEAD atual.\n'
 else
   printf '\nResumo do commit:\n'
-  git diff --cached --stat
+  git --no-pager diff --cached --shortstat
   printf '\nMensagem do commit [Fix causal EEG evaluation leakage and rerun]: '
   IFS= read -r commit_message
   commit_message=${commit_message:-"Fix causal EEG evaluation leakage and rerun"}
