@@ -1,0 +1,38 @@
+identifier,value,ci_low,ci_high,unit,population_set,horizon,model,comparator,source,gate,status,note
+gate1_tangent_recurrence_impulse_relative_frobenius,2.741588759811685e-05,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=0.01; pass=True
+gate1_tangent_recurrence_step_relative_frobenius,4.071965506246694e-05,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=0.01; pass=True
+gate1_tangent_recurrence_frequency_relative_frobenius,2.7415887598113987e-05,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=0.01; pass=True
+gate1_tangent_recurrence_memory_function_l1,9.398330543943103e-06,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=0.02; pass=True
+gate1_tangent_recurrence_impulse_cosine_similarity,0.999999999693486,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=nan; pass=nan
+gate1_tangent_recurrence_step_cosine_similarity,0.999999999331464,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=nan; pass=nan
+gate1_separable_W_times_R_impulse_relative_frobenius,0.4186143584528049,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=0.01; pass=False
+gate1_separable_W_times_R_step_relative_frobenius,0.0689880901873685,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=0.01; pass=False
+gate1_separable_W_times_R_frequency_relative_frobenius,0.4186143584528051,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=0.01; pass=False
+gate1_separable_W_times_R_memory_function_l1,0.6155043103410932,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=0.02; pass=False
+gate1_separable_W_times_R_impulse_cosine_similarity,0.9194410503716944,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=nan; pass=nan
+gate1_separable_W_times_R_step_cosine_similarity,0.9980322655791974,,,relative_error,local_channel,,single_kernel,,results/eeg/theory_vs_sim_check.csv,Gate 1,confirmatory,tolerance=nan; pass=nan
+gate1_companion_spectral_radius,0.9587240324199373,,,spectral_radius,local_channel,,single_kernel,,results/eeg/theory_vs_sim_metadata.json,Gate 1,confirmatory,
+eeg_F_kernel_vs_k0_interaction,0.0368052906014339,0.019668072170851,0.056494717433043,delta_NRMSE_degradation,F,2_to_64,single_kernel,QRC_K0,results/eeg/gate_interactions.csv,Gate 0,confirmatory,Holm p=0.0005741119384765
+eeg_Z_kernel_vs_k0_interaction,0.0318747052947147,0.0157027642633044,0.0516623728980807,delta_NRMSE_degradation,Z,2_to_64,single_kernel,QRC_K0,results/eeg/gate_interactions.csv,Gate 0,confirmatory,Holm p=0.0001144409179687
+eeg_S_kernel_vs_k0_interaction,-0.0031418107037182,-0.0091714335220872,0.002986724291199,delta_NRMSE_degradation,S,2_to_64,single_kernel,QRC_K0,results/eeg/gate_interactions.csv,Gate 0,confirmatory,Holm p=0.2454872131347656
+eeg_F_kernel_useful_horizon,8.0,,,samples,F,8.0,single_kernel,,results/eeg/useful_horizon_v2.csv,Gate 0,confirmatory,
+eeg_Z_kernel_useful_horizon,16.0,,,samples,Z,16.0,single_kernel,,results/eeg/useful_horizon_v2.csv,Gate 0,confirmatory,
+eeg_S_kernel_useful_horizon,32.0,,,samples,S,32.0,single_kernel,,results/eeg/useful_horizon_v2.csv,Gate 0,confirmatory,
+gate2_aggregate_spearman,0.990876350540216,0.8872954764196344,0.9950961833093008,Spearman_rho,10_scenarios,,,,results/synth/stage2_metadata.json,Gate 2,confirmatory,
+gate2_median_within_scenario_spearman,0.5999999999999999,,,Spearman_rho,10_scenarios,,,,results/synth/stage2_metadata.json,Gate 2,confirmatory,
+gate2_best_model_match,0.6,,,fraction,10_scenarios,,,,results/synth/stage2_metadata.json,Gate 2,confirmatory,
+gate2_centered_pearson,0.9608914509284456,,,coefficient_or_fraction,10_scenarios,,,,results/synth/gate2_postgate_sensitivity.csv,Gate 2,post_gate_diagnostic,
+gate2_centered_spearman,0.7617286914765906,,,coefficient_or_fraction,10_scenarios,,,,results/synth/gate2_postgate_sensitivity.csv,Gate 2,post_gate_diagnostic,
+gate2_pairwise_accuracy,0.68,,,coefficient_or_fraction,10_scenarios,,,,results/synth/gate2_postgate_sensitivity.csv,Gate 2,post_gate_diagnostic,
+gate2_top2_match,0.8,,,coefficient_or_fraction,10_scenarios,,,,results/synth/gate2_postgate_sensitivity.csv,Gate 2,post_gate_diagnostic,
+gate3_shots_100_median_relative_inflation,0.0494686320102384,,,fraction,all_shot_cells,all,,,results/eeg/shot_sensitivity_classification.csv,Gate 3,confirmatory,
+gate3_shots_100_p90_relative_inflation,1.4417570541226905,,,fraction,all_shot_cells,all,,,results/eeg/shot_sensitivity_classification.csv,Gate 3,confirmatory,
+gate3_shots_300_median_relative_inflation,0.0386263109358474,,,fraction,all_shot_cells,all,,,results/eeg/shot_sensitivity_classification.csv,Gate 3,confirmatory,
+gate3_shots_300_p90_relative_inflation,1.0138971732006976,,,fraction,all_shot_cells,all,,,results/eeg/shot_sensitivity_classification.csv,Gate 3,confirmatory,
+gate3_shots_1000_median_relative_inflation,0.0290701826969747,,,fraction,all_shot_cells,all,,,results/eeg/shot_sensitivity_classification.csv,Gate 3,confirmatory,
+gate3_shots_1000_p90_relative_inflation,0.664243953210731,,,fraction,all_shot_cells,all,,,results/eeg/shot_sensitivity_classification.csv,Gate 3,confirmatory,
+gate3_shots_3000_median_relative_inflation,0.021822447585845,,,fraction,all_shot_cells,all,,,results/eeg/shot_sensitivity_classification.csv,Gate 3,confirmatory,
+gate3_shots_3000_p90_relative_inflation,0.4600803631426346,,,fraction,all_shot_cells,all,,,results/eeg/shot_sensitivity_classification.csv,Gate 3,confirmatory,
+gate3_shots_10000_median_relative_inflation,0.0157682932934197,,,fraction,all_shot_cells,all,,,results/eeg/shot_sensitivity_classification.csv,Gate 3,confirmatory,
+gate3_shots_10000_p90_relative_inflation,0.3104838181104674,,,fraction,all_shot_cells,all,,,results/eeg/shot_sensitivity_classification.csv,Gate 3,confirmatory,
+gate3_passing_strata,66.0,,,count,120_set_horizon_cells,,,,results/eeg/shot_sensitivity_strata_classification.csv,Gate 3,confirmatory,

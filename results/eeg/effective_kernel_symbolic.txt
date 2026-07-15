@@ -1,0 +1,9 @@
+K = 15
+S_K(r) = r*(1-r**K)/(1-r)
+W_K(z) = (1-m) + m*((r/z)*(1-(r/z)**K)/(1-r/z))/S_K(r)
+H_actual modal = 1/(z-a*W_K(z))
+H_separable modal = W_K(z)/(z-a)
+generic difference = -(W - 1)*(-W*a - a + z)/((-a + z)*(-W*a + z))
+generic equality: False
+conditional delayed T_eff = 3.26178020782
+full mean lag including w0 = 0.978534062346

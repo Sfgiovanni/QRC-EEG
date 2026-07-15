@@ -1,0 +1,8 @@
+# Direct environment versions used for repository preparation (Python 3.13.9, Linux x86_64).
+matplotlib==3.11.0
+numpy==2.5.1
+pandas==3.0.3
+pytest==9.1.1
+PyYAML==6.0.3
+scipy==1.18.0
+sympy==1.14.0

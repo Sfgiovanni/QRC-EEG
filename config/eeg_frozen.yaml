@@ -1,6 +1,5 @@
-# Frozen configuration for the QRC-EEG study. Do not edit after HP search
-# begins; any change after that point is a deviation to be logged in
-# results/eeg/PROVENANCE.md, not silently applied.
+# Frozen configuration for the QRC-EEG study. The gate extension below was
+# preregistered in docs/eeg_gate_preregistration.md before gate models ran.
 
 data:
   sets: [Z, F, S]
@@ -32,9 +31,10 @@ readout:
   alpha_grid: [1.0e-8, 1.0e-7, 1.0e-6, 1.0e-5, 1.0e-4, 1.0e-3, 1.0e-2,
                0.1, 1.0, 10.0, 100.0]
   washout: 50
-  horizons: [1, 2, 4, 8]
+  horizons: [1, 2, 4, 8, 16, 32, 64, 128]
 
 hp_grids:
+  QRC_K0: {}
   AB_noaux:
     tau: [5, 15]
     delayed_mass: [0.3, 0.5]
@@ -68,3 +68,11 @@ quadratic_capacity:
 statistics:
   bootstrap_resamples: 10000
   family: eeg_primary
+
+eeg_gate:
+  h_short: 2
+  h_long: 64
+  ar_lags: [1, 2, 4, 8, 15, 25, 50]
+  classical_comparators: [AR, NVAR2, persistence, tapped_delay]
+  fitted_classical_for_decision: [AR, NVAR2, tapped_delay]
+  family: eeg_gate

@@ -1,0 +1,41 @@
+{
+  "configuration": "rotaA_gate3_shots_v1",
+  "git_commit": "6b4b4ea68fd040d29729d5a8405476e14e15fd69",
+  "hp_source": "HEAD:results/eeg/hp_selected.json",
+  "official_hp_sha256": "028c594860c3bf25b8d7dab2016c4e4e55f2f9a01315f3a8ce40481b6b86b0f5",
+  "main_models": ["QRC_K0", "AB_noaux", "single_kernel"],
+  "resource_models": ["QRC_K0", "AB_noaux", "single_kernel", "triangular", "uniform", "dual_kernel"],
+  "sets": ["Z", "F", "S"],
+  "channel_seeds": [1, 2, 3],
+  "horizons": [1, 2, 4, 8, 16, 32, 64, 128],
+  "shots": [100, 300, 1000, 3000, 10000],
+  "noise_replicates": 10,
+  "shot_temporal_stride": 16,
+  "alpha_grid": [1e-08, 1e-07, 1e-06, 1e-05, 0.0001, 0.001, 0.01, 0.1, 1.0, 10.0, 100.0],
+  "washout": 50,
+  "bootstrap_resamples": 2000,
+  "baseline_tolerance_max_abs_nrmse": 1e-09,
+  "baseline_references": {
+    "official_r07_h1_to_h8": "results/eeg/_prefix_snapshot_gate/raw/eeg_holdout_by_segment_seed.csv",
+    "k0_and_ab_extended": "results/eeg/raw/eeg_holdout_by_segment_seed.csv"
+  },
+  "reference_sha256": {
+    "results/eeg/_prefix_snapshot_gate/raw/eeg_holdout_by_segment_seed.csv": "f98aba3f43582a7bb7e1ad91f74f8a551656bfc3fe0d8bd6a49c1c4276958974",
+    "results/eeg/raw/eeg_holdout_by_segment_seed.csv": "4d3622a86e3d35f7d058474cd9489cd651dbd5e082b44a8359c6c61ee4132f5b",
+    "results/eeg/gate_interactions.csv": "83cfc142cce77cd4e77c35f6630ab23e1bf3352e1d3821c3567d41cd3dd70366",
+    "results/eeg/gate_report.md": "9f1d7717c4061ee31ee19e0dc9f666a27d1c7ec9a7c743bba56a8f8820c79247",
+    "data/eeg/splits/Z_split.json": "0ce9db2e1f8b2fb8d03ba78b98d9b380ba40047c5b33df5e3efbc2ae88bc8be4",
+    "data/eeg/splits/F_split.json": "e67870dd06d2aeaedf0680191c06fabda23b572e24fc99c038fbfa29c3dd0b2b",
+    "data/eeg/splits/S_split.json": "b55ba299126b8218ed2bf0bded0f3612f257a1105fa778aa48bd053eee158f36"
+  },
+  "measurement": "independent_binomial_pauli",
+  "observables": 66,
+  "qwc_grouping_implemented": false,
+  "trajectory_length_for_resource_table": 4097,
+  "robustness_thresholds": {
+    "median_relative_nrmse_inflation_max": 0.05,
+    "p90_relative_nrmse_inflation_max": 0.10,
+    "principal_contrast_sign_fraction_required": 1.0
+  },
+  "timezone": "America/Sao_Paulo"
+}

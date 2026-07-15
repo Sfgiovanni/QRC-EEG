@@ -11,7 +11,7 @@ import numpy as np
 
 from .readout import fit_readout, predict_readout
 
-FORECAST_HORIZONS = (1, 2, 4, 8)
+FORECAST_HORIZONS = (1, 2, 4, 8, 16, 32, 64, 128)
 DEMAND_EMBEDDING_ORDER = 10
 DEMAND_ALPHA_GRID = np.logspace(-6, 2, 9)
 DEMAND_N_FOLDS = 5

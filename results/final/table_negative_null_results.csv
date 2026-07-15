@@ -1,0 +1,15 @@
+result,scope,value,ci_low,ci_high,source,interpretation
+separable_factorization_failed,impulse_relative_frobenius,0.4186143584528049,,,results/eeg/theory_vs_sim_check.csv,valid falsification
+separable_factorization_failed,step_relative_frobenius,0.0689880901873685,,,results/eeg/theory_vs_sim_check.csv,valid falsification
+separable_factorization_failed,frequency_relative_frobenius,0.4186143584528051,,,results/eeg/theory_vs_sim_check.csv,valid falsification
+separable_factorization_failed,memory_function_l1,0.6155043103410932,,,results/eeg/theory_vs_sim_check.csv,valid falsification
+separable_factorization_failed,impulse_cosine_similarity,0.9194410503716944,,,results/eeg/theory_vs_sim_check.csv,valid falsification
+separable_factorization_failed,step_cosine_similarity,0.9980322655791974,,,results/eeg/theory_vs_sim_check.csv,valid falsification
+S_primary_causal_null,S,-0.0031418107037182,-0.0091714335220872,0.002986724291199,results/eeg/gate_interactions.csv,null result
+negative_within_scenario_ordering,ar1_phi030,-0.8999999999999998,,,results/synth/stage2_metadata.json,explicit theory-ordering failure
+negative_within_scenario_ordering,nonlinear_ar1_phi085,-0.7999999999999999,,,results/synth/stage2_metadata.json,explicit theory-ordering failure
+no_global_shot_robustness,N=100,1.4417570541226905,,,results/eeg/shot_sensitivity_classification.csv,global criterion failed
+no_global_shot_robustness,N=300,1.0138971732006976,,,results/eeg/shot_sensitivity_classification.csv,global criterion failed
+no_global_shot_robustness,N=1000,0.664243953210731,,,results/eeg/shot_sensitivity_classification.csv,global criterion failed
+no_global_shot_robustness,N=3000,0.4600803631426346,,,results/eeg/shot_sensitivity_classification.csv,global criterion failed
+no_global_shot_robustness,N=10000,0.3104838181104674,,,results/eeg/shot_sensitivity_classification.csv,global criterion failed

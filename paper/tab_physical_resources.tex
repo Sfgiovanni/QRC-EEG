@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\caption{Conservative resources of the simulated density-matrix reservoirs.}
+\label{tab:physical_resources}
+\begin{ruledtabular}
+\begin{tabular}{lrrrrrr}
+Construction & $K{+}1$ & Independent reals & Conservative reals & Buffer bytes & Mix proxy & $10^4$-shot preparations/step \\
+\hline
+QRC\_K0 & 1 & 255 & 256 & 4096 & 256 & 660000 \\
+AB\_noaux & 6 & 1530 & 1536 & 24576 & 2816 & 660000 \\
+single\_kernel & 16 & 4080 & 4096 & 65536 & 7936 & 660000 \\
+triangular & 16 & 4080 & 4096 & 65536 & 7936 & 660000 \\
+uniform & 16 & 4080 & 4096 & 65536 & 7936 & 660000 \\
+dual\_kernel & 16 & 4080 & 4096 & 65536 & 7936 & 660000 \\
+\end{tabular}
+\end{ruledtabular}
+\begin{flushleft}\footnotesize Buffer bytes use complex128. Measurement counts assume one independent group per Pauli observable; no gate decomposition or QWC optimization is claimed.\end{flushleft}
+\end{table*}

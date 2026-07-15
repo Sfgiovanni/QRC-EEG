@@ -1,0 +1,93 @@
+{
+  "artifact_sha256": {
+    "figures/synth/fig_theory_predictions_vs_measured.pdf": "0a30fe2bbd51f83d557bd6e3948fbd03c0ef04fb74e2e4dc73c3bacc8447e0ce",
+    "figures/synth/fig_theory_predictions_vs_measured.png": "f08b4ac1bef5f2cc16b438316828ffa9eb93ea7a11d98c809369b55d3ac2d8c2",
+    "results/synth/gate2_report.md": "9ac5785588d80a369d1761255ba772b10b32a40dbb49c502054f859236d3a2a2",
+    "results/synth/stage2_model_dynamics.csv": "a82f01f14ed2e595488cececd2bacb7d11fb447649bd0a02d651b939ddbe80b3",
+    "results/synth/theory_predictions_frozen.csv": "161722b20657f897fd29644854bd5b494f88b970276091ccc7b9fb6befbd700f",
+    "results/synth/theory_predictions_vs_measured.csv": "a67c77f0bca210eabbf627759af3047c2f657b5cb065506423c28b8b0bc4008d",
+    "results/synth/theory_vs_measured_curves.csv": "eee138b7df0e5d5336e5d1da4aa782e0c8b5eaf098ecdeaff5f2f4ce186be10f"
+  },
+  "config_sha256": "e875c31a6dc6f85a43c602b09cc1598ba321ff59110a0ab2e5d2e3c74e418898",
+  "configuration": "rotaA_stage2_synthetic_v1",
+  "git_commit": "6b4b4ea68fd040d29729d5a8405476e14e15fd69",
+  "numpy": "2.5.1",
+  "prediction_sha256": "161722b20657f897fd29644854bd5b494f88b970276091ccc7b9fb6befbd700f",
+  "protocol_sha256": "51449562ca925cddc03e9838da48c49baf58177b483c7dc77c8edb7d1741fc86",
+  "python": "3.13.9",
+  "statistics": {
+    "aggregate_spearman": 0.990876350540216,
+    "aggregate_spearman_ci_high": 0.9950961833093008,
+    "aggregate_spearman_ci_low": 0.8872954764196344,
+    "best_matches": [
+      {
+        "model_measured": "QRC_K0",
+        "model_predicted": "uniform",
+        "scenario": "ar1_phi030"
+      },
+      {
+        "model_measured": "QRC_K0",
+        "model_predicted": "QRC_K0",
+        "scenario": "ar1_phi060"
+      },
+      {
+        "model_measured": "QRC_K0",
+        "model_predicted": "QRC_K0",
+        "scenario": "ar1_phi085"
+      },
+      {
+        "model_measured": "AB_noaux",
+        "model_predicted": "uniform",
+        "scenario": "ar1_phi095"
+      },
+      {
+        "model_measured": "AB_noaux",
+        "model_predicted": "AB_noaux",
+        "scenario": "ar2_rho075_f012"
+      },
+      {
+        "model_measured": "AB_noaux",
+        "model_predicted": "AB_noaux",
+        "scenario": "ar2_rho090_f012"
+      },
+      {
+        "model_measured": "AB_noaux",
+        "model_predicted": "AB_noaux",
+        "scenario": "colored_beta05"
+      },
+      {
+        "model_measured": "uniform",
+        "model_predicted": "uniform",
+        "scenario": "colored_beta15"
+      },
+      {
+        "model_measured": "AB_noaux",
+        "model_predicted": "single_kernel",
+        "scenario": "nonlinear_ar1_phi085"
+      },
+      {
+        "model_measured": "AB_noaux",
+        "model_predicted": "QRC_K0",
+        "scenario": "phase_surrogate_nonlinear_ar1_phi085"
+      }
+    ],
+    "best_model_match_fraction": 0.6,
+    "median_within_scenario_spearman": 0.5999999999999999,
+    "scenario_spearman": {
+      "ar1_phi030": -0.8999999999999998,
+      "ar1_phi060": 0.8999999999999998,
+      "ar1_phi085": 0.3,
+      "ar1_phi095": 0.19999999999999998,
+      "ar2_rho075_f012": 0.8999999999999998,
+      "ar2_rho090_f012": 0.8999999999999998,
+      "colored_beta05": 0.9999999999999999,
+      "colored_beta15": 0.9999999999999999,
+      "nonlinear_ar1_phi085": -0.7999999999999999,
+      "phase_surrogate_nonlinear_ar1_phi085": 0.3
+    },
+    "verdict": "SUPPORTED"
+  },
+  "timestamp": "2026-07-14T10:41:06.917894-03:00",
+  "timezone": "America/Sao_Paulo",
+  "working_tree_clean": false
+}

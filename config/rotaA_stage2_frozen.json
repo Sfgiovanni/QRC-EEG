@@ -1,0 +1,33 @@
+{
+  "configuration": "rotaA_stage2_synthetic_v1",
+  "gate1_commit": "6b4b4ea68fd040d29729d5a8405476e14e15fd69",
+  "hp_source": "HEAD:results/eeg/hp_selected.json",
+  "models": ["QRC_K0", "AB_noaux", "single_kernel", "triangular", "uniform"],
+  "seeds": [1, 2, 3],
+  "split": {"train": 12, "validation": 6, "test": 12},
+  "segment_length": 768,
+  "washout": 50,
+  "horizons": [1, 2, 4, 8, 16, 32, 64, 128],
+  "alpha_grid": [1e-06, 0.0001, 0.01, 1.0, 100.0],
+  "impulse_length": 512,
+  "bootstrap_resamples": 2000,
+  "scenarios": [
+    {"name": "ar1_phi030", "family": "AR1", "phi": 0.3},
+    {"name": "ar1_phi060", "family": "AR1", "phi": 0.6},
+    {"name": "ar1_phi085", "family": "AR1", "phi": 0.85},
+    {"name": "ar1_phi095", "family": "AR1", "phi": 0.95},
+    {"name": "ar2_rho075_f012", "family": "AR2", "rho": 0.75, "frequency": 0.12},
+    {"name": "ar2_rho090_f012", "family": "AR2", "rho": 0.9, "frequency": 0.12},
+    {"name": "colored_beta05", "family": "colored", "beta": 0.5},
+    {"name": "colored_beta15", "family": "colored", "beta": 1.5},
+    {"name": "nonlinear_ar1_phi085", "family": "higher_order", "phi": 0.85, "quadratic": 0.35},
+    {"name": "phase_surrogate_nonlinear_ar1_phi085", "family": "phase_surrogate", "source": "nonlinear_ar1_phi085"}
+  ],
+  "slope_definition": "OLS coefficient of mean NRMSE against log2(horizon)",
+  "gate_rule": {
+    "SUPPORTED": "bootstrap lower 95% CI of aggregate Spearman(predicted, measured) > 0, median within-scenario Spearman >= 0.5, and predicted best-slope model matches measured in >= 0.6 of scenarios",
+    "PARTIAL": "aggregate Spearman point estimate > 0 and median within-scenario Spearman > 0",
+    "NOT_SUPPORTED": "otherwise"
+  },
+  "timezone": "America/Sao_Paulo"
+}

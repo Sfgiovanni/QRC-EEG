@@ -1,0 +1,15 @@
+{
+  "configuration": "single_kernel_gate1_confirmatory",
+  "construction": "single_kernel",
+  "hp_source": "HEAD:results/eeg/hp_selected.json",
+  "hp": {
+    "K": 15,
+    "r": 0.7,
+    "past_mass": 0.3
+  },
+  "seed": 1,
+  "epsilon": 0.0001,
+  "response_length": 256,
+  "human_decision": "r=0.7 is the official frozen Gate 1 configuration",
+  "timezone": "America/Sao_Paulo"
+}

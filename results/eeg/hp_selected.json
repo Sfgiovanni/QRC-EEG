@@ -1,18 +1,22 @@
 {
+  "QRC_K0": {
+    "hp": {},
+    "val_nrmse": 0.8366698518947048
+  },
   "AB_noaux": {
     "hp": {
       "tau": 5,
       "delayed_mass": 0.3
     },
-    "val_nrmse": 0.6407405850192218
+    "val_nrmse": 0.8454463677390247
   },
   "single_kernel": {
     "hp": {
       "K": 15,
-      "r": 0.7,
+      "r": 0.9,
       "past_mass": 0.3
     },
-    "val_nrmse": 0.6059292237488765
+    "val_nrmse": 0.8257883889085893
   },
   "dual_kernel": {
     "hp": {
@@ -20,23 +24,23 @@
       "r_fast": 0.5,
       "r_slow": 0.9,
       "fast_mass": 0.2,
-      "slow_mass": 0.2
+      "slow_mass": 0.3
     },
-    "val_nrmse": 0.6069095615983003
+    "val_nrmse": 0.8265482694002001
   },
   "triangular": {
     "hp": {
       "K": 15,
       "past_mass": 0.3
     },
-    "val_nrmse": 0.6075345219031336
+    "val_nrmse": 0.8269801485678965
   },
   "uniform": {
     "hp": {
       "K": 15,
       "past_mass": 0.3
     },
-    "val_nrmse": 0.6099072748029751
+    "val_nrmse": 0.8257022609725684
   },
   "ESN": {
     "hp": {
@@ -45,6 +49,6 @@
       "input_scale": 1.0,
       "leak_rate": 0.7
     },
-    "val_nrmse": 0.5820967121033881
+    "val_nrmse": 0.8304816125686282
   }
 }

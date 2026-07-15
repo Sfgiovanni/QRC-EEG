@@ -22,6 +22,7 @@ from .state_kernels import (
     KernelWeights,
     dual_exponential_weights,
     matched_delay_weights,
+    no_memory_weights,
     single_exponential_weights,
     triangular_weights,
     uniform_weights,
@@ -35,6 +36,8 @@ WASHOUT = 50
 
 
 def kernel_for(name: str, hp: dict) -> KernelWeights | None:
+    if name == "QRC_K0":
+        return no_memory_weights()
     if name == "AB_noaux":
         return matched_delay_weights(K=hp["tau"], tau_star=hp["tau"], past_mass=hp["delayed_mass"])
     if name == "single_kernel":

@@ -1,0 +1,462 @@
+[2026-07-13T19:54:59-03:00] fetch_eeg
+using cached archive: /home/franco/QRC EEG/data/eeg/raw/bonn_eeg_dataset.zip
+observed sha256: f4c2dc52fd5320d4404fcbc6ecb9db69a4a7e408df4e3d5456530343dbcb75ad
+set Z: 100 segments verified in /home/franco/QRC EEG/data/eeg/sets/Z
+set F: 100 segments verified in /home/franco/QRC EEG/data/eeg/sets/F
+set S: 100 segments verified in /home/franco/QRC EEG/data/eeg/sets/S
+wrote /home/franco/QRC EEG/data/eeg/CHECKSUMS.txt
+[2026-07-13T19:55:00-03:00] sanity_checks
+============================= test session starts ==============================
+platform linux -- Python 3.13.9, pytest-9.1.1, pluggy-1.6.0 -- /home/franco/QRC EEG/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/franco/QRC EEG
+configfile: pyproject.toml
+collecting ... collected 12 items
+
+tests/test_mechanism_checks.py::test_trace_hermiticity_positivity_over_trajectory PASSED [  8%]
+tests/test_mechanism_checks.py::test_fading_memory_echo_state_property PASSED [ 16%]
+tests/test_mechanism_checks.py::test_shuffled_target_leakage_r2_near_zero PASSED [ 25%]
+tests/test_mechanism_checks.py::test_nonzero_quadratic_capacity PASSED   [ 33%]
+tests/test_mechanism_checks.py::test_complex64_matches_complex128 PASSED [ 41%]
+tests/test_mechanism_checks.py::test_constructions_produce_distinct_trajectories PASSED [ 50%]
+tests/test_constructions_differ.py::test_constructions_differ_on_real_shaped_input PASSED [ 58%]
+tests/test_batched_matches_reference.py::test_batched_matches_sequential_reference PASSED [ 66%]
+tests/test_segment_grouped_selection.py::test_frozen_train_validation_test_splits_are_segment_disjoint PASSED [ 75%]
+tests/test_segment_grouped_selection.py::test_ridge_selection_rejects_segment_overlap PASSED [ 83%]
+tests/test_segment_grouped_selection.py::test_group_guard_rejects_duplicates_inside_partition PASSED [ 91%]
+tests/test_gate_controls.py::test_qrc_k0_dynamics_differ_from_state_memory_kernel PASSED [100%]
+
+============================== 12 passed in 3.58s ==============================
+sanity checks: ok
+[2026-07-13T19:55:04-03:00] hp_search
+QRC_K0 {} -> val NRMSE 0.8367 (86.2s)
+AB_noaux {'tau': 5, 'delayed_mass': 0.3} -> val NRMSE 0.8454 (88.0s)
+AB_noaux {'tau': 5, 'delayed_mass': 0.5} -> val NRMSE 0.8575 (87.8s)
+AB_noaux {'tau': 15, 'delayed_mass': 0.3} -> val NRMSE 0.8471 (90.8s)
+AB_noaux {'tau': 15, 'delayed_mass': 0.5} -> val NRMSE 0.8607 (90.8s)
+single_kernel {'K': 15, 'r': 0.7, 'past_mass': 0.3} -> val NRMSE 0.8300 (100.7s)
+single_kernel {'K': 15, 'r': 0.7, 'past_mass': 0.5} -> val NRMSE 0.8299 (101.1s)
+single_kernel {'K': 15, 'r': 0.9, 'past_mass': 0.3} -> val NRMSE 0.8258 (100.7s)
+single_kernel {'K': 15, 'r': 0.9, 'past_mass': 0.5} -> val NRMSE 0.8311 (100.8s)
+dual_kernel {'K': 15, 'r_fast': 0.5, 'r_slow': 0.9, 'fast_mass': 0.2, 'slow_mass': 0.2} -> val NRMSE 0.8273 (100.5s)
+dual_kernel {'K': 15, 'r_fast': 0.5, 'r_slow': 0.9, 'fast_mass': 0.2, 'slow_mass': 0.3} -> val NRMSE 0.8265 (100.4s)
+triangular {'K': 15, 'past_mass': 0.3} -> val NRMSE 0.8270 (100.4s)
+triangular {'K': 15, 'past_mass': 0.5} -> val NRMSE 0.8329 (100.3s)
+uniform {'K': 15, 'past_mass': 0.3} -> val NRMSE 0.8257 (100.2s)
+uniform {'K': 15, 'past_mass': 0.5} -> val NRMSE 0.8374 (100.5s)
+ESN {'n_reservoir': 200, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.8537 (151.0s)
+ESN {'n_reservoir': 200, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.8305 (156.5s)
+ESN {'n_reservoir': 200, 'spectral_radius': 0.9, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.8505 (151.9s)
+ESN {'n_reservoir': 200, 'spectral_radius': 0.9, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.8320 (151.8s)
+ESN {'n_reservoir': 200, 'spectral_radius': 1.2, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.8606 (151.6s)
+ESN {'n_reservoir': 200, 'spectral_radius': 1.2, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.8385 (151.8s)
+wrote /home/franco/QRC EEG/results/eeg/hp_search_log.csv
+wrote /home/franco/QRC EEG/results/eeg/hp_selected.json
+[2026-07-13T20:34:29-03:00] esn66_hp_search
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.8692 (41.8s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.8383 (41.7s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.9, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.8726 (41.7s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.9, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.8428 (41.7s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 1.2, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.8782 (41.7s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 1.2, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.8528 (41.6s)
+wrote /home/franco/QRC EEG/results/eeg/hp_search_log_esn66.csv
+wrote /home/franco/QRC EEG/results/eeg/hp_selected_esn66.json
+[2026-07-13T20:38:39-03:00] holdout_eval
+Z: causal training-only scaler mean=-2.96436 std=48.0139 n=245820
+F: causal training-only scaler mean=-2.91726 std=63.6454 n=245820
+S: causal training-only scaler mean=-6.93099 std=305.697 n=245820
+QRC_K0 set=Z seed=1: 45.1s mean_nrmse=0.8610
+QRC_K0 set=Z seed=2: 45.2s mean_nrmse=0.8603
+QRC_K0 set=Z seed=3: 45.0s mean_nrmse=0.8530
+QRC_K0 set=Z seed=4: 45.1s mean_nrmse=0.8623
+QRC_K0 set=Z seed=5: 45.4s mean_nrmse=0.8460
+QRC_K0 set=Z seed=6: 45.3s mean_nrmse=0.8716
+QRC_K0 set=Z seed=7: 45.2s mean_nrmse=0.8587
+QRC_K0 set=Z seed=8: 45.3s mean_nrmse=0.8617
+QRC_K0 set=Z seed=9: 45.0s mean_nrmse=0.8712
+QRC_K0 set=Z seed=10: 45.0s mean_nrmse=0.8432
+QRC_K0 set=F seed=1: 45.3s mean_nrmse=0.8130
+QRC_K0 set=F seed=2: 45.3s mean_nrmse=0.8103
+QRC_K0 set=F seed=3: 45.3s mean_nrmse=0.8074
+QRC_K0 set=F seed=4: 45.3s mean_nrmse=0.8046
+QRC_K0 set=F seed=5: 45.2s mean_nrmse=0.7953
+QRC_K0 set=F seed=6: 45.1s mean_nrmse=0.8119
+QRC_K0 set=F seed=7: 45.2s mean_nrmse=0.8113
+QRC_K0 set=F seed=8: 45.2s mean_nrmse=0.8108
+QRC_K0 set=F seed=9: 45.0s mean_nrmse=0.8068
+QRC_K0 set=F seed=10: 44.9s mean_nrmse=0.8021
+QRC_K0 set=S seed=1: 45.0s mean_nrmse=0.7780
+QRC_K0 set=S seed=2: 45.1s mean_nrmse=0.7806
+QRC_K0 set=S seed=3: 45.2s mean_nrmse=0.7856
+QRC_K0 set=S seed=4: 45.1s mean_nrmse=0.7796
+QRC_K0 set=S seed=5: 45.0s mean_nrmse=0.7791
+QRC_K0 set=S seed=6: 45.1s mean_nrmse=0.7794
+QRC_K0 set=S seed=7: 45.1s mean_nrmse=0.7783
+QRC_K0 set=S seed=8: 45.1s mean_nrmse=0.7825
+QRC_K0 set=S seed=9: 45.1s mean_nrmse=0.7797
+QRC_K0 set=S seed=10: 45.0s mean_nrmse=0.7785
+AB_noaux set=Z seed=1: 46.5s mean_nrmse=0.8621
+AB_noaux set=Z seed=2: 46.5s mean_nrmse=0.8598
+AB_noaux set=Z seed=3: 46.7s mean_nrmse=0.8582
+AB_noaux set=Z seed=4: 46.3s mean_nrmse=0.8613
+AB_noaux set=Z seed=5: 46.6s mean_nrmse=0.8554
+AB_noaux set=Z seed=6: 46.3s mean_nrmse=0.8713
+AB_noaux set=Z seed=7: 46.2s mean_nrmse=0.8605
+AB_noaux set=Z seed=8: 46.5s mean_nrmse=0.8588
+AB_noaux set=Z seed=9: 46.5s mean_nrmse=0.8660
+AB_noaux set=Z seed=10: 46.4s mean_nrmse=0.8496
+AB_noaux set=F seed=1: 46.7s mean_nrmse=0.7999
+AB_noaux set=F seed=2: 46.6s mean_nrmse=0.7981
+AB_noaux set=F seed=3: 46.7s mean_nrmse=0.7912
+AB_noaux set=F seed=4: 46.7s mean_nrmse=0.7908
+AB_noaux set=F seed=5: 46.6s mean_nrmse=0.8023
+AB_noaux set=F seed=6: 46.6s mean_nrmse=0.7893
+AB_noaux set=F seed=7: 46.7s mean_nrmse=0.7992
+AB_noaux set=F seed=8: 46.5s mean_nrmse=0.7902
+AB_noaux set=F seed=9: 46.5s mean_nrmse=0.7900
+AB_noaux set=F seed=10: 46.5s mean_nrmse=0.7952
+AB_noaux set=S seed=1: 46.3s mean_nrmse=0.7971
+AB_noaux set=S seed=2: 46.4s mean_nrmse=0.8007
+AB_noaux set=S seed=3: 46.4s mean_nrmse=0.8009
+AB_noaux set=S seed=4: 46.4s mean_nrmse=0.7951
+AB_noaux set=S seed=5: 46.3s mean_nrmse=0.8009
+AB_noaux set=S seed=6: 46.4s mean_nrmse=0.7949
+AB_noaux set=S seed=7: 46.4s mean_nrmse=0.8006
+AB_noaux set=S seed=8: 46.4s mean_nrmse=0.7984
+AB_noaux set=S seed=9: 46.4s mean_nrmse=0.7975
+AB_noaux set=S seed=10: 46.3s mean_nrmse=0.7979
+single_kernel set=Z seed=1: 53.9s mean_nrmse=0.8461
+single_kernel set=Z seed=2: 54.0s mean_nrmse=0.8483
+single_kernel set=Z seed=3: 54.0s mean_nrmse=0.8440
+single_kernel set=Z seed=4: 53.9s mean_nrmse=0.8477
+single_kernel set=Z seed=5: 54.0s mean_nrmse=0.8425
+single_kernel set=Z seed=6: 53.9s mean_nrmse=0.8559
+single_kernel set=Z seed=7: 53.8s mean_nrmse=0.8456
+single_kernel set=Z seed=8: 54.3s mean_nrmse=0.8455
+single_kernel set=Z seed=9: 54.2s mean_nrmse=0.8520
+single_kernel set=Z seed=10: 54.1s mean_nrmse=0.8363
+single_kernel set=F seed=1: 54.1s mean_nrmse=0.7898
+single_kernel set=F seed=2: 54.0s mean_nrmse=0.7877
+single_kernel set=F seed=3: 54.1s mean_nrmse=0.7818
+single_kernel set=F seed=4: 54.1s mean_nrmse=0.7837
+single_kernel set=F seed=5: 53.9s mean_nrmse=0.7931
+single_kernel set=F seed=6: 53.7s mean_nrmse=0.7795
+single_kernel set=F seed=7: 53.8s mean_nrmse=0.7889
+single_kernel set=F seed=8: 53.8s mean_nrmse=0.7810
+single_kernel set=F seed=9: 53.7s mean_nrmse=0.7824
+single_kernel set=F seed=10: 53.8s mean_nrmse=0.7882
+single_kernel set=S seed=1: 54.2s mean_nrmse=0.7749
+single_kernel set=S seed=2: 54.1s mean_nrmse=0.7775
+single_kernel set=S seed=3: 54.3s mean_nrmse=0.7758
+single_kernel set=S seed=4: 54.2s mean_nrmse=0.7728
+single_kernel set=S seed=5: 54.2s mean_nrmse=0.7802
+single_kernel set=S seed=6: 54.3s mean_nrmse=0.7724
+single_kernel set=S seed=7: 54.3s mean_nrmse=0.7781
+single_kernel set=S seed=8: 54.3s mean_nrmse=0.7752
+single_kernel set=S seed=9: 54.3s mean_nrmse=0.7772
+single_kernel set=S seed=10: 54.3s mean_nrmse=0.7733
+dual_kernel set=Z seed=1: 54.0s mean_nrmse=0.8461
+dual_kernel set=Z seed=2: 54.0s mean_nrmse=0.8506
+dual_kernel set=Z seed=3: 54.1s mean_nrmse=0.8443
+dual_kernel set=Z seed=4: 54.0s mean_nrmse=0.8483
+dual_kernel set=Z seed=5: 54.1s mean_nrmse=0.8439
+dual_kernel set=Z seed=6: 53.8s mean_nrmse=0.8547
+dual_kernel set=Z seed=7: 53.8s mean_nrmse=0.8449
+dual_kernel set=Z seed=8: 53.9s mean_nrmse=0.8470
+dual_kernel set=Z seed=9: 53.9s mean_nrmse=0.8518
+dual_kernel set=Z seed=10: 53.8s mean_nrmse=0.8385
+dual_kernel set=F seed=1: 54.3s mean_nrmse=0.7906
+dual_kernel set=F seed=2: 54.2s mean_nrmse=0.7879
+dual_kernel set=F seed=3: 54.3s mean_nrmse=0.7814
+dual_kernel set=F seed=4: 54.3s mean_nrmse=0.7847
+dual_kernel set=F seed=5: 54.3s mean_nrmse=0.7931
+dual_kernel set=F seed=6: 54.3s mean_nrmse=0.7792
+dual_kernel set=F seed=7: 54.5s mean_nrmse=0.7890
+dual_kernel set=F seed=8: 54.3s mean_nrmse=0.7821
+dual_kernel set=F seed=9: 54.2s mean_nrmse=0.7821
+dual_kernel set=F seed=10: 54.2s mean_nrmse=0.7865
+dual_kernel set=S seed=1: 54.4s mean_nrmse=0.7723
+dual_kernel set=S seed=2: 54.3s mean_nrmse=0.7805
+dual_kernel set=S seed=3: 54.5s mean_nrmse=0.7775
+dual_kernel set=S seed=4: 54.4s mean_nrmse=0.7738
+dual_kernel set=S seed=5: 54.3s mean_nrmse=0.7786
+dual_kernel set=S seed=6: 54.3s mean_nrmse=0.7695
+dual_kernel set=S seed=7: 54.4s mean_nrmse=0.7776
+dual_kernel set=S seed=8: 54.4s mean_nrmse=0.7728
+dual_kernel set=S seed=9: 54.4s mean_nrmse=0.7744
+dual_kernel set=S seed=10: 54.3s mean_nrmse=0.7751
+triangular set=Z seed=1: 54.2s mean_nrmse=0.8466
+triangular set=Z seed=2: 54.2s mean_nrmse=0.8476
+triangular set=Z seed=3: 54.3s mean_nrmse=0.8439
+triangular set=Z seed=4: 54.3s mean_nrmse=0.8472
+triangular set=Z seed=5: 54.4s mean_nrmse=0.8423
+triangular set=Z seed=6: 54.3s mean_nrmse=0.8564
+triangular set=Z seed=7: 54.2s mean_nrmse=0.8460
+triangular set=Z seed=8: 54.5s mean_nrmse=0.8456
+triangular set=Z seed=9: 54.3s mean_nrmse=0.8523
+triangular set=Z seed=10: 54.3s mean_nrmse=0.8361
+triangular set=F seed=1: 54.8s mean_nrmse=0.7904
+triangular set=F seed=2: 54.6s mean_nrmse=0.7888
+triangular set=F seed=3: 54.6s mean_nrmse=0.7827
+triangular set=F seed=4: 54.8s mean_nrmse=0.7840
+triangular set=F seed=5: 54.7s mean_nrmse=0.7933
+triangular set=F seed=6: 54.8s mean_nrmse=0.7805
+triangular set=F seed=7: 54.6s mean_nrmse=0.7898
+triangular set=F seed=8: 54.8s mean_nrmse=0.7813
+triangular set=F seed=9: 54.7s mean_nrmse=0.7830
+triangular set=F seed=10: 54.7s mean_nrmse=0.7886
+triangular set=S seed=1: 54.8s mean_nrmse=0.7745
+triangular set=S seed=2: 54.3s mean_nrmse=0.7789
+triangular set=S seed=3: 54.4s mean_nrmse=0.7761
+triangular set=S seed=4: 54.2s mean_nrmse=0.7730
+triangular set=S seed=5: 54.3s mean_nrmse=0.7801
+triangular set=S seed=6: 54.3s mean_nrmse=0.7726
+triangular set=S seed=7: 54.3s mean_nrmse=0.7782
+triangular set=S seed=8: 54.3s mean_nrmse=0.7751
+triangular set=S seed=9: 54.4s mean_nrmse=0.7773
+triangular set=S seed=10: 54.3s mean_nrmse=0.7732
+uniform set=Z seed=1: 54.6s mean_nrmse=0.8467
+uniform set=Z seed=2: 54.7s mean_nrmse=0.8542
+uniform set=Z seed=3: 54.6s mean_nrmse=0.8466
+uniform set=Z seed=4: 54.8s mean_nrmse=0.8486
+uniform set=Z seed=5: 54.8s mean_nrmse=0.8456
+uniform set=Z seed=6: 55.3s mean_nrmse=0.8558
+uniform set=Z seed=7: 54.9s mean_nrmse=0.8467
+uniform set=Z seed=8: 55.1s mean_nrmse=0.8489
+uniform set=Z seed=9: 55.0s mean_nrmse=0.8527
+uniform set=Z seed=10: 54.9s mean_nrmse=0.8404
+uniform set=F seed=1: 54.4s mean_nrmse=0.7908
+uniform set=F seed=2: 54.4s mean_nrmse=0.7865
+uniform set=F seed=3: 54.4s mean_nrmse=0.7818
+uniform set=F seed=4: 54.3s mean_nrmse=0.7868
+uniform set=F seed=5: 54.4s mean_nrmse=0.7948
+uniform set=F seed=6: 54.3s mean_nrmse=0.7789
+uniform set=F seed=7: 54.3s mean_nrmse=0.7894
+uniform set=F seed=8: 54.2s mean_nrmse=0.7832
+uniform set=F seed=9: 54.3s mean_nrmse=0.7824
+uniform set=F seed=10: 54.2s mean_nrmse=0.7885
+uniform set=S seed=1: 54.7s mean_nrmse=0.7791
+uniform set=S seed=2: 54.6s mean_nrmse=0.7797
+uniform set=S seed=3: 54.6s mean_nrmse=0.7787
+uniform set=S seed=4: 54.5s mean_nrmse=0.7754
+uniform set=S seed=5: 54.5s mean_nrmse=0.7827
+uniform set=S seed=6: 54.6s mean_nrmse=0.7754
+uniform set=S seed=7: 54.5s mean_nrmse=0.7806
+uniform set=S seed=8: 54.5s mean_nrmse=0.7777
+uniform set=S seed=9: 54.6s mean_nrmse=0.7790
+uniform set=S seed=10: 54.5s mean_nrmse=0.7766
+ESN set=Z seed=1: 77.2s mean_nrmse=0.8848
+ESN set=Z seed=2: 76.1s mean_nrmse=0.8816
+ESN set=Z seed=3: 75.5s mean_nrmse=0.8822
+ESN set=Z seed=4: 74.9s mean_nrmse=0.8828
+ESN set=Z seed=5: 75.1s mean_nrmse=0.8834
+ESN set=Z seed=6: 75.4s mean_nrmse=0.8838
+ESN set=Z seed=7: 77.5s mean_nrmse=0.8816
+ESN set=Z seed=8: 75.5s mean_nrmse=0.8832
+ESN set=Z seed=9: 75.7s mean_nrmse=0.8818
+ESN set=Z seed=10: 75.5s mean_nrmse=0.8823
+ESN set=F seed=1: 75.3s mean_nrmse=0.8099
+ESN set=F seed=2: 75.7s mean_nrmse=0.8143
+ESN set=F seed=3: 76.0s mean_nrmse=0.8100
+ESN set=F seed=4: 75.6s mean_nrmse=0.8116
+ESN set=F seed=5: 76.1s mean_nrmse=0.8161
+ESN set=F seed=6: 75.6s mean_nrmse=0.8130
+ESN set=F seed=7: 76.0s mean_nrmse=0.8134
+ESN set=F seed=8: 75.5s mean_nrmse=0.8093
+ESN set=F seed=9: 75.2s mean_nrmse=0.8149
+ESN set=F seed=10: 74.8s mean_nrmse=0.8137
+ESN set=S seed=1: 74.7s mean_nrmse=0.7707
+ESN set=S seed=2: 74.7s mean_nrmse=0.7686
+ESN set=S seed=3: 74.7s mean_nrmse=0.7687
+ESN set=S seed=4: 74.5s mean_nrmse=0.7722
+ESN set=S seed=5: 74.4s mean_nrmse=0.7710
+ESN set=S seed=6: 75.0s mean_nrmse=0.7708
+ESN set=S seed=7: 75.0s mean_nrmse=0.7702
+ESN set=S seed=8: 75.5s mean_nrmse=0.7708
+ESN set=S seed=9: 75.9s mean_nrmse=0.7700
+ESN set=S seed=10: 75.3s mean_nrmse=0.7705
+wrote /home/franco/QRC EEG/results/eeg/raw/eeg_holdout_by_segment_seed.csv (33600 rows)
+wrote /home/franco/QRC EEG/results/eeg/selected_alphas.csv (1680 rows)
+[2026-07-13T23:50:52-03:00] esn66_holdout
+ESN_66 set=Z seed=1: 20.3s mean_nrmse=0.8882
+ESN_66 set=Z seed=2: 20.2s mean_nrmse=0.8930
+ESN_66 set=Z seed=3: 20.2s mean_nrmse=0.8907
+ESN_66 set=Z seed=4: 20.1s mean_nrmse=0.8906
+ESN_66 set=Z seed=5: 20.1s mean_nrmse=0.8886
+ESN_66 set=Z seed=6: 20.2s mean_nrmse=0.8908
+ESN_66 set=Z seed=7: 20.1s mean_nrmse=0.8851
+ESN_66 set=Z seed=8: 19.9s mean_nrmse=0.8854
+ESN_66 set=Z seed=9: 20.1s mean_nrmse=0.8900
+ESN_66 set=Z seed=10: 20.0s mean_nrmse=0.8919
+ESN_66 set=F seed=1: 20.0s mean_nrmse=0.8120
+ESN_66 set=F seed=2: 20.1s mean_nrmse=0.8159
+ESN_66 set=F seed=3: 20.1s mean_nrmse=0.8142
+ESN_66 set=F seed=4: 20.1s mean_nrmse=0.8163
+ESN_66 set=F seed=5: 20.1s mean_nrmse=0.8147
+ESN_66 set=F seed=6: 20.1s mean_nrmse=0.8173
+ESN_66 set=F seed=7: 20.3s mean_nrmse=0.8100
+ESN_66 set=F seed=8: 20.3s mean_nrmse=0.8095
+ESN_66 set=F seed=9: 20.3s mean_nrmse=0.8132
+ESN_66 set=F seed=10: 20.3s mean_nrmse=0.8197
+ESN_66 set=S seed=1: 20.3s mean_nrmse=0.7797
+ESN_66 set=S seed=2: 20.3s mean_nrmse=0.7852
+ESN_66 set=S seed=3: 20.3s mean_nrmse=0.7858
+ESN_66 set=S seed=4: 20.3s mean_nrmse=0.7832
+ESN_66 set=S seed=5: 20.4s mean_nrmse=0.7830
+ESN_66 set=S seed=6: 20.4s mean_nrmse=0.7813
+ESN_66 set=S seed=7: 20.4s mean_nrmse=0.7784
+ESN_66 set=S seed=8: 20.6s mean_nrmse=0.7759
+ESN_66 set=S seed=9: 20.3s mean_nrmse=0.7782
+ESN_66 set=S seed=10: 20.2s mean_nrmse=0.7828
+wrote /home/franco/QRC EEG/results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv (4800 rows)
+wrote /home/franco/QRC EEG/results/eeg/selected_alphas_esn66.csv (240 rows)
+[2026-07-14T00:01:00-03:00] gate_baselines
+gate baseline set=Z h=1: AR(p=50)/NVAR2/tapped complete
+gate baseline set=Z h=2: AR(p=50)/NVAR2/tapped complete
+gate baseline set=Z h=4: AR(p=50)/NVAR2/tapped complete
+gate baseline set=Z h=8: AR(p=50)/NVAR2/tapped complete
+gate baseline set=Z h=16: AR(p=50)/NVAR2/tapped complete
+gate baseline set=Z h=32: AR(p=50)/NVAR2/tapped complete
+gate baseline set=Z h=64: AR(p=50)/NVAR2/tapped complete
+gate baseline set=Z h=128: AR(p=50)/NVAR2/tapped complete
+gate baselines set=Z: 20.9s
+gate baseline set=F h=1: AR(p=50)/NVAR2/tapped complete
+gate baseline set=F h=2: AR(p=50)/NVAR2/tapped complete
+gate baseline set=F h=4: AR(p=50)/NVAR2/tapped complete
+gate baseline set=F h=8: AR(p=50)/NVAR2/tapped complete
+gate baseline set=F h=16: AR(p=15)/NVAR2/tapped complete
+gate baseline set=F h=32: AR(p=2)/NVAR2/tapped complete
+gate baseline set=F h=64: AR(p=50)/NVAR2/tapped complete
+gate baseline set=F h=128: AR(p=1)/NVAR2/tapped complete
+gate baselines set=F: 17.2s
+gate baseline set=S h=1: AR(p=50)/NVAR2/tapped complete
+gate baseline set=S h=2: AR(p=50)/NVAR2/tapped complete
+gate baseline set=S h=4: AR(p=50)/NVAR2/tapped complete
+gate baseline set=S h=8: AR(p=50)/NVAR2/tapped complete
+gate baseline set=S h=16: AR(p=50)/NVAR2/tapped complete
+gate baseline set=S h=32: AR(p=50)/NVAR2/tapped complete
+gate baseline set=S h=64: AR(p=25)/NVAR2/tapped complete
+gate baseline set=S h=128: AR(p=50)/NVAR2/tapped complete
+gate baselines set=S: 19.9s
+wrote /home/franco/QRC EEG/results/eeg/raw/eeg_gate_classical_by_segment_seed.csv (19200 rows)
+wrote /home/franco/QRC EEG/results/eeg/gate_classical_selected_hp.csv (72 rows)
+[2026-07-14T00:01:59-03:00] quadratic_capacity
+QRC_K0: quadratic = 2.1802 +/- 0.2324, linear = 4.1203 +/- 0.2446
+AB_noaux: quadratic = 1.9296 +/- 0.1230, linear = 2.6086 +/- 0.0654
+single_kernel: quadratic = 2.6176 +/- 0.0860, linear = 3.4232 +/- 0.1998
+dual_kernel: quadratic = 2.3003 +/- 0.0554, linear = 3.0964 +/- 0.0694
+triangular: quadratic = 2.6154 +/- 0.0841, linear = 3.4204 +/- 0.1911
+uniform: quadratic = 2.5878 +/- 0.0818, linear = 3.3617 +/- 0.2053
+ESN: quadratic = 0.0087 +/- 0.0038, linear = 3.2333 +/- 0.0442
+wrote /home/franco/QRC EEG/results/eeg/quadratic_capacity.csv
+wrote /home/franco/QRC EEG/results/eeg/linear_capacity.csv
+[2026-07-14T00:02:25-03:00] statistics
+wrote /home/franco/QRC EEG/results/eeg/tab_eeg_contrasts.csv (72 rows)
+                      comparison set  ...    p_holm  win_fraction_state
+0   dual_kernel vs single_kernel   F  ...  0.000137                0.00
+1      single_kernel vs AB_noaux   F  ...  0.000137                1.00
+2           single_kernel vs ESN   F  ...  0.000137                0.00
+3   dual_kernel vs single_kernel   F  ...  0.000137                0.00
+4      single_kernel vs AB_noaux   F  ...  0.000137                1.00
+..                           ...  ..  ...       ...                 ...
+67     single_kernel vs AB_noaux   Z  ...  0.003336                0.85
+68          single_kernel vs ESN   Z  ...  0.031843                0.85
+69  dual_kernel vs single_kernel   Z  ...  0.331352                0.85
+70     single_kernel vs AB_noaux   Z  ...  0.067596                0.85
+71          single_kernel vs ESN   Z  ...  0.001068                0.90
+
+[72 rows x 6 columns]
+[2026-07-14T00:02:40-03:00] esn66_contrasts
+wrote /home/franco/QRC EEG/results/eeg/tab_esn_matched.csv (24 rows)
+   set  horizon  ...  esn66_nrmse_mean_matched  esn200_nrmse_mean_unmatched
+0    F        1  ...                  0.184615                     0.178616
+1    F        2  ...                  0.331493                     0.326079
+2    F        4  ...                  0.623091                     0.620891
+3    F        8  ...                  0.932677                     0.933216
+4    F       16  ...                  1.087787                     1.088245
+5    F       32  ...                  1.123606                     1.123542
+6    F       64  ...                  1.121916                     1.121662
+7    F      128  ...                  1.109055                     1.108715
+8    S        1  ...                  0.162630                     0.148260
+9    S        2  ...                  0.367103                     0.338826
+10   S        4  ...                  0.768792                     0.733875
+11   S        8  ...                  0.965445                     0.956386
+12   S       16  ...                  0.972246                     0.971348
+13   S       32  ...                  0.997352                     0.996431
+14   S       64  ...                  1.009612                     1.010051
+15   S      128  ...                  1.007736                     1.007750
+16   Z        1  ...                  0.265738                     0.261312
+17   Z        2  ...                  0.506129                     0.497143
+18   Z        4  ...                  0.874293                     0.860633
+19   Z        8  ...                  0.998263                     0.990187
+20   Z       16  ...                  1.029746                     1.020438
+21   Z       32  ...                  1.101276                     1.095024
+22   Z       64  ...                  1.162505                     1.160776
+23   Z      128  ...                  1.177542                     1.176625
+
+[24 rows x 9 columns]
+wrote /home/franco/QRC EEG/paper/tab_esn_matched.tex
+[2026-07-14T00:02:45-03:00] long_horizon_contrasts
+wrote /home/franco/QRC EEG/results/eeg/tab_long_horizon_contrasts.csv (12 rows)
+                   comparison set  ...    p_holm  win_fraction_state
+0   single_kernel vs AB_noaux   F  ...  0.372185                0.75
+1     single_kernel vs ESN_66   F  ...  0.707413                0.45
+2   single_kernel vs AB_noaux   F  ...  0.632389                0.80
+3     single_kernel vs ESN_66   F  ...  0.009357                0.80
+4   single_kernel vs AB_noaux   S  ...  0.007027                0.95
+5     single_kernel vs ESN_66   S  ...  0.707413                0.45
+6   single_kernel vs AB_noaux   S  ...  0.707413                0.35
+7     single_kernel vs ESN_66   S  ...  0.707413                0.60
+8   single_kernel vs AB_noaux   Z  ...  0.262146                0.70
+9     single_kernel vs ESN_66   Z  ...  0.239777                0.65
+10  single_kernel vs AB_noaux   Z  ...  0.632389                0.65
+11    single_kernel vs ESN_66   Z  ...  0.063896                0.75
+
+[12 rows x 8 columns]
+wrote /home/franco/QRC EEG/paper/tab_long_horizon_contrasts.tex
+[2026-07-14T00:02:49-03:00] tables_figures
+/home/franco/.config/matplotlib is not a writable directory
+Matplotlib created a temporary cache directory at /tmp/matplotlib-d0hnozks because there was an issue with the default path ({configdir}); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+wrote fig_eeg_demand_gradient (pdf, png) -- categorical x-axis, not the degenerate continuous score
+capacity/demand regression: {'slope': 43.58944892736363, 'ci_lo': -22.488127506478428, 'ci_hi': 109.66702536120567, 'n': 72} {'slope': 0.006033666414548601, 'ci_lo': nan, 'ci_hi': nan, 'n': 3}
+wrote fig_eeg_capacity_vs_gain (pdf, png)
+[2026-07-14T00:02:51-03:00] long_horizon_figure
+/home/franco/.config/matplotlib is not a writable directory
+Matplotlib created a temporary cache directory at /tmp/matplotlib-qnvpu84w because there was an issue with the default path ({configdir}); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+wrote fig_long_horizon (pdf, png)
+[2026-07-14T00:02:54-03:00] gate_report
+/home/franco/.config/matplotlib is not a writable directory
+Matplotlib created a temporary cache directory at /tmp/matplotlib-8ey5f74t because there was an issue with the default path ({configdir}); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Traceback (most recent call last):
+  File "/home/franco/QRC EEG/.venv/lib/python3.13/site-packages/pandas/compat/_optional.py", line 158, in import_optional_dependency
+    module = importlib.import_module(name)
+  File "/home/franco/miniconda3/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'tabulate'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/franco/QRC EEG/scripts/make_gate_report.py", line 198, in <module>
+    main()
+    ~~~~^^
+  File "/home/franco/QRC EEG/scripts/make_gate_report.py", line 182, in main
+    lines += [f"### Set {set_name}", "", table.round(4).to_markdown(), ""]
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/franco/QRC EEG/.venv/lib/python3.13/site-packages/pandas/core/frame.py", line 2983, in to_markdown
+    tabulate = import_optional_dependency("tabulate")
+  File "/home/franco/QRC EEG/.venv/lib/python3.13/site-packages/pandas/compat/_optional.py", line 161, in import_optional_dependency
+    raise ImportError(msg) from err
+ImportError: `Import tabulate` failed.  Use pip or conda to install the tabulate package.
+[2026-07-14T08:13:26-03:00] update_results
+wrote RESULTS.md from gate CSVs; verdict=PASS
+[2026-07-14T08:13:27-03:00] pytest
+..............                                                           [100%]
+14 passed in 3.98s
+[2026-07-14T08:13:55-03:00] gate_report
+GATE VERDICT: PASS; report regenerated after removing optional tabulate dependency
+[2026-07-14T08:13:55-03:00] pipeline_stages_complete

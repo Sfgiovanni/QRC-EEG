@@ -1,0 +1,7 @@
+AB_noaux: quadratic capacity = 1.9143 +/- 0.1533
+single_kernel: quadratic capacity = 2.6139 +/- 0.1073
+dual_kernel: quadratic capacity = 2.4939 +/- 0.0833
+triangular: quadratic capacity = 2.6072 +/- 0.0859
+uniform: quadratic capacity = 2.5822 +/- 0.0789
+ESN: quadratic capacity = 0.0134 +/- 0.0047
+wrote /home/franco/QRC EEG/results/eeg/quadratic_capacity.csv

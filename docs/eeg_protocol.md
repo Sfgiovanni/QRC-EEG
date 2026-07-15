@@ -1,5 +1,17 @@
 # EEG Protocol: Methods and Modeling-Choice Justification
 
+## Preregistered causal-memory horizon gate
+
+The gate extension is frozen in `docs/eeg_gate_preregistration.md`. It evaluates
+`h={1,2,4,8,16,32,64,128}` with training-only scaling, whole-segment
+train/validation/test partitions, per-segment washout, and ridge/lag selection on
+complete validation segments. Reservoir trajectories are computed once per
+construction/set/seed and reused by every horizon-specific readout. The causal
+control `QRC_K0` uses the identical quantum channel and observables with no delayed
+state mixture. Classical controls are persistence, validation-selected AR(p),
+degree-2 diagonal NVAR on the selected AR window, and a tapped-delay ridge using
+the exact exponential input-lag weights of `single_kernel`.
+
 ## Provenance of reused vs. built code
 
 | Component | Origin |

@@ -1,0 +1,107 @@
+[2026-07-12T22:30:07-03:00] overnight run started (2 items + gate)
+[2026-07-12T22:30:35-03:00] Item2 step1: ESN-66 HP search starting
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.6309 (30.2s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.5, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.5695 (30.2s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.9, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.6328 (30.4s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 0.9, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.5762 (29.7s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 1.2, 'input_scale': 1.0, 'leak_rate': 0.3} -> val NRMSE 0.6394 (29.6s)
+ESN_66 {'n_reservoir': 66, 'spectral_radius': 1.2, 'input_scale': 1.0, 'leak_rate': 0.7} -> val NRMSE 0.5863 (30.1s)
+wrote /home/franco/QRC EEG/results/eeg/hp_search_log_esn66.csv
+wrote /home/franco/QRC EEG/results/eeg/hp_selected_esn66.json
+[2026-07-12T22:33:37-03:00] Item2 step1: ESN-66 HP search done
+[2026-07-12T22:33:56-03:00] Item2 step2: ESN-66 held-out eval starting
+ESN_66 set=Z seed=1: 20.9s mean_nrmse=0.6360
+ESN_66 set=Z seed=2: 21.2s mean_nrmse=0.6386
+ESN_66 set=Z seed=3: 20.5s mean_nrmse=0.6378
+ESN_66 set=Z seed=4: 20.6s mean_nrmse=0.6383
+ESN_66 set=Z seed=5: 20.7s mean_nrmse=0.6370
+ESN_66 set=Z seed=6: 20.8s mean_nrmse=0.6379
+ESN_66 set=Z seed=7: 21.0s mean_nrmse=0.6352
+ESN_66 set=Z seed=8: 20.6s mean_nrmse=0.6342
+ESN_66 set=Z seed=9: 20.8s mean_nrmse=0.6358
+ESN_66 set=Z seed=10: 20.7s mean_nrmse=0.6374
+ESN_66 set=F seed=1: 20.8s mean_nrmse=0.4860
+ESN_66 set=F seed=2: 21.0s mean_nrmse=0.4871
+ESN_66 set=F seed=3: 20.6s mean_nrmse=0.4882
+ESN_66 set=F seed=4: 20.6s mean_nrmse=0.4882
+ESN_66 set=F seed=5: 20.6s mean_nrmse=0.4859
+ESN_66 set=F seed=6: 20.8s mean_nrmse=0.4864
+ESN_66 set=F seed=7: 21.6s mean_nrmse=0.4843
+ESN_66 set=F seed=8: 21.7s mean_nrmse=0.4846
+ESN_66 set=F seed=9: 21.2s mean_nrmse=0.4860
+ESN_66 set=F seed=10: 20.5s mean_nrmse=0.4873
+ESN_66 set=S seed=1: 20.6s mean_nrmse=0.5355
+ESN_66 set=S seed=2: 20.6s mean_nrmse=0.5430
+ESN_66 set=S seed=3: 21.1s mean_nrmse=0.5452
+ESN_66 set=S seed=4: 21.1s mean_nrmse=0.5391
+ESN_66 set=S seed=5: 20.7s mean_nrmse=0.5393
+ESN_66 set=S seed=6: 20.7s mean_nrmse=0.5401
+ESN_66 set=S seed=7: 20.7s mean_nrmse=0.5323
+ESN_66 set=S seed=8: 20.7s mean_nrmse=0.5315
+ESN_66 set=S seed=9: 20.7s mean_nrmse=0.5311
+ESN_66 set=S seed=10: 20.9s mean_nrmse=0.5390
+wrote /home/franco/QRC EEG/results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv (2400 rows)
+[2026-07-12T22:44:22-03:00] Item2 step2: ESN-66 held-out eval done
+[2026-07-12T22:44:32-03:00] Item2 step3: ESN-66 contrasts
+wrote /home/franco/QRC EEG/results/eeg/tab_esn_matched.csv (12 rows)
+   set  horizon  ...  esn66_nrmse_mean_matched  esn200_nrmse_mean_unmatched
+0    F        1  ...                  0.166974                     0.164124
+1    F        2  ...                  0.308905                     0.304186
+2    F        4  ...                  0.592002                     0.586542
+3    F        8  ...                  0.877753                     0.874851
+4    S        1  ...                  0.150549                     0.142759
+5    S        2  ...                  0.340748                     0.324131
+6    S        4  ...                  0.729686                     0.707130
+7    S        8  ...                  0.929535                     0.913571
+8    Z        1  ...                  0.263272                     0.259252
+9    Z        2  ...                  0.497119                     0.489817
+10   Z        4  ...                  0.843512                     0.834747
+11   Z        8  ...                  0.943421                     0.941798
+
+[12 rows x 9 columns]
+wrote /home/franco/QRC EEG/paper/tab_esn_matched.tex
+[2026-07-12T22:44:36-03:00] Item2 done
+[2026-07-12T22:44:36-03:00] Item1: long horizon contrasts
+wrote /home/franco/QRC EEG/results/eeg/tab_long_horizon_contrasts.csv (12 rows)
+                   comparison set  ...    p_holm  win_fraction_state
+0   single_kernel vs AB_noaux   F  ...  0.107422                0.80
+1     single_kernel vs ESN_66   F  ...  0.051069                0.75
+2   single_kernel vs AB_noaux   F  ...  0.044647                0.80
+3     single_kernel vs ESN_66   F  ...  0.000820                0.90
+4   single_kernel vs AB_noaux   S  ...  0.000525                0.90
+5     single_kernel vs ESN_66   S  ...  0.389229                0.30
+6   single_kernel vs AB_noaux   S  ...  0.404900                0.35
+7     single_kernel vs ESN_66   S  ...  0.404900                0.75
+8   single_kernel vs AB_noaux   Z  ...  0.002901                0.80
+9     single_kernel vs ESN_66   Z  ...  0.081699                0.70
+10  single_kernel vs AB_noaux   Z  ...  0.389229                0.60
+11    single_kernel vs ESN_66   Z  ...  0.000435                0.90
+
+[12 rows x 8 columns]
+wrote /home/franco/QRC EEG/paper/tab_long_horizon_contrasts.tex
+[2026-07-12T22:44:39-03:00] Item1 done
+[2026-07-13T09:17:58-03:00] Figures: generating
+wrote fig_long_horizon (pdf, png)
+[2026-07-13T09:18:00-03:00] Figures done
+[2026-07-13T09:18:00-03:00] Provenance pass 1 (pre-gate)
+skip (missing): results/eeg/overnight_summary.md
+appended 9 checksums to /home/franco/QRC EEG/provenance/eeg_checksums.txt
+PROVENANCE.md addendum already present, skipping (idempotent re-run)
+[2026-07-13T09:18:52-03:00] Gate: verify_overnight.py starting
+[gate] 1/4 reproducibility: re-running single_kernel seed=1, all sets, h=1 ...
+[gate] reproducibility OK -- seed=1 h=1 nrmse matches stored raw row-for-row; R^2 anchors match RESULTS.md: {'F': 0.9659567564552133, 'S': 0.9735425947850991, 'Z': 0.9217752904667499}
+[gate] 2/4 anti-leakage ...
+[gate] anti-leakage OK -- splits disjoint, no cross-set collisions
+[gate] 3/4 completeness ...
+[gate] completeness OK -- ESN-66 grid is 3x4x10x20, all new artifacts checksummed
+[gate] 4/4 writing overnight_summary.md ...
+[gate] wrote /home/franco/QRC EEG/results/eeg/overnight_summary.md
+GATE PASSED.
+[2026-07-13T09:20:32-03:00] Gate: verify_overnight.py exit=0
+[2026-07-13T09:20:32-03:00] Provenance pass 2 (post-gate)
+appended 10 checksums to /home/franco/QRC EEG/provenance/eeg_checksums.txt
+PROVENANCE.md addendum already present, skipping (idempotent re-run)
+[2026-07-13T09:20:32-03:00] Full pytest suite
+........                                                                 [100%]
+8 passed in 3.84s
+[2026-07-13T09:20:37-03:00] pytest exit=0

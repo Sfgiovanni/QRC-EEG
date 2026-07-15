@@ -84,6 +84,17 @@ def single_exponential_weights(K: int, r: float, past_mass: float) -> KernelWeig
     return _normalize(r**tau, past_mass, "single_exponential", {"K": K, "r": float(r)})
 
 
+def no_memory_weights() -> KernelWeights:
+    """K=0 control: retain only the present reservoir state, with no delayed mixture."""
+
+    return KernelWeights(
+        delayed=np.empty(0, dtype=np.float64),
+        present=1.0,
+        kind="no_state_memory_k0",
+        metadata={"K": 0},
+    )
+
+
 def dual_exponential_weights(
     K: int,
     r_fast: float,

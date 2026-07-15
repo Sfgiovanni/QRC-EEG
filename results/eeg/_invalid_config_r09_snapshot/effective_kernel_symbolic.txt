@@ -1,0 +1,10 @@
+K = 15
+S_K(r) = r*(1-r**K)/(1-r)
+D_K(z,r) = (r/z)*(1-(r/z)**K)/(1-r/z)
+W_K(z) = (1-m) + m*D_K(z,r)/S_K(r)
+T_eff(K,r) = (1-(K+1)*r**K+K*r**(K+1))/((1-r)*(1-r**K))
+scalar H_actual(z) = 1/(z-a*W_K(z))
+scalar H_separable(z) = W_K(z)/(z-a)
+abstract difference = -(W - 1)*(-W*a - a + z)/((-a + z)*(-W*a + z))
+SymPy proves H_actual == H_separable generically: False
+numeric T_eff = 6.11090228779

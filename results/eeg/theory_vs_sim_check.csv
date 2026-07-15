@@ -1,0 +1,13 @@
+configuration,theory,metric,value,tolerance,pass,K,r,past_mass,seed,epsilon,response_length,git_commit,automatic_verdict
+single_kernel_gate1_confirmatory,tangent_recurrence,impulse_relative_frobenius,2.7415887598116846e-05,0.01,True,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
+single_kernel_gate1_confirmatory,tangent_recurrence,step_relative_frobenius,4.071965506246694e-05,0.01,True,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
+single_kernel_gate1_confirmatory,tangent_recurrence,frequency_relative_frobenius,2.7415887598113987e-05,0.01,True,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
+single_kernel_gate1_confirmatory,tangent_recurrence,memory_function_l1,9.398330543943103e-06,0.02,True,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
+single_kernel_gate1_confirmatory,tangent_recurrence,impulse_cosine_similarity,0.999999999693486,,,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
+single_kernel_gate1_confirmatory,tangent_recurrence,step_cosine_similarity,0.999999999331464,,,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
+single_kernel_gate1_confirmatory,separable_W_times_R,impulse_relative_frobenius,0.4186143584528049,0.01,False,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
+single_kernel_gate1_confirmatory,separable_W_times_R,step_relative_frobenius,0.06898809018736853,0.01,False,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
+single_kernel_gate1_confirmatory,separable_W_times_R,frequency_relative_frobenius,0.4186143584528051,0.01,False,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
+single_kernel_gate1_confirmatory,separable_W_times_R,memory_function_l1,0.6155043103410932,0.02,False,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
+single_kernel_gate1_confirmatory,separable_W_times_R,impulse_cosine_similarity,0.9194410503716945,,,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
+single_kernel_gate1_confirmatory,separable_W_times_R,step_cosine_similarity,0.9980322655791974,,,15,0.7,0.3,1,0.0001,256,6b4b4ea68fd040d29729d5a8405476e14e15fd69,FAIL_SEPARABLE_FACTORIZATION
