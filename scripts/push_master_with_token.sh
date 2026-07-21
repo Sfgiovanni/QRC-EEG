@@ -70,10 +70,11 @@ if git diff --cached --quiet; then
 else
     printf '\nResumo staged:\n'
     git --no-pager diff --cached --stat --compact-summary
-    printf '\nMensagem do commit [Prepare scientific repository release artifacts]: '
+    readonly DEFAULT_COMMIT_MESSAGE="Add Gate 1B post-gate robustness extension of the effective-kernel mechanism"
+    printf '\nMensagem do commit [%s]: ' "$DEFAULT_COMMIT_MESSAGE"
     IFS= read -r commit_message
-    commit_message=${commit_message:-"Prepare scientific repository release artifacts"}
-    git commit -m "$commit_message"
+    commit_message=${commit_message:-"$DEFAULT_COMMIT_MESSAGE"}
+    git commit -m "$commit_message" -m "Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>"
 fi
 
 printf '\nUse um fine-grained GitHub PAT para Sfgiovanni/QRC-EEG com Contents: Read and write.\n'

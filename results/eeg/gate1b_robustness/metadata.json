@@ -1,0 +1,284 @@
+{
+  "analysis": "Gate 1B \u2014 post-gate robustness of the effective-kernel mechanism",
+  "artifact_sha256": {
+    "amplitude_sweep.csv": "deaa64bb92496fc8e67a50109ea5c2210375b9b0593a418f7d3d2a4e81d6144b",
+    "metrics_by_configuration.csv": "948929e502a6e33dc65d1de05c7033f0df03a0b8e28b64a4612194f949e4e0db",
+    "spectrum_by_configuration.csv": "def0b13e2b787d8038e966cfbaead61f1dcfd45be3ebfdb7f55616240c18bdab",
+    "summary.csv": "c29e0f362c89140ce550768f4304c084774a287c87980bfc9562b8200b11f4d6"
+  },
+  "canonical_gate1_sha256_after": {
+    "config/effective_kernel_gate1_frozen.json": "8248c68ea6fd032de1e26a584c4cd571856b84611968051eab8061bdc3f51cd5",
+    "results/eeg/effective_kernel_symbolic.txt": "0ab059737be8f8b0a9e239d32af3f43443313d54e944ffab36afbc9ea60eb6a6",
+    "results/eeg/theory_linearity_sweep.csv": "590b20096903d34dd1684eeb9ecc04ce64cabcf38279fa3a064e9f705e2fab55",
+    "results/eeg/theory_vs_sim_check.csv": "9ffc76d4ed8c911224696314ea2aaa4235e9ba65ae73da38d20d36dc5b8413d0",
+    "results/eeg/theory_vs_sim_metadata.json": "ef03f27500216d0f3f6c9d540401dce50de5bb87a4af0bda30b003cdea59b01a",
+    "results/eeg/theory_vs_sim_responses.npz": "074eecd3d7006c80e4537c502bd7e0c3ec0c297fb4c2f6a0103da8e6b2f20e55"
+  },
+  "canonical_gate1_sha256_before": {
+    "config/effective_kernel_gate1_frozen.json": "8248c68ea6fd032de1e26a584c4cd571856b84611968051eab8061bdc3f51cd5",
+    "results/eeg/effective_kernel_symbolic.txt": "0ab059737be8f8b0a9e239d32af3f43443313d54e944ffab36afbc9ea60eb6a6",
+    "results/eeg/theory_linearity_sweep.csv": "590b20096903d34dd1684eeb9ecc04ce64cabcf38279fa3a064e9f705e2fab55",
+    "results/eeg/theory_vs_sim_check.csv": "9ffc76d4ed8c911224696314ea2aaa4235e9ba65ae73da38d20d36dc5b8413d0",
+    "results/eeg/theory_vs_sim_metadata.json": "ef03f27500216d0f3f6c9d540401dce50de5bb87a4af0bda30b003cdea59b01a",
+    "results/eeg/theory_vs_sim_responses.npz": "074eecd3d7006c80e4537c502bd7e0c3ec0c297fb4c2f6a0103da8e6b2f20e55"
+  },
+  "classification": {
+    "global": {
+      "classification": "ROBUST_WITHIN_GRID",
+      "locally_stable_fraction_over_total": 1.0,
+      "locally_stable_fraction_over_valid": 1.0,
+      "n_total": 60,
+      "n_valid": 60,
+      "separable_pass_fraction": 0.0,
+      "tangent_pass_fraction": 1.0
+    },
+    "r=0.7": {
+      "classification": "ROBUST_WITHIN_GRID",
+      "locally_stable_fraction_over_total": 1.0,
+      "locally_stable_fraction_over_valid": 1.0,
+      "n_total": 30,
+      "n_valid": 30,
+      "separable_pass_fraction": 0.0,
+      "tangent_pass_fraction": 1.0
+    },
+    "r=0.9": {
+      "classification": "ROBUST_WITHIN_GRID",
+      "locally_stable_fraction_over_total": 1.0,
+      "locally_stable_fraction_over_valid": 1.0,
+      "n_total": 30,
+      "n_valid": 30,
+      "separable_pass_fraction": 0.0,
+      "tangent_pass_fraction": 1.0
+    },
+    "u0=-0.5": {
+      "classification": "ROBUST_WITHIN_GRID",
+      "locally_stable_fraction_over_total": 1.0,
+      "locally_stable_fraction_over_valid": 1.0,
+      "n_total": 20,
+      "n_valid": 20,
+      "separable_pass_fraction": 0.0,
+      "tangent_pass_fraction": 1.0
+    },
+    "u0=0.0": {
+      "classification": "ROBUST_WITHIN_GRID",
+      "locally_stable_fraction_over_total": 1.0,
+      "locally_stable_fraction_over_valid": 1.0,
+      "n_total": 20,
+      "n_valid": 20,
+      "separable_pass_fraction": 0.0,
+      "tangent_pass_fraction": 1.0
+    },
+    "u0=0.5": {
+      "classification": "ROBUST_WITHIN_GRID",
+      "locally_stable_fraction_over_total": 1.0,
+      "locally_stable_fraction_over_valid": 1.0,
+      "n_total": 20,
+      "n_valid": 20,
+      "separable_pass_fraction": 0.0,
+      "tangent_pass_fraction": 1.0
+    }
+  },
+  "config": {
+    "K": 15,
+    "amplitude_sweep": [
+      1e-05,
+      3e-05,
+      0.0001,
+      0.0003,
+      0.001,
+      0.003,
+      0.01
+    ],
+    "analysis": "Gate 1B \u2014 post-gate robustness of the effective-kernel mechanism",
+    "channel_seeds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "classification": {
+      "INVALID": "incomplete grid, non-finite unclassified artifacts, invalid provenance, or integrity failure",
+      "MIXED": "outside the ROBUST bounds, but tangent passes all four simultaneously in >50% of valid configurations and clearly exceeds the separable hypothesis",
+      "NOT_ROBUST_WITHIN_GRID": "tangent passes all four simultaneously in <=50% of valid configurations, OR the separable construction passes all four simultaneously in >=50%",
+      "ROBUST_WITHIN_GRID": ">=90% of valid configurations pass all four tangent tolerances simultaneously AND <=10% pass all four separable tolerances simultaneously"
+    },
+    "companion_dimension": 4080,
+    "confirmatory_epsilon_for_robustness_summary": 0.0001,
+    "construction": "single_kernel",
+    "derivative_epsilon": 0.0001,
+    "diagnostic_metrics_without_tolerance": [
+      "impulse_cosine_similarity",
+      "step_cosine_similarity"
+    ],
+    "expected_total_configurations": 60,
+    "fixed_point_max_iterations": 5000,
+    "fixed_point_tolerance": 1e-13,
+    "n_pauli_observables": 66,
+    "n_qubits": 4,
+    "operating_point_convention": "u0 is the raw (pre-squash, z-scored) constant input. The frozen channel applies logistic squashing, so u0 in {-0.5,0.0,0.5} maps to encoded amplitudes {0.37754,0.5,0.62246}, all interior to (0,1) with no clipping; u0=0 reproduces the Gate 1 operating point exactly.",
+    "operating_points": [
+      -0.5,
+      0.0,
+      0.5
+    ],
+    "past_mass": 0.3,
+    "r": [
+      0.7,
+      0.9
+    ],
+    "relationship_to_gate1": "Post-gate robustness analysis. Does not alter, overwrite, or retrospectively reinterpret the frozen confirmatory Gate 1 (config/effective_kernel_gate1_frozen.json). Gate 1 remains canonical: K=15, r=0.7, past_mass=0.3, seed=1, u0=0, epsilon=1e-4.",
+    "response_length": 256,
+    "status": "prespecified grid frozen before execution; NOT preregistered, NOT confirmatory",
+    "tangent_state_dimension": 255,
+    "timezone": "America/Sao_Paulo",
+    "tolerances": {
+      "frequency_relative_frobenius": 0.01,
+      "impulse_relative_frobenius": 0.01,
+      "memory_function_l1": 0.02,
+      "step_relative_frobenius": 0.01
+    },
+    "valid_definition": "A configuration is valid iff its fixed point converged AND no exception occurred AND all four confirmatory response arrays are finite. Locally-unstable-but-finite configurations remain valid and are additionally reported over the stable-only subset."
+  },
+  "config_sha256": "e78b988afa66247e10d48da3e4fa69361eca6daca1a4d41d487e79c2a8ab763d",
+  "gate1_artifacts_unchanged": true,
+  "gate1_original_not_altered": true,
+  "git_commit": "cfb8e08f769bfe5cc2961e3a93421a8490cc9796",
+  "git_status_porcelain": [
+    "?? config/effective_kernel_gate1b_robustness.json",
+    "?? docs/gate1b_robustness_protocol.md",
+    "?? figures/eeg/fig_gate1b_robustness.pdf",
+    "?? figures/eeg/fig_gate1b_robustness.png",
+    "?? results/eeg/gate1b_robustness/",
+    "?? scripts/make_gate1b_figure.py",
+    "?? scripts/run_gate1b_robustness.py",
+    "?? scripts/verify_gate1b_robustness.py",
+    "?? tests/test_gate1b_robustness.py"
+  ],
+  "golden_gate1_corner_detail": {
+    "companion_spectral_radius": {
+      "expected": 0.9587240324199373,
+      "got": 0.9587240324199373,
+      "ok": true
+    },
+    "fixed_difference": {
+      "expected": 9.454e-14,
+      "got": 9.454397506176486e-14,
+      "ok": true
+    },
+    "fixed_iterations": {
+      "expected": 296,
+      "got": 296,
+      "ok": true
+    },
+    "separable_impulse_relative_frobenius": {
+      "expected": 0.418614,
+      "got": 0.4186143584528049,
+      "ok": true
+    },
+    "separable_step_relative_frobenius": {
+      "expected": 0.068988,
+      "got": 0.06898809018736853,
+      "ok": true
+    },
+    "tangent_impulse_relative_frobenius": {
+      "expected": 2.7416e-05,
+      "got": 2.7415887598116846e-05,
+      "ok": true
+    },
+    "tangent_step_relative_frobenius": {
+      "expected": 4.072e-05,
+      "got": 4.071965506246694e-05,
+      "ok": true
+    }
+  },
+  "golden_gate1_corner_reproduced": true,
+  "n_configurations_expected": 60,
+  "n_configurations_total": 60,
+  "numpy_version": "2.5.1",
+  "pandas_version": "3.0.3",
+  "protocol_sha256": "a383649cbc6ebc418d984f6026f983148fb75321f8e9c112b87a20ea3c1d1418",
+  "python_version": "3.13.9",
+  "seconds_per_configuration": {
+    "seed10_r0.7_u0-0.5": 2.799234400037676,
+    "seed10_r0.7_u00.0": 2.8496648290893063,
+    "seed10_r0.7_u00.5": 2.6344664769712836,
+    "seed10_r0.9_u0-0.5": 2.7809702469967306,
+    "seed10_r0.9_u00.0": 2.7089946620399132,
+    "seed10_r0.9_u00.5": 2.704998882021755,
+    "seed1_r0.7_u0-0.5": 2.6748144059674814,
+    "seed1_r0.7_u00.0": 2.664163327892311,
+    "seed1_r0.7_u00.5": 2.663398887962103,
+    "seed1_r0.9_u0-0.5": 2.709846865036525,
+    "seed1_r0.9_u00.0": 2.6899292409652844,
+    "seed1_r0.9_u00.5": 2.658000266063027,
+    "seed2_r0.7_u0-0.5": 2.6547225120011717,
+    "seed2_r0.7_u00.0": 2.688931958982721,
+    "seed2_r0.7_u00.5": 2.6920279879122972,
+    "seed2_r0.9_u0-0.5": 2.721971133025363,
+    "seed2_r0.9_u00.0": 2.74299948499538,
+    "seed2_r0.9_u00.5": 2.7160050800302997,
+    "seed3_r0.7_u0-0.5": 2.676597993937321,
+    "seed3_r0.7_u00.0": 2.684057893930003,
+    "seed3_r0.7_u00.5": 2.621606460073963,
+    "seed3_r0.9_u0-0.5": 2.680987876956351,
+    "seed3_r0.9_u00.0": 2.7030031089670956,
+    "seed3_r0.9_u00.5": 2.6849901559762657,
+    "seed4_r0.7_u0-0.5": 2.645528349909,
+    "seed4_r0.7_u00.0": 2.67553064704407,
+    "seed4_r0.7_u00.5": 2.6598791939904913,
+    "seed4_r0.9_u0-0.5": 2.677000652998686,
+    "seed4_r0.9_u00.0": 2.702999130007811,
+    "seed4_r0.9_u00.5": 2.7259978759102523,
+    "seed5_r0.7_u0-0.5": 2.6566304669249803,
+    "seed5_r0.7_u00.0": 2.7372904339572415,
+    "seed5_r0.7_u00.5": 2.7136045260122046,
+    "seed5_r0.9_u0-0.5": 2.7119967449689284,
+    "seed5_r0.9_u00.0": 2.708990158047527,
+    "seed5_r0.9_u00.5": 2.775001664995216,
+    "seed6_r0.7_u0-0.5": 2.6830174430506304,
+    "seed6_r0.7_u00.0": 2.7025388160254806,
+    "seed6_r0.7_u00.5": 2.6820615930482745,
+    "seed6_r0.9_u0-0.5": 2.7200018370058388,
+    "seed6_r0.9_u00.0": 2.7030003529507667,
+    "seed6_r0.9_u00.5": 2.6860048710368574,
+    "seed7_r0.7_u0-0.5": 2.623726009973325,
+    "seed7_r0.7_u00.0": 2.6723336230497807,
+    "seed7_r0.7_u00.5": 2.689824339002371,
+    "seed7_r0.9_u0-0.5": 2.739002970047295,
+    "seed7_r0.9_u00.0": 2.721003178972751,
+    "seed7_r0.9_u00.5": 2.697996322065592,
+    "seed8_r0.7_u0-0.5": 2.6723843900253996,
+    "seed8_r0.7_u00.0": 2.6766779989702627,
+    "seed8_r0.7_u00.5": 2.6748782279901206,
+    "seed8_r0.9_u0-0.5": 2.701984415994957,
+    "seed8_r0.9_u00.0": 2.7110111269867048,
+    "seed8_r0.9_u00.5": 2.6870003370568156,
+    "seed9_r0.7_u0-0.5": 2.6747490379493684,
+    "seed9_r0.7_u00.0": 2.6144275129772723,
+    "seed9_r0.7_u00.5": 2.712435186957009,
+    "seed9_r0.9_u0-0.5": 2.6970377719262615,
+    "seed9_r0.9_u00.0": 2.701008406933397,
+    "seed9_r0.9_u00.5": 2.7159882120322436
+  },
+  "seconds_per_configuration_mean": 2.6959487994104467,
+  "spectral_radius_max": 0.99521196668763,
+  "spectral_radius_min": 0.9471461435826272,
+  "status": "prespecified grid frozen before execution; NOT preregistered, NOT confirmatory",
+  "status_counts": {
+    "exception": 0,
+    "fixed_point_failed": 0,
+    "nonfinite": 0,
+    "success": 60,
+    "unstable": 0
+  },
+  "sympy_version": "1.14.0",
+  "timestamp": "2026-07-21T17:45:27.294386-03:00",
+  "timezone": "America/Sao_Paulo",
+  "total_seconds": 167.21109193190932
+}

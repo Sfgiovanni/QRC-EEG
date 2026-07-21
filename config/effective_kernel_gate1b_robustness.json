@@ -1,0 +1,41 @@
+{
+  "analysis": "Gate 1B — post-gate robustness of the effective-kernel mechanism",
+  "status": "prespecified grid frozen before execution; NOT preregistered, NOT confirmatory",
+  "relationship_to_gate1": "Post-gate robustness analysis. Does not alter, overwrite, or retrospectively reinterpret the frozen confirmatory Gate 1 (config/effective_kernel_gate1_frozen.json). Gate 1 remains canonical: K=15, r=0.7, past_mass=0.3, seed=1, u0=0, epsilon=1e-4.",
+  "construction": "single_kernel",
+  "K": 15,
+  "past_mass": 0.3,
+  "r": [0.7, 0.9],
+  "channel_seeds": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  "operating_points": [-0.5, 0.0, 0.5],
+  "operating_point_convention": "u0 is the raw (pre-squash, z-scored) constant input. The frozen channel applies logistic squashing, so u0 in {-0.5,0.0,0.5} maps to encoded amplitudes {0.37754,0.5,0.62246}, all interior to (0,1) with no clipping; u0=0 reproduces the Gate 1 operating point exactly.",
+  "confirmatory_epsilon_for_robustness_summary": 0.0001,
+  "amplitude_sweep": [1e-05, 3e-05, 0.0001, 0.0003, 0.001, 0.003, 0.01],
+  "derivative_epsilon": 0.0001,
+  "response_length": 256,
+  "fixed_point_tolerance": 1e-13,
+  "fixed_point_max_iterations": 5000,
+  "n_qubits": 4,
+  "n_pauli_observables": 66,
+  "tangent_state_dimension": 255,
+  "companion_dimension": 4080,
+  "tolerances": {
+    "impulse_relative_frobenius": 0.01,
+    "step_relative_frobenius": 0.01,
+    "frequency_relative_frobenius": 0.01,
+    "memory_function_l1": 0.02
+  },
+  "diagnostic_metrics_without_tolerance": [
+    "impulse_cosine_similarity",
+    "step_cosine_similarity"
+  ],
+  "expected_total_configurations": 60,
+  "classification": {
+    "ROBUST_WITHIN_GRID": ">=90% of valid configurations pass all four tangent tolerances simultaneously AND <=10% pass all four separable tolerances simultaneously",
+    "MIXED": "outside the ROBUST bounds, but tangent passes all four simultaneously in >50% of valid configurations and clearly exceeds the separable hypothesis",
+    "NOT_ROBUST_WITHIN_GRID": "tangent passes all four simultaneously in <=50% of valid configurations, OR the separable construction passes all four simultaneously in >=50%",
+    "INVALID": "incomplete grid, non-finite unclassified artifacts, invalid provenance, or integrity failure"
+  },
+  "valid_definition": "A configuration is valid iff its fixed point converged AND no exception occurred AND all four confirmatory response arrays are finite. Locally-unstable-but-finite configurations remain valid and are additionally reported over the stable-only subset.",
+  "timezone": "America/Sao_Paulo"
+}
