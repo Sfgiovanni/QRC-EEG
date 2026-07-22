@@ -1,0 +1,4 @@
+construction,n_reservoir,K,trainable_params_per_horizon,fixed_untrained_params,kernel_hp_count,buffer_floats_per_active_segment,approx_multiply_adds_per_step
+ESN66_K0,66,0,67,4422,1,66,4554
+ESN66_AB,66,5,67,4422,6,396,4884
+ESN66_kernel,66,15,67,4422,16,1056,5544

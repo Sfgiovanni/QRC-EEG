@@ -1,0 +1,39 @@
+{
+  "ESN66_K0": {
+    "esn_hp": {
+      "n_reservoir": 66,
+      "spectral_radius": 0.5,
+      "input_scale": 1.0,
+      "leak_rate": 0.7
+    },
+    "kernel_hp": {},
+    "val_nrmse": 0.8383156534700449
+  },
+  "ESN66_AB": {
+    "esn_hp": {
+      "n_reservoir": 66,
+      "spectral_radius": 0.5,
+      "input_scale": 1.0,
+      "leak_rate": 0.7
+    },
+    "kernel_hp": {
+      "tau": 5,
+      "delayed_mass": 0.3
+    },
+    "val_nrmse": 0.8506454987566917
+  },
+  "ESN66_kernel": {
+    "esn_hp": {
+      "n_reservoir": 66,
+      "spectral_radius": 0.5,
+      "input_scale": 1.0,
+      "leak_rate": 0.7
+    },
+    "kernel_hp": {
+      "K": 15,
+      "r": 0.9,
+      "past_mass": 0.3
+    },
+    "val_nrmse": 0.8343309770150766
+  }
+}

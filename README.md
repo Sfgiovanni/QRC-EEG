@@ -155,6 +155,7 @@ frozen artifacts and is documented in [reproducibility.md](docs/reproducibility.
 - [Final CSV-table inventory](docs/table_inventory.md)
 - [Evidence map](docs/evidence_map.md) and [reviewer-risk register](docs/reviewer_risk_register.md)
 - [Future paper blueprint](docs/paper_blueprint.md) — organization only, not a manuscript
+- Follow-up (additive, does not modify any canonical gate): [classical distributed-memory ESN control protocol](docs/classical_distributed_memory_protocol.md), [crossed segment x seed inference protocol](docs/crossed_inference_protocol.md), results under `results/eeg/followup/`, report at `results/eeg/followup/technical_report.md`
 
 ## Dataset
 

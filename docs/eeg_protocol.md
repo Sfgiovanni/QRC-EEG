@@ -145,6 +145,17 @@ no subject-level split and no claim of between-patient generalization. Z is
 surface EEG, whereas F and S are intracranial EEG; inference is limited to
 the held-out segments of this benchmark.
 
+## Follow-up: classical distributed-memory ESN control and crossed inference
+
+Two additive, self-contained follow-up experiments extend this protocol without modifying it:
+a classical ESN control that grafts the same causal state-mixing structure used by the QRC arms
+onto a leaky-integrator ESN (`ESN66_K0`/`ESN66_AB`/`ESN66_kernel`,
+`docs/classical_distributed_memory_protocol.md`), and a segment x seed crossed-bootstrap
+sensitivity analysis of the model-by-horizon interaction (`docs/crossed_inference_protocol.md`).
+Both write only under `results/eeg/followup/` and `figures/eeg/fig_classical_distributed_memory.*`,
+`figures/eeg/fig_crossed_inference.*`; neither touches `results/eeg/gate_interactions.csv` or any
+canonical Gate artifact. See `results/eeg/followup/technical_report.md` for the numeric findings.
+
 ## Compute-budget notes
 
 Sequential per-segment evolution costs ~0.28 ms/step (measured); a full

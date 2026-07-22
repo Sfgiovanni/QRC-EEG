@@ -1,0 +1,43 @@
+{
+  "origin_commit": "96165589b33613c9fb8ee25e1a2187bb92748564",
+  "working_tree_dirty_at_metadata_time": true,
+  "python_version": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:16:10) [GCC 11.2.0]",
+  "dependency_versions": {
+    "numpy": "2.5.1",
+    "scipy": "1.18.0",
+    "pandas": "3.0.3",
+    "matplotlib": "3.11.0",
+    "statsmodels": "0.14.6",
+    "pyyaml": "6.0.3",
+    "patsy": "1.0.2"
+  },
+  "os": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+  "cpu_count": 32,
+  "thread_env": {
+    "OMP_NUM_THREADS": null,
+    "OPENBLAS_NUM_THREADS": null,
+    "MKL_NUM_THREADS": null
+  },
+  "stage_wall_time_seconds_approx_from_artifact_mtimes": {
+    "hp_search_retuned_core": 0.0009999275207519531,
+    "holdout_both_modes": 0.010000228881835938,
+    "aggregated_table_and_figure_1": 1.09902024269104,
+    "crossed_inference": 0.004000186920166016,
+    "figure_2": 0.0
+  },
+  "artifact_sha256": {
+    "docs/classical_distributed_memory_protocol.md": "cbd596bf700b3b32a2aff4401f188146963e3e85d7bb9b01366c4c1a8f292e7b",
+    "docs/crossed_inference_protocol.md": "7b7dcd7ce2a3a1a2d6fdc7052d83caa6c2ec69755e39d98c32ef7c529a77e0ca",
+    "config/esn_distributed_memory_frozen.yaml": "46ead3885594739d19bdac79a2bbe231526149b5c88a278e77033cd028cbb625",
+    "results/eeg/followup/raw/esn_distributed_memory_holdout_by_segment_seed.csv": "69313ab747563f3ed913e88e4dcb1b624df733cd228c56c7374e679238fe7600",
+    "results/eeg/followup/classical_control/hp_search_log.csv": "6f1a9e066e0a47190fdee4d36ad92dab10996da77646e66e73e91b33f8b00a04",
+    "results/eeg/followup/classical_control/hp_selected.json": "5c98cb6d0d9e935ba345932fb722ffcb831c756c987a911e720112d6f2d90664",
+    "results/eeg/followup/classical_control/fixed_core_hp.json": "6b072a04801b94d8ab358ca934c9b74e742aec37afa7ec95748a3d4c30245b3d",
+    "results/eeg/followup/classical_control/tab_classical_distributed_memory.csv": "cbd106ebcff05fb7d6f5331a18653136a16567b3ddb77f1be1a27a72b0d8c4cd",
+    "results/eeg/followup/crossed_inference/crossed_bootstrap.csv": "02dbf069fcd34d73036bb14aa49cda5f1eb67afc98939d98bb2992f5e1700900",
+    "results/eeg/followup/crossed_inference/original_style_replication.csv": "7d1b6f53eb7e2b0ea0254beca175fc14b05dfead900a48d61277204f5edcaf05",
+    "results/eeg/followup/crossed_inference/mixed_model_results.csv": "96305b7daf76491088a1b1809c21cfc8ab20b3c5b3d9941647c6c2bee211abd8",
+    "results/eeg/followup/crossed_inference/mixed_model_diagnostics.json": "a9c60844133f57ca7c0f87f519515a711e4b3d2bdb394897fe8b01ee139e738d"
+  },
+  "artifacts_missing_at_metadata_time": []
+}

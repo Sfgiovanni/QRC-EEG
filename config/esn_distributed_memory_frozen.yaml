@@ -1,0 +1,165 @@
+# Frozen configuration for the follow-up "classical distributed-memory ESN
+# control" and "crossed segment x seed inference" experiments.
+#
+# Amended once, before any code was written or any holdout/HP-search call was
+# made (design review caught two issues pre-execution: (1) confirmed by
+# direct recomputation of one held-out cell that the committed
+# results/eeg/raw/eeg_holdout_by_segment_seed.csv embodies r=0.9, not r=0.7,
+# for single_kernel -- so r=0.9 for ESN66_kernel is the internally-consistent
+# choice against contrasts 1-3, not merely "the committed HP file's value";
+# (2) the original shared_reservoir_weights wording keyed sharing on
+# (seed, spectral_radius, input_scale), which is unsatisfiable in
+# analysis_modes.retuned_core and contradicted the test list below. Fixed by
+# separating the seed-only base draw from the per-arm rescale. No parameter,
+# endpoint, family, or interpretation rule changed; only construction-detail
+# wording was corrected. Both protocol docs' Deviations sections record this.
+#
+# Frozen BEFORE any construction_features(), HP-search, or holdout call was
+# made for these two experiments. SHA-256 of this file (and of the two
+# companion protocol docs) is recorded in
+# results/eeg/followup/PROTOCOL_HASHES.sha256 at freeze time. No parameter,
+# endpoint, statistical family, or interpretation rule below may be changed
+# after that hash is recorded; any deviation must be logged in
+# docs/classical_distributed_memory_protocol.md /
+# docs/crossed_inference_protocol.md, never silently applied.
+#
+# Everything not restated here (splits, washout, alpha grid, horizons,
+# sampling rate, bootstrap resample count) is inherited unchanged from
+# config/eeg_frozen.yaml, read at run time -- not copy-pasted, so the two
+# configs cannot silently drift apart.
+
+status: frozen before execution; post-hoc / additive follow-up, not part of
+  the original eeg_gate preregistration; does not alter, overwrite, or
+  reinterpret any canonical Gate/Gate1B/Gate2/Gate3 artifact.
+
+hp_provenance_divergence:
+  # docs/eeg_gate_preregistration.md and config/effective_kernel_gate1_frozen.json
+  # freeze single_kernel at r=0.7. The HEAD-committed results/eeg/hp_selected.json
+  # (used by every downstream QRC holdout/gate/contrast script, e.g.
+  # scripts/run_holdout_eval.py, scripts/run_gate_baselines.py) instead carries
+  # single_kernel.hp.r = 0.9. This is a pre-existing, already-flagged repository
+  # inconsistency (see docs/eeg_gate_preregistration.md deviations discipline
+  # and the project's own r=0.9 INVALID_CONFIG snapshot under
+  # results/eeg/_invalid_config_r09_snapshot/); it is a human-review item, not
+  # something this follow-up may silently "fix". Per the maintainer's explicit
+  # instruction for this follow-up: use the officially committed HEAD value.
+  official_committed_value: {K: 15, r: 0.9, past_mass: 0.3}
+  gate1_frozen_value_not_used_here: {K: 15, r: 0.7, past_mass: 0.3}
+  resolution: >
+    ESN66_kernel uses the officially committed r=0.9 single_kernel HP.
+    This divergence from the Gate 1 frozen r=0.7 corner is documented here,
+    in the protocol doc, and repeated verbatim in the technical report; it
+    is not resolved, hidden, or averaged over.
+
+dimension_matching:
+  n_reservoir: 66  # matches the 66-feature quantum readout (weight<=2 Pauli
+                    # observables on 4 qubits); identical to the existing
+                    # ESN_66 control (results/eeg/hp_selected_esn66.json)
+
+constructions:
+  ESN66_K0:
+    memory: none
+    kernel_hp: {}     # no_memory_weights(): present=1, no delayed mass
+    reproduces: ESN_66  # must be numerically identical to the existing
+                        # ESN_66 arm (results/eeg/raw/eeg_holdout_esn66_by_segment_seed.csv)
+                        # under the same seed and core HP
+  ESN66_AB:
+    memory: matched_delay (concentrated single-lag)
+    kernel_hp: {tau: 5, delayed_mass: 0.3}
+    kernel_hp_source: "HEAD:results/eeg/hp_selected.json:AB_noaux.hp (tau=5, delayed_mass=0.3;
+      identical between the Gate-1-era snapshot and the current committed file, no divergence)"
+  ESN66_kernel:
+    memory: single_exponential (distributed)
+    kernel_hp: {K: 15, r: 0.9, past_mass: 0.3}
+    kernel_hp_source: "HEAD:results/eeg/hp_selected.json:single_kernel.hp -- see
+      hp_provenance_divergence above"
+
+shared_reservoir_weights:
+  rule: >
+    For a given seed, exactly one BASE draw is made
+    (numpy.random.default_rng(seed) -> W_raw = normal(66,66), then
+    W_in_raw = normal(66), same single rng stream and draw order as the
+    existing qrc_eeg.pipeline.batched_esn_features) and reused, unmodified,
+    by all three constructions (ESN66_K0, ESN66_AB, ESN66_kernel) in every
+    analysis mode. The final W_res = W_raw * (spectral_radius / spectral_radius(W_raw))
+    and W_in = W_in_raw * input_scale are then rescaled per
+    (spectral_radius, input_scale). Only the upstream mixing kernel and the
+    rescaling HP differ between arms; leak_rate affects only the update
+    equation, not the draw.
+  consequence_fixed_core: >
+    All three arms use the identical (spectral_radius, input_scale) pair in
+    Analysis A, so W_res and W_in are bit-identical across arms for a given
+    seed -- this is the property tested directly.
+  consequence_retuned_core: >
+    In Analysis B each arm independently selects its own
+    (spectral_radius, input_scale) from the shared grid/budget, so the final
+    rescaled W_res/W_in are generally NOT identical across arms even for the
+    same seed -- only the base draw (W_raw, W_in_raw) is shared. The test
+    suite asserts base-draw sharing in this mode, not final-matrix identity.
+
+buffer:
+  causal: true
+  reinitialized_per_segment: true
+  initial_value: zeros(66)  # matches EchoStateNetwork.reset()'s zero state
+  indexing_convention: identical to qrc_eeg.batched.run_batched_reservoir
+    (buffer holds K+1 slots, oldest to newest; mix_t = present*state
+    + sum_{i=1..K} delayed[i-1] * buffer[-1-i]; buffer is rolled with
+    buffer = concat(buffer[1:], [new_state]) after every step)
+  shared_across_segments: false
+
+recurrence_equation: >
+  m_t = w0 * x_t + sum_{tau=1..K} w_tau * x_{t-tau}
+  x_{t+1} = (1 - a) * m_t + a * tanh(W_res @ m_t + W_in * u_t)
+  -- mixing enters BEFORE the tanh nonlinearity and before the leak, exactly
+  mirroring how run_batched_reservoir mixes density matrices before the
+  channel step. No post-hoc filter on features or predictions is applied.
+
+analysis_modes:
+  fixed_core:
+    description: >
+      All three arms reuse the already-selected ESN-66 core HP
+      (results/eeg/hp_selected_esn66.json), isolating the effect of
+      substituting x_t with m_t inside the recurrence.
+    core_hp_source: "HEAD:results/eeg/hp_selected_esn66.json:ESN_66.hp"
+    core_hp: {spectral_radius: 0.5, input_scale: 1.0, leak_rate: 0.7}
+  retuned_core:
+    description: >
+      Each arm's core ESN HP (spectral_radius, input_scale, leak_rate) is
+      independently re-selected under a paired budget: same grid, same
+      train/val subsample, same HP-search seeds, same pooled-across-sets
+      mean-NRMSE-across-horizons criterion, same refit_on_train_validation=False
+      scoring convention as scripts/run_esn66_hp_search.py. The memory-kernel
+      HP (kernel_hp above) is never searched; n_reservoir is fixed at 66 (the
+      independent variable of this experiment, not a tuned knob, mirroring
+      scripts/run_esn66_hp_search.py's own documented deviation).
+    core_hp_grid_source: "config/eeg_frozen.yaml:hp_grids.ESN (spectral_radius,
+      input_scale, leak_rate only; n_reservoir overridden to 66)"
+    hp_search_seeds_source: "config/eeg_frozen.yaml:channel.hp_search_seeds"
+    hp_search_subsample_source: "config/eeg_frozen.yaml:hp_search_subsample"
+
+held_out_evaluation:
+  seeds_source: "config/eeg_frozen.yaml:channel.confirmatory_seeds"  # 1..10
+  splits_source: "data/eeg/splits/{set}_split.json"  # frozen, not regenerated
+  sets_source: "config/eeg_frozen.yaml:data.sets"  # [Z, F, S]
+  horizons_source: "config/eeg_frozen.yaml:readout.horizons"
+  alpha_grid_source: "config/eeg_frozen.yaml:readout.alpha_grid"
+  washout_source: "config/eeg_frozen.yaml:readout.washout"
+  run_once_per_mode: true  # no re-running after inspecting test-segment results
+
+crossed_inference:
+  # see docs/crossed_inference_protocol.md for full detail; parameters
+  # duplicated here for single-file auditability
+  h_short: 2
+  h_long: 64
+  n_bootstrap_replicates: 10000
+  bootstrap_rng_seed: 20260722
+  family_name: eeg_followup_crossed_sensitivity  # explicitly separate from
+    # eeg_primary and eeg_gate; never mixed with those Holm corrections
+  contrasts:
+    - {kernel: single_kernel, comparator: QRC_K0, modes: [null]}
+    - {kernel: single_kernel, comparator: AB_noaux, modes: [null]}
+    - {kernel: single_kernel, comparator: ESN_66, modes: [null]}
+    - {kernel: ESN66_kernel, comparator: ESN66_K0, modes: [fixed_core, retuned_core]}
+    - {kernel: ESN66_kernel, comparator: ESN66_AB, modes: [fixed_core, retuned_core]}
+  sets: [Z, F, S]
+  # total tests in family: (3 comparisons x 1 mode + 2 comparisons x 2 modes) x 3 sets = 21

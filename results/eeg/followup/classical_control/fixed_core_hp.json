@@ -1,0 +1,37 @@
+{
+  "ESN66_K0": {
+    "esn_hp": {
+      "n_reservoir": 66,
+      "spectral_radius": 0.5,
+      "input_scale": 1.0,
+      "leak_rate": 0.7
+    },
+    "kernel_hp": {}
+  },
+  "ESN66_AB": {
+    "esn_hp": {
+      "n_reservoir": 66,
+      "spectral_radius": 0.5,
+      "input_scale": 1.0,
+      "leak_rate": 0.7
+    },
+    "kernel_hp": {
+      "tau": 5,
+      "delayed_mass": 0.3
+    }
+  },
+  "ESN66_kernel": {
+    "esn_hp": {
+      "n_reservoir": 66,
+      "spectral_radius": 0.5,
+      "input_scale": 1.0,
+      "leak_rate": 0.7
+    },
+    "kernel_hp": {
+      "K": 15,
+      "r": 0.9,
+      "past_mass": 0.3
+    }
+  },
+  "source": "HEAD:results/eeg/hp_selected_esn66.json:ESN_66.hp, reused unmodified for all three arms"
+}

@@ -1,0 +1,496 @@
+[
+  {
+    "comparison": "single_kernel vs QRC_K0",
+    "set": "Z",
+    "converged": true,
+    "singular": false,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": 0.03187470529471586,
+    "ci95_lo": 0.01574338156843257,
+    "ci95_hi": 0.04800602902099915,
+    "p_value": 0.00010759529494607488,
+    "warnings": [
+      "The MLE may be on the boundary of the parameter space."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 3.685356916020834e-05,
+      "segment": 0.005995394417762404
+    },
+    "analysis_mode": "not_applicable"
+  },
+  {
+    "comparison": "single_kernel vs AB_noaux",
+    "set": "Z",
+    "converged": true,
+    "singular": false,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": -0.044282198645832486,
+    "ci95_lo": -0.0587653693631955,
+    "ci95_hi": -0.029799027928469477,
+    "p_value": 2.065416942905863e-09,
+    "warnings": [
+      "The MLE may be on the boundary of the parameter space."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 2.0032133871497564e-05,
+      "segment": 0.005082532078910717
+    },
+    "analysis_mode": "not_applicable"
+  },
+  {
+    "comparison": "single_kernel vs ESN_66",
+    "set": "Z",
+    "converged": false,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": 0.0778723227847192,
+    "ci95_lo": 0.05505130462873402,
+    "ci95_hi": 0.10069334094070438,
+    "p_value": 2.262425850923035e-11,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with cg",
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "MixedLM optimization failed, trying a different optimizer may help.",
+      "Gradient optimization failed, |grad| = 0.187710",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 6.459589640947065e-10,
+      "segment": 0.008839227395615027
+    },
+    "analysis_mode": "not_applicable"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_K0",
+    "set": "Z",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": 0.02269870633670613,
+    "ci95_lo": -0.0003739466595451997,
+    "ci95_hi": 0.045771359332957465,
+    "p_value": 0.05383048373445952,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 5.080304800825348e-06,
+      "segment": 0.014662347736953957
+    },
+    "analysis_mode": "fixed_core"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_K0",
+    "set": "Z",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": 0.02269870633670613,
+    "ci95_lo": -0.0003739466595451997,
+    "ci95_hi": 0.045771359332957465,
+    "p_value": 0.05383048373445952,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 5.080304800825348e-06,
+      "segment": 0.014662347736953957
+    },
+    "analysis_mode": "retuned_core"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_AB",
+    "set": "Z",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": -0.03003818405883385,
+    "ci95_lo": -0.05070353471129524,
+    "ci95_hi": -0.00937283340637246,
+    "p_value": 0.004386905622341738,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 0.0006072554328184514,
+      "segment": 0.011243437927278223
+    },
+    "analysis_mode": "fixed_core"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_AB",
+    "set": "Z",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": -0.03003818405883385,
+    "ci95_lo": -0.05070353471129524,
+    "ci95_hi": -0.00937283340637246,
+    "p_value": 0.004386905622341738,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 0.0006072554328184514,
+      "segment": 0.011243437927278223
+    },
+    "analysis_mode": "retuned_core"
+  },
+  {
+    "comparison": "single_kernel vs QRC_K0",
+    "set": "F",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": 0.03680529060143346,
+    "ci95_lo": 0.0185660511441641,
+    "ci95_hi": 0.05504453005870283,
+    "p_value": 7.651969999124657e-05,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 5.508789638605039e-06,
+      "segment": 0.003250757235827348
+    },
+    "analysis_mode": "not_applicable"
+  },
+  {
+    "comparison": "single_kernel vs AB_noaux",
+    "set": "F",
+    "converged": false,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": -0.014829724417963631,
+    "ci95_lo": -0.031189519812417833,
+    "ci95_hi": 0.0015300709764905704,
+    "p_value": 0.07562488486755181,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with cg",
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "MixedLM optimization failed, trying a different optimizer may help.",
+      "Gradient optimization failed, |grad| = 2.209277",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 6.863270724401889e-08,
+      "segment": 0.0032472400517624365
+    },
+    "analysis_mode": "not_applicable"
+  },
+  {
+    "comparison": "single_kernel vs ESN_66",
+    "set": "F",
+    "converged": false,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": 0.11495038229570065,
+    "ci95_lo": 0.09422232209719543,
+    "ci95_hi": 0.13567844249420588,
+    "p_value": 1.6151110148045074e-27,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with cg",
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "MixedLM optimization failed, trying a different optimizer may help.",
+      "Gradient optimization failed, |grad| = 0.031601",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 1.3168642589223421e-11,
+      "segment": 0.004121038563578442
+    },
+    "analysis_mode": "not_applicable"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_K0",
+    "set": "F",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": 0.041197175429221376,
+    "ci95_lo": 0.021617100996297094,
+    "ci95_hi": 0.06077724986214566,
+    "p_value": 3.726171997320228e-05,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 6.200877109496296e-09,
+      "segment": 0.004973921426378214
+    },
+    "analysis_mode": "fixed_core"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_K0",
+    "set": "F",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": 0.041197175429221376,
+    "ci95_lo": 0.021617100996297094,
+    "ci95_hi": 0.06077724986214566,
+    "p_value": 3.726171997320228e-05,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 6.200877109496296e-09,
+      "segment": 0.004973921426378214
+    },
+    "analysis_mode": "retuned_core"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_AB",
+    "set": "F",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": -0.003305368990875194,
+    "ci95_lo": -0.019956567152886608,
+    "ci95_hi": 0.01334582917113622,
+    "p_value": 0.6972278075688823,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 1.1461183818957835e-06,
+      "segment": 0.004552768622091435
+    },
+    "analysis_mode": "fixed_core"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_AB",
+    "set": "F",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": -0.003305368990875194,
+    "ci95_lo": -0.019956567152886608,
+    "ci95_hi": 0.01334582917113622,
+    "p_value": 0.6972278075688823,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 1.1461183818957835e-06,
+      "segment": 0.004552768622091435
+    },
+    "analysis_mode": "retuned_core"
+  },
+  {
+    "comparison": "single_kernel vs QRC_K0",
+    "set": "S",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": -0.0031418107037177343,
+    "ci95_lo": -0.019592139213715155,
+    "ci95_hi": 0.013308517806279684,
+    "p_value": 0.7081595225528364,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 3.525049438499914e-12,
+      "segment": 0.0039933173126936745
+    },
+    "analysis_mode": "not_applicable"
+  },
+  {
+    "comparison": "single_kernel vs AB_noaux",
+    "set": "S",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": -0.08829634397001887,
+    "ci95_lo": -0.10430764602008558,
+    "ci95_hi": -0.07228504191995216,
+    "p_value": 3.138661010637287e-27,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 6.354859497438726e-07,
+      "segment": 0.0036341215373892344
+    },
+    "analysis_mode": "not_applicable"
+  },
+  {
+    "comparison": "single_kernel vs ESN_66",
+    "set": "S",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": -0.007510969205775391,
+    "ci95_lo": -0.024307168210802657,
+    "ci95_hi": 0.009285229799251877,
+    "p_value": 0.3807789594191612,
+    "warnings": [
+      "Random effects covariance is singular",
+      "Random effects covariance is singular",
+      "Random effects covariance is singular",
+      "Random effects covariance is singular",
+      "Random effects covariance is singular",
+      "Random effects covariance is singular",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 4.695692987920324e-13,
+      "segment": 0.00411057997470077
+    },
+    "analysis_mode": "not_applicable"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_K0",
+    "set": "S",
+    "converged": true,
+    "singular": false,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": 0.008616874164649029,
+    "ci95_lo": -0.008221359492173739,
+    "ci95_hi": 0.025455107821471798,
+    "p_value": 0.31586044105432676,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 4.271503728256618e-06,
+      "segment": 0.003835219362561746
+    },
+    "analysis_mode": "fixed_core"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_K0",
+    "set": "S",
+    "converged": true,
+    "singular": false,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": 0.008616874164649029,
+    "ci95_lo": -0.008221359492173739,
+    "ci95_hi": 0.025455107821471798,
+    "p_value": 0.31586044105432676,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 4.271503728256618e-06,
+      "segment": 0.003835219362561746
+    },
+    "analysis_mode": "retuned_core"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_AB",
+    "set": "S",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": -0.07700160630762526,
+    "ci95_lo": -0.09293929783366607,
+    "ci95_hi": -0.06106391478158445,
+    "p_value": 2.8145587008372655e-21,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 6.370527081718578e-06,
+      "segment": 0.003771916551840114
+    },
+    "analysis_mode": "fixed_core"
+  },
+  {
+    "comparison": "ESN66_kernel vs ESN66_AB",
+    "set": "S",
+    "converged": true,
+    "singular": true,
+    "boundary_hit": true,
+    "interaction_comp_minus_kernel": -0.07700160630762526,
+    "ci95_lo": -0.09293929783366607,
+    "ci95_hi": -0.06106391478158445,
+    "p_value": 2.8145587008372655e-21,
+    "warnings": [
+      "Maximum Likelihood optimization failed to converge. Check mle_retvals",
+      "Retrying MixedLM optimization with lbfgs",
+      "The MLE may be on the boundary of the parameter space.",
+      "The Hessian matrix at the estimated parameter values is not positive definite."
+    ],
+    "error": null,
+    "variance_components": {
+      "seed": 6.370527081718578e-06,
+      "segment": 0.003771916551840114
+    },
+    "analysis_mode": "retuned_core"
+  }
+]

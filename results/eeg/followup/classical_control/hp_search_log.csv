@@ -1,0 +1,19 @@
+construction,esn_hp,kernel_hp,mean_val_nrmse,seconds
+ESN66_K0,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.3}",{},0.8692427987324749,59.637152625015005
+ESN66_K0,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.7}",{},0.8383156534700449,59.446817641030066
+ESN66_K0,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.3}",{},0.8725918499318334,58.61320792895276
+ESN66_K0,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.7}",{},0.8427860094379308,60.28984136204235
+ESN66_K0,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.3}",{},0.8781656555380978,58.96234490000643
+ESN66_K0,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.7}",{},0.8527855803380875,58.42413755506277
+ESN66_AB,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.3}","{""tau"": 5, ""delayed_mass"": 0.3}",0.8651498741353689,59.359173906967044
+ESN66_AB,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.7}","{""tau"": 5, ""delayed_mass"": 0.3}",0.8506454987566917,60.36362588405609
+ESN66_AB,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.3}","{""tau"": 5, ""delayed_mass"": 0.3}",0.8648800022044169,58.83621332398616
+ESN66_AB,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.7}","{""tau"": 5, ""delayed_mass"": 0.3}",0.855053354240778,57.99919716408476
+ESN66_AB,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.3}","{""tau"": 5, ""delayed_mass"": 0.3}",0.8702625129016719,59.22102947498206
+ESN66_AB,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.7}","{""tau"": 5, ""delayed_mass"": 0.3}",0.8616884357041361,58.558778439997695
+ESN66_kernel,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.3}","{""K"": 15, ""r"": 0.9, ""past_mass"": 0.3}",0.8544266238500668,60.57917216105852
+ESN66_kernel,"{""n_reservoir"": 66, ""spectral_radius"": 0.5, ""input_scale"": 1.0, ""leak_rate"": 0.7}","{""K"": 15, ""r"": 0.9, ""past_mass"": 0.3}",0.8343309770150766,59.62005653697997
+ESN66_kernel,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.3}","{""K"": 15, ""r"": 0.9, ""past_mass"": 0.3}",0.855544090743165,59.84017397207208
+ESN66_kernel,"{""n_reservoir"": 66, ""spectral_radius"": 0.9, ""input_scale"": 1.0, ""leak_rate"": 0.7}","{""K"": 15, ""r"": 0.9, ""past_mass"": 0.3}",0.8370281272489168,59.87161780591123
+ESN66_kernel,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.3}","{""K"": 15, ""r"": 0.9, ""past_mass"": 0.3}",0.8603975512683691,60.00371727603488
+ESN66_kernel,"{""n_reservoir"": 66, ""spectral_radius"": 1.2, ""input_scale"": 1.0, ""leak_rate"": 0.7}","{""K"": 15, ""r"": 0.9, ""past_mass"": 0.3}",0.8415679221601806,60.61698826996144
